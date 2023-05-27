@@ -47,6 +47,9 @@
             <Setter Property="FontSize" Value="32"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
+        <Style x:Key="SubTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
+        </Style>
         <Style x:Key="Label" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>

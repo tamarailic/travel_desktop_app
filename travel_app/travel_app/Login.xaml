@@ -8,39 +8,28 @@
     Title="Login" Height="450" Width="800">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <!-- Add a logo image placeholder here -->
-        <Image x:Name="LogoImage" Source="/Images/Putokazi_logo.png" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="10"/>
-        <TextBlock x:Name="TitleTextBlock" Style="{StaticResource Title}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Text="Login" Margin="10"/>
-        <Grid Grid.Row="2" Grid.Column="1" Margin="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+       
+        <Image x:Name="LogoImage" Source="/images/putokazi_logo.png" Width="200" Height="100" Grid.Row="0" Grid.ColumnSpan="2" />
 
-            <TextBlock x:Name="UsernameTextBlock" Style="{StaticResource Label}" Text="Username:" VerticalAlignment="Center" Margin="5" Grid.Row="0" Grid.Column="0"/>
-            <Border CornerRadius="8" BorderThickness="1" Background="White" Grid.Row="0" Grid.Column="1" Margin="5" >
-                <TextBox x:Name="UsernameTextBox" Width="200"  Margin="5" BorderThickness="0"/>
-            </Border>
-            <TextBlock x:Name="PasswordTextBlock" Style="{StaticResource Label}"  Text="Password:" VerticalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0"/>
-            <Border CornerRadius="8" BorderThickness="1" Background="White"  Grid.Row="1" Grid.Column="1" Margin="5">
-                <PasswordBox x:Name="PasswordBox" Width="200" Margin="5" BorderThickness="0"/>
-            </Border>
-            <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Right" Margin="5" Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource GradientButton}"/>
-        </Grid>
+        <TextBlock x:Name="LoginTextBlock" Style="{StaticResource SubTitle}" Grid.Row="1" Grid.Column="1"  Text="Prijavi se" Margin="20"/>
+        <TextBlock x:Name="UsernameTextBlock" Style="{StaticResource Label}" Text="Korisničko ime:" VerticalAlignment="Center" Margin="5" Grid.Row="2" Grid.Column="0"/>
+        <Border CornerRadius="8" BorderThickness="1" Background="White" Grid.Row="2" Grid.Column="1" Margin="5" >
+            <TextBox x:Name="UsernameTextBox" Width="200"  Margin="5" BorderThickness="0"/>
+        </Border>
+        <TextBlock x:Name="PasswordTextBlock" Style="{StaticResource Label}"  Text="Lozinka:" VerticalAlignment="Center" Margin="5" Grid.Row="3" Grid.Column="0"/>
+        <Border CornerRadius="8" BorderThickness="1" Background="White"  Grid.Row="3" Grid.Column="1" Margin="5">
+            <PasswordBox x:Name="PasswordBox" Width="200" Margin="5" BorderThickness="0"/>
+        </Border>
+        <Button x:Name="LoginButton" Content= "Prijava" HorizontalAlignment= "Right" Margin= "5" Grid.Row ="4 " Grid.ColumnSpan ="2" Style="{StaticResource GradientButton}" />
     </Grid>
 </Window>
