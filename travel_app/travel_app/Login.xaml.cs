@@ -24,14 +24,14 @@ namespace travel_app
             string username = UsernameTextBox.Text;
             string password = PasswordBox.Password;
             // Create an object with the username and password
-            var user = new User(username, password);
+            //var user = new User(username, password);
             Console.WriteLine("user");
             // Put the object in DbContext
-            using (var db = new UserContext())
-            {
-                db.User.Add(user);
-                db.SaveChanges();
-            }
+            //using (var db = new UserContext())
+            //{
+            //    db.User.Add(user);
+            //    db.SaveChanges();
+            //}
         }
 
     }
