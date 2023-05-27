@@ -40,7 +40,7 @@
             <Border CornerRadius="8" BorderThickness="1" Background="White"  Grid.Row="1" Grid.Column="1" Margin="5">
                 <PasswordBox x:Name="PasswordBox" Width="200" Margin="5" BorderThickness="0"/>
             </Border>
-            <Button x:Name="LoginButton" Content= "Login " HorizontalAlignment= "Right " Margin= "5 " Grid.Row ="2 " Grid.ColumnSpan ="2 " Style="{StaticResource GradientButton} "/>
+            <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Right" Margin="5" Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource GradientButton}"/>
         </Grid>
     </Grid>
 </Window>
