@@ -25,7 +25,16 @@
         <TextBlock Style="{StaticResource SubTitle}" Grid.Row="1" Grid.Column="1"  Text="Registruj se" Margin="20"/>
         <TextBlock Style="{StaticResource Label}" Text="Korisničko ime:" VerticalAlignment="Center" Margin="5" Grid.Row="2" Grid.Column="0"/>
         <Border CornerRadius="8" BorderThickness="1" Background="White" Grid.Row="2" Grid.Column="1" Margin="5" >
-            <TextBox x:Name="UsernameTextBox" Width="200"  Margin="5" BorderThickness="0"/>
+            <TextBox x:Name="UsernameTextBox" Width="200" Margin="5" BorderThickness="0">
+                <TextBox.Text>
+                    <Binding Path="Username" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:MinimumLengthValidationRule Message="Korisničko ime mora da ima bar 5 karaktera." MinimumLength="5" />
+                            <local:NoSpecialCharactersOrNumbersValidationRule Message="Korisničko ime mora da ima bar 1 specijalni karaktera ili broj." />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
         </Border>
         <TextBlock Style="{StaticResource Label}"  Text="Lozinka:" VerticalAlignment="Center" Margin="5" Grid.Row="3" Grid.Column="0"/>
         <Border CornerRadius="8" BorderThickness="1" Background="White"  Grid.Row="3" Grid.Column="1" Margin="5">
