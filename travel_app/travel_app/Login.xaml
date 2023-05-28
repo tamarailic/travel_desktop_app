@@ -7,6 +7,7 @@
     mc:Ignorable="d"
     Title="Login" Height="450" Width="800">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -30,6 +31,7 @@
         <Border CornerRadius="8" BorderThickness="1" Background="White"  Grid.Row="3" Grid.Column="1" Margin="5">
             <PasswordBox x:Name="PasswordBox" Width="200" Margin="5" BorderThickness="0"/>
         </Border>
-        <Button x:Name="LoginButton" Content= "Prijava" HorizontalAlignment= "Right" Margin= "5" Grid.Row ="4 " Grid.ColumnSpan ="2" Style="{StaticResource GradientButton}" />
+        <Button Click="LoginButton_Click" x:Name="LoginButton" Content= "Prijava" HorizontalAlignment= "Right" Margin= "5" Grid.Row ="4 " Grid.ColumnSpan ="2" Style="{StaticResource GradientButton}" />
     </Grid>
 </Window>
+    

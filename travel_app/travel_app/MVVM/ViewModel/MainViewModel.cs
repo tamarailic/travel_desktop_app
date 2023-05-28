@@ -12,8 +12,12 @@ namespace travel_app.MVVM.ViewModel
 
         public RelayCommand HomeViewCommand { get; set; }
         public RelayCommand SalesViewCommand { get; set; }
+        public RelayCommand SettingsViewCommand { get; set; }
+        public RelayCommand AttractionsViewCommand { get; set; }
         public HomeViewModel HomeVM { get; set; }
         public SalesViewModel SalesVM { get; set; }
+        public SettingsViewModel SettingsVM { get; set; }
+        public AttractionsViewModel AttractionsVM { get; set; }
 
         private object _currentView;
 
@@ -29,6 +33,8 @@ namespace travel_app.MVVM.ViewModel
         public MainViewModel() { 
             HomeVM = new HomeViewModel();
             SalesVM = new SalesViewModel();
+            SettingsVM = new SettingsViewModel();
+            AttractionsVM = new AttractionsViewModel();
             CurrentView = HomeVM;
 
             HomeViewCommand = new RelayCommand(o=>
@@ -37,6 +43,14 @@ namespace travel_app.MVVM.ViewModel
             });
             SalesViewCommand = new RelayCommand(o => { 
                 CurrentView = SalesVM;
+            });
+            SettingsViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = SettingsVM;
+            });
+            AttractionsViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = AttractionsVM;
             });
         }
 

@@ -5,12 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:travel_app"
         xmlns:viewModel="clr-namespace:travel_app.MVVM.ViewModel"
+        xmlns:view="clr-namespace:travel_app.MVVM.View"
+        xmlns:converters="clr-namespace:travel_app.MVVM.Converters"
         mc:Ignorable="d"
-        Height="800" Width="1200"
+        Height="800" Width="1400"
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True">
+
+    <Window.Resources>
+        <converters:EmailToNameConverter x:Key="EmailToNameConverter" />
+    </Window.Resources>
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
@@ -32,6 +38,8 @@
                    Height="38"
                    Source="/Images/just-logo-white.png"/>
 
+            <TextBlock Text="{Binding LogedInUser.Email, RelativeSource={RelativeSource AncestorType=Window}, StringFormat='Dobrodošli {0}', Converter={StaticResource EmailToNameConverter}}" Grid.Column="1" Margin="40,0,0,0" Foreground="White" FontSize="24" VerticalAlignment="Center"/>
+            
             <StackPanel Grid.Row="1">
                 <RadioButton Content="Početna"
                              Height="50"
@@ -46,18 +54,48 @@
                              FontSize="16"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding SalesViewCommand}"/>
+                <RadioButton Content="Atrakcije"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="16"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding AttractionsViewCommand}"/>
+                <RadioButton Content="Podešavanja"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="16"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding SettingsViewCommand}"/>
                 <RadioButton Content="Odjavi se"
                              Height="50"
                              Foreground="White"
                              FontSize="16"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Click="LogOut"/>
             </StackPanel>
 
             <ContentControl 
                 Grid.Row="1" 
                 Grid.Column="1" 
                 Margin="20,20,10,10"
-                Content="{Binding CurrentView}"/>
+                Content="{Binding CurrentView}">
+                <ContentControl.Resources>
+
+                    <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                        <view:HomeView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:SalesViewModel}">
+                        <view:SalesView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
+                        <view:SettingsView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:AttractionsViewModel}">
+                        <view:AttractionsView/>
+                    </DataTemplate>
+
+                </ContentControl.Resources>              
+            </ContentControl>
         </Grid>
     </Border>
 </Window>

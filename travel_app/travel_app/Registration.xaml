@@ -1,0 +1,40 @@
+﻿<Window x:Class="travel_app.Registration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:travel_app"
+        mc:Ignorable="d"
+        Title="Registration" Height="450" Width="800">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Source="/images/putokazi_logo.png" Width="200" Height="100" Grid.Row="0" Grid.ColumnSpan="2" />
+
+        <TextBlock Style="{StaticResource SubTitle}" Grid.Row="1" Grid.Column="1"  Text="Registruj se" Margin="20"/>
+        <TextBlock Style="{StaticResource Label}" Text="Korisničko ime:" VerticalAlignment="Center" Margin="5" Grid.Row="2" Grid.Column="0"/>
+        <Border CornerRadius="8" BorderThickness="1" Background="White" Grid.Row="2" Grid.Column="1" Margin="5" >
+            <TextBox x:Name="UsernameTextBox" Width="200"  Margin="5" BorderThickness="0"/>
+        </Border>
+        <TextBlock Style="{StaticResource Label}"  Text="Lozinka:" VerticalAlignment="Center" Margin="5" Grid.Row="3" Grid.Column="0"/>
+        <Border CornerRadius="8" BorderThickness="1" Background="White"  Grid.Row="3" Grid.Column="1" Margin="5">
+            <PasswordBox x:Name="PasswordBox" Width="200" Margin="5" BorderThickness="0"/>
+        </Border>
+        <TextBlock Style="{StaticResource Label}"  Text="Ponovite lozinku:" VerticalAlignment="Center" Margin="5" Grid.Row="4" Grid.Column="0"/>
+        <Border CornerRadius="8" BorderThickness="1" Background="White"  Grid.Row="4" Grid.Column="1" Margin="5">
+            <PasswordBox x:Name="RePasswordBox" Width="200" Margin="5" BorderThickness="0"/>
+        </Border>
+        <Button Click="RegistrationButton_Click" Content="Registracija" HorizontalAlignment="Right" Margin="5" Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource GradientButton}" />
+    </Grid>
+</Window>
