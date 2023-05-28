@@ -11,12 +11,16 @@ namespace travel_app.MVVM.ViewModel
         public ObservableObject CurrentViewModel => _navigationStore.CurrentViewModel;
         public ICommand HomeViewCommand { get; }
         public ICommand SalesViewCommand { get; }
+        public ICommand SettingsViewCommand { get; }
+        public ICommand AttractionsViewCommand { get; }
 
         public MainViewModel(NavigationStore navigationStore) {
             _navigationStore = navigationStore;
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
             HomeViewCommand = new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));
             SalesViewCommand = new NavigateCommand<SalesViewModel>(navigationStore, () => new SalesViewModel(navigationStore));
+            SettingsViewCommand = new NavigateCommand<SettingsViewModel>(navigationStore, () => new SettingsViewModel(navigationStore));
+            AttractionsViewCommand = new NavigateCommand<AttractionsViewModel>(navigationStore, () => new AttractionsViewModel(navigationStore));
         }
         private void OnCurrentViewModelChanged()
         {

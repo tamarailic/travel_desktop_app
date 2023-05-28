@@ -48,7 +48,6 @@
                             <TextBlock Text="{Binding Name}" Foreground="White" FontSize="24" Margin="20,10,10,0"/>
                             <TextBlock Text="{Binding ShortDescription}" Foreground="White" FontSize="16" Margin="20,10,10,0"/>
                             <TextBlock Text="{Binding Price}" Foreground="White" FontSize="16" Margin="20,10,10,0"/>
-                            <Button Command="{Binding Command}"/>
                         </StackPanel>
                     </Border>
                 </DataTemplate>
