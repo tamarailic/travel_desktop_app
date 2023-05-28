@@ -19,9 +19,6 @@ using travel_app.MVVM.Model;
 
 namespace travel_app.MVVM.View
 {
-    /// <summary>
-    /// Interaction logic for CreateNewTravelView.xaml
-    /// </summary>
     public partial class CreateNewTravelView : UserControl
     {
         public CreateNewTravelView()

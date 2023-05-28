@@ -34,7 +34,7 @@ namespace travel_app
                                                             new AttractionTypes(){ Name = "Prirodno dobro" },
                                                             new AttractionTypes(){ Name = "Ostalo" },
                                                             };
-                //db.Database.ExecuteSqlCommand("DELETE FROM [AttractionTypes]");
+                db.Database.ExecuteSqlCommand("DELETE FROM [AttractionTypes]");
                 db.AttractionTypes.AddRange(attractionTypes);
                 db.SaveChanges();
             }
@@ -49,7 +49,7 @@ namespace travel_app
                                                             new RestaurantTypes(){ Name = "Meksički" },
                                                             new RestaurantTypes(){ Name = "Veganski" },
                                                             };
-                //db.Database.ExecuteSqlCommand("DELETE FROM [RestaurantTypes]");
+                db.Database.ExecuteSqlCommand("DELETE FROM [RestaurantTypes]");
                 db.RestaurantTypes.AddRange(restaurentTypes);
                 db.SaveChanges();
             }
