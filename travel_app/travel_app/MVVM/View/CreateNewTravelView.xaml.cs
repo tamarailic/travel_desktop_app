@@ -187,7 +187,11 @@ namespace travel_app.MVVM.View
 
         private void AddAttraction(object sender, RoutedEventArgs e)
         {
-
+            using (var db = new TravelContext())
+            {
+                var attractionName = attractionComboBox.SelectedItem;
+                ChoosenAttractions.Add(db.Attractions.Where(el => el.Name == attractionName).FirstOrDefault());
+            }
         }
     }
 }

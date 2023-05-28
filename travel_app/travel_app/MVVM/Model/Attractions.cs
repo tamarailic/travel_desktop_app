@@ -12,9 +12,12 @@ namespace travel_app.MVVM.Model
 
         [Key]
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Address { get; set; }
         public int AttractionTypesId { get; set; }
+        public AttractionTypes AttractionTypes { get; set; }
 
         public Attractions()
         {
@@ -25,8 +28,12 @@ namespace travel_app.MVVM.Model
             Address = address;
             AttractionTypesId = attractionTypesId;
         }
-
-
+        public Attractions(string name, string address, AttractionTypes attractionTypes)
+        {
+            Name = name;
+            Address = address;
+            AttractionTypes = attractionTypes;
+        }
         public Attractions(int id, string name, string address, int attractionTypesId)
         {
             Id = id;

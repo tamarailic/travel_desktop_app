@@ -46,18 +46,27 @@ namespace travel_app.MVVM.View
         private void CreateNewHotel(object sender, RoutedEventArgs e)
         {
             
+            using (var db = new TravelContext())
+            {
+                var name = hotelName.Text.Trim();
+                var address = hotelLocation.Text.Trim();
+                var stars = int.Parse(hotelStarsComboBox.SelectedItem.ToString());
+                
+                db.Hotels.Add(new Hotels(name, address, stars));
+                db.SaveChanges();
+            }
         }
 
         private void CreateNewRestaurant(object sender, RoutedEventArgs e)
         {
             using (var db = new TravelContext())
             {
-                var name = attractionName.Text.Trim();
-                var address = attractionAddress.Text.Trim();
-                var typeName = attractionTypesComboBox.SelectedItem.ToString();
-                var typeId = db.AttractionTypes.Where(attraction => attraction.Name == typeName).Select(el => el.Id).FirstOrDefault();
+                var name = restaurantName.Text.Trim();
+                var address = restaurantLocation.Text.Trim();
+                var typeName = restaurantTypesComboBox.SelectedItem.ToString();
+                var typeId = db.RestaurantTypes.Where(restaurent => restaurent.Name == typeName).Select(el => el.Id).FirstOrDefault();
 
-                db.Attractions.Add(new Attractions(name, address, typeId));
+                db.Restaurants.Add(new Restaurants(name, address, typeId));
                 db.SaveChanges();
             }
         }
