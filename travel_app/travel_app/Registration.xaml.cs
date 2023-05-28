@@ -66,7 +66,7 @@ namespace travel_app
                     {
                         Email = username,
                         Password = password,
-                        Role = "agent",
+                        Role = "user",
                         Pro = false
                     };
                     db.Users.Add(newUser);
