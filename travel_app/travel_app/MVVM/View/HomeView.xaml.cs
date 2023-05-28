@@ -24,7 +24,7 @@ namespace travel_app.MVVM.View
         public HomeView()
         {
             InitializeComponent();
-            this.DataContext = this;
+            
         }
 
         public static List<Travel> Travels
@@ -71,5 +71,6 @@ namespace travel_app.MVVM.View
         public string Description { get; set; }
         public string Image { get; set; }
         public int Price { get; set; }
+        public ICommand Command { get; set; }
     }
 }

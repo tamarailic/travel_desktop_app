@@ -5,16 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:travel_app"
         xmlns:viewModel="clr-namespace:travel_app.MVVM.ViewModel"
+        xmlns:view="clr-namespace:travel_app.MVVM.View"
         mc:Ignorable="d"
         Height="800" Width="1200"
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True">
-
-    <Window.DataContext>
-        <viewModel:MainViewModel/>
-    </Window.DataContext>
     <Border Background="#272537"
             CornerRadius="20">
 
@@ -57,7 +54,17 @@
                 Grid.Row="1" 
                 Grid.Column="1" 
                 Margin="20,20,10,10"
-                Content="{Binding CurrentView}"/>
+                Content="{Binding CurrentViewModel}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                        <view:HomeView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:SalesViewModel}">
+                        <view:SalesView/>
+                    </DataTemplate>
+                </ContentControl.Resources>
+                
+            </ContentControl>
         </Grid>
     </Border>
 </Window>
