@@ -17,15 +17,12 @@ using travel_app.MVVM.Model;
 
 namespace travel_app.MVVM.View
 {
-    /// <summary>
-    /// Interaction logic for HomeView.xaml
-    /// </summary>
     public partial class HomeView : UserControl
     {
         public HomeView()
         {
             InitializeComponent();
-            this.DataContext = this;
+            
         }
 
         public static List<Travel> Travels

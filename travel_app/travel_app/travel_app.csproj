@@ -41,6 +41,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.Maps.MapControl.WPF" Version="1.0.0.3" />
   </ItemGroup>
+   
+   <ItemGroup>
+    <Folder Include="MVVM\Model\" />
+  </ItemGroup>
 
 </Project>
 

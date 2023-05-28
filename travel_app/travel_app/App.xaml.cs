@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using travel_app.MVVM.ViewModel;
+using travel_app.Store;
 
 namespace travel_app
 {
@@ -23,6 +24,5 @@ namespace travel_app
             MainWindow.Show();
             base.OnStartup(e);
         }
-
     }
 }

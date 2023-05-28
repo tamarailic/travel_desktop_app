@@ -1,57 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Input;
+using travel_app.Command;
 using travel_app.Core;
+using travel_app.Store;
 
 namespace travel_app.MVVM.ViewModel
 {
     internal class MainViewModel : ObservableObject
     {
+        private readonly NavigationStore _navigationStore;
+        public ObservableObject CurrentViewModel => _navigationStore.CurrentViewModel;
+        public ICommand HomeViewCommand { get; }
+        public ICommand SalesViewCommand { get; }
 
-        public RelayCommand HomeViewCommand { get; set; }
-        public RelayCommand SalesViewCommand { get; set; }
-        public RelayCommand SettingsViewCommand { get; set; }
-        public RelayCommand AttractionsViewCommand { get; set; }
-        public HomeViewModel HomeVM { get; set; }
-        public SalesViewModel SalesVM { get; set; }
-        public SettingsViewModel SettingsVM { get; set; }
-        public AttractionsViewModel AttractionsVM { get; set; }
-
-        private object _currentView;
-
-        public object CurrentView
-        {
-            get { return _currentView; }
-            set { _currentView = value;
-                OnPropertyChanged();
-            }
+        public MainViewModel(NavigationStore navigationStore) {
+            _navigationStore = navigationStore;
+            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+            HomeViewCommand = new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));
+            SalesViewCommand = new NavigateCommand<SalesViewModel>(navigationStore, () => new SalesViewModel(navigationStore));
         }
-
-
-        public MainViewModel() { 
-            HomeVM = new HomeViewModel();
-            SalesVM = new SalesViewModel();
-            SettingsVM = new SettingsViewModel();
-            AttractionsVM = new AttractionsViewModel();
-            CurrentView = HomeVM;
-
-            HomeViewCommand = new RelayCommand(o=>
-            {
-                CurrentView = HomeVM;
-            });
-            SalesViewCommand = new RelayCommand(o => { 
-                CurrentView = SalesVM;
-            });
-            SettingsViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = SettingsVM;
-            });
-            AttractionsViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = AttractionsVM;
-            });
+        private void OnCurrentViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
         }
 
     }
