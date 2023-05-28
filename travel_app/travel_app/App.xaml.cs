@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using travel_app.MVVM.ViewModel;
+using travel_app.Store;
 
 namespace travel_app
 {
@@ -13,5 +15,17 @@ namespace travel_app
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            NavigationStore navigationStore = new NavigationStore();
+            HomeViewModel homeViewModel = new HomeViewModel(navigationStore);
+            navigationStore.CurrentViewModel = homeViewModel;
+            MainWindow = new MainWindow()
+            {
+                DataContext = new MainViewModel(navigationStore)
+            };
+            MainWindow.Show();
+            base.OnStartup(e);
+        }
     }
 }
