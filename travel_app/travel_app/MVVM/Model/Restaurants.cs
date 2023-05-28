@@ -12,7 +12,9 @@ namespace travel_app.MVVM.Model
 
         [Key]
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Location { get; set; }
         public int RestaurantTypesId { get; set; }
         public virtual RestaurantTypes RestaurantTypes { get; set; }
@@ -27,7 +29,12 @@ namespace travel_app.MVVM.Model
             Location = location;
             RestaurantTypesId = restaurantTypesId;
         }
-
+        public Restaurants(string name, string location, RestaurantTypes restaurantTypes)
+        {
+            Name = name;
+            Location = location;
+            RestaurantTypes = restaurantTypes;
+        }
         public Restaurants(int id, string name, string location, int restaurantTypesId)
         {
             Id = id;

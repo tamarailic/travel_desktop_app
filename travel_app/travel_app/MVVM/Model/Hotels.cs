@@ -11,8 +11,29 @@ namespace travel_app.MVVM.Model
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Location { get; set; }
-        public int Stars { get; set; }
+        public int? Stars { get; set; }
+
+        public Hotels()
+        {
+        }
+
+        public Hotels(string name, string location, int? stars)
+        {
+            Name = name;
+            Location = location;
+            Stars = stars;
+        }
+
+        public Hotels(int id, string name, string location, int? stars)
+        {
+            Id = id;
+            Name = name;
+            Location = location;
+            Stars = stars;
+        }
     }
 }
