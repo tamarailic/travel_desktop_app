@@ -85,12 +85,14 @@
                     <DataTemplate DataType="{x:Type viewModel:SalesViewModel}">
                         <view:SalesView/>
                     </DataTemplate>
-
                     <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
                         <view:SettingsView/>
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type viewModel:AttractionsViewModel}">
                         <view:AttractionsView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:CreateNewTravelViewModel}">
+                        <view:CreateNewTravelView/>
                     </DataTemplate>
 
                 </ContentControl.Resources>              

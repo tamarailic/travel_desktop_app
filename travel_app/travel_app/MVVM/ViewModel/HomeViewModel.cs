@@ -18,10 +18,12 @@ namespace travel_app.MVVM.ViewModel
     public class HomeViewModel : ObservableObject
     {
         public ICommand NavigateDetailsCommand { get; }
+        public ICommand CreateNewCommand { get; }
 
         public HomeViewModel(NavigationStore navigationStore)
         {
             NavigateDetailsCommand = new NavigateCommand<SalesViewModel>(navigationStore, () => new SalesViewModel(navigationStore));
+            CreateNewCommand = new NavigateCommand<CreateNewTravelViewModel>(navigationStore, () => new CreateNewTravelViewModel(navigationStore));
         }
 
         public static List<Travel> Travels
@@ -34,12 +36,6 @@ namespace travel_app.MVVM.ViewModel
                 }
 
             }
-        }
-
-        private void CreateNewTravel(object sender, RoutedEventArgs e)
-        {
-            var newTravelView = new CreateNewTravelView();
-            newTravelView.Show();
         }
 
         private void SeeDetailes(object sender, MouseButtonEventArgs e)

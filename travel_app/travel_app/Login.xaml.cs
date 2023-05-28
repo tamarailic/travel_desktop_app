@@ -8,6 +8,8 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Documents;
 using travel_app.MVVM.Model;
+using travel_app.MVVM.ViewModel;
+using travel_app.Store;
 
 namespace travel_app
 {
@@ -81,7 +83,14 @@ namespace travel_app
                 User? user = db.Users.Where(user => user.Email == username).SingleOrDefault();
                 if(user != null && user.Password == password)
                 {
-                    MainWindow mainWindow = new MainWindow();
+
+                    NavigationStore navigationStore = new NavigationStore();
+                    HomeViewModel homeViewModel = new HomeViewModel(navigationStore);
+                    navigationStore.CurrentViewModel = homeViewModel;
+                    MainWindow mainWindow = new MainWindow()
+                    {
+                        DataContext = new MainViewModel(navigationStore)
+                    };                    
                     MainWindow.LogedInUser = user;
                     var currentWindow = Application.Current.MainWindow;
                     Application.Current.MainWindow = mainWindow;

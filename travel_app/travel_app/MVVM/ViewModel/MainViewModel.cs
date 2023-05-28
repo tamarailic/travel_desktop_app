@@ -26,6 +26,5 @@ namespace travel_app.MVVM.ViewModel
         {
             OnPropertyChanged(nameof(CurrentViewModel));
         }
-
     }
 }
