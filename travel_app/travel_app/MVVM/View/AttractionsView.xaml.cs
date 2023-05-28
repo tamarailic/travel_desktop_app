@@ -45,17 +45,35 @@ namespace travel_app.MVVM.View
 
         private void CreateNewHotel(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void CreateNewRestaurant(object sender, RoutedEventArgs e)
         {
+            using (var db = new TravelContext())
+            {
+                var name = attractionName.Text.Trim();
+                var address = attractionAddress.Text.Trim();
+                var typeName = attractionTypesComboBox.SelectedItem.ToString();
+                var typeId = db.AttractionTypes.Where(attraction => attraction.Name == typeName).Select(el => el.Id).FirstOrDefault();
 
+                db.Attractions.Add(new Attractions(name, address, typeId));
+                db.SaveChanges();
+            }
         }
 
         private void CreateNewAttraction(object sender, RoutedEventArgs e)
         {
+            using(var db = new TravelContext() )
+            {
+                var name = attractionName.Text.Trim();
+                var address = attractionAddress.Text.Trim();
+                var typeName = attractionTypesComboBox.SelectedItem.ToString();
+                var typeId = db.AttractionTypes.Where(attraction => attraction.Name == typeName).Select(el => el.Id).FirstOrDefault();
 
+                db.Attractions.Add(new Attractions(name, address, typeId));
+                db.SaveChanges();
+            }
         }
 
         private void BtnBrowse_Click(object sender, RoutedEventArgs e)

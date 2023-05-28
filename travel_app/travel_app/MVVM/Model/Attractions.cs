@@ -47,7 +47,7 @@ namespace travel_app.MVVM.Model
 
         public override string? ToString()
         {
-            return $"Id: {Id}, Ime: {Name}, Adresa: {Address}, TypeId: {AttractionTypesId}";
+            return $"{Name}";
         }
     }
 }

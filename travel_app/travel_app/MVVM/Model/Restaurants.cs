@@ -15,5 +15,25 @@ namespace travel_app.MVVM.Model
         public string Name { get; set; }
         public string Location { get; set; }
         public int RestaurantTypesId { get; set; }
+        public virtual RestaurantTypes RestaurantTypes { get; set; }
+
+        public Restaurants()
+        {
+        }
+
+        public Restaurants(string name, string location, int restaurantTypesId)
+        {
+            Name = name;
+            Location = location;
+            RestaurantTypesId = restaurantTypesId;
+        }
+
+        public Restaurants(int id, string name, string location, int restaurantTypesId)
+        {
+            Id = id;
+            Name = name;
+            Location = location;
+            RestaurantTypesId = restaurantTypesId;
+        }
     }
 }
