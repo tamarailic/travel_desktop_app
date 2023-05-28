@@ -3,9 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:travel_app.MVVM.Converters"
         xmlns:local="clr-namespace:travel_app.MVVM.View"
         mc:Ignorable="d"
         Title="DetailsView" Height="450" Width="800">
+
+    <Window.Resources>
+        <converters:BytesToImageConverter x:Key="BytesToImageConverter" />
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -16,7 +22,7 @@
         </Grid.RowDefinitions>
         <Image Width="300"
                Height="200"
-               Source="/Images/Putokazi_logo.PNG"
+               Source="{Binding Image, Converter={StaticResource BytesToImageConverter}}"
                HorizontalAlignment="Center"
                VerticalAlignment="Top"/>
         <StackPanel Grid.Column="1">

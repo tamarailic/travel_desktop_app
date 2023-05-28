@@ -4,20 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:travel_app.MVVM.View"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         mc:Ignorable="d"
-        Title="CreateNewTravelView" Height="450" Width="800">
+        Title="CreateNewTravelView" Height="800" Width="1200">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Unesite informacije za novo putovanje:" FontSize="22" TextWrapping="Wrap" Margin="40"/>
-
-        <StackPanel Grid.Column="1" Margin="20,40,0,0">
+        <StackPanel Grid.Column="0" Margin="20,20,80,0">
+            <TextBlock Text="Novo putovanje:" Margin="0,0,0,20" FontSize="24" FontWeight="Bold"/>
+            <Label Content="Poster (slika) putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="4" Grid.Column="0"/>
+            <Image Grid.Row="5" Grid.Column="0" x:Name="photo" Height="200" />
+            <Button Grid.Row="5" Grid.Column="1" Content="Izaberi sliku" Click="BrowseButton_Click" Margin="0,20,0,20" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -27,18 +30,39 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Label Content="Naziv putovanja" FontWeight="Bold" FontSize="16" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" FontSize="14" Name="TravelName"/>
-                <Label Content="Kratak opis" FontWeight="Bold" FontSize="16" Grid.Row="1" Grid.Column="0"/>
-                <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" FontSize="14" Name="TravelShortDescription"/>
-                <Label Content="Detaljan opis" FontWeight="Bold" FontSize="16" Grid.Row="2" Grid.Column="0"/>
-                <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" FontSize="14" Name="TravelLongDescription"/>
-                <Label Content="Cena putovanja" FontWeight="Bold" FontSize="16" Grid.Row="3" Grid.Column="0"/>
-                <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" FontSize="14" Name="TravelPrice"/>
+                <Label Content="Naziv putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelName" />
+                <Label Content="Kratak opis:" FontWeight="Bold" FontSize="14" Grid.Row="1" Grid.Column="0"/>
+                <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelShortDescription"/>
+                <Label Content="Detaljan opis:" FontWeight="Bold" FontSize="14" Grid.Row="2" Grid.Column="0"/>
+                <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelLongDescription"/>
+                <Label Content="Cena putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="3" Grid.Column="0"/>
+                <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelPrice"/>
+                <Label Content="Adresa okupljanja:" FontWeight="Bold" FontSize="14" Grid.Row="4" Grid.Column="0"/>
+                <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="StartLocation"/>
+                <Label Content="Adresa destinacije:" FontWeight="Bold" FontSize="14" Grid.Row="5" Grid.Column="0"/>
+                <TextBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="EndLocation"/>
+                <Label Grid.Row="7"/>
+                <Button Grid.Row="8" Grid.Column="1" Content="Kreiraj novo putovanje" Click="Create_Click" Style="{StaticResource GradientButton}" />
             </Grid>
         </StackPanel>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <m:Map CredentialsProvider="AoDHQrsDjWxAd2BBTIt1TbvTMLqIHZ_Gki6iY1HMq-dcSVwoyF2K4QWog7Fi5QK8" Grid.Row="0" Margin="20"/>
+        </Grid>
 
     </Grid>
 </Window>

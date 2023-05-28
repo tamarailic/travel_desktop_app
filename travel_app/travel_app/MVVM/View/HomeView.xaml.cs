@@ -13,12 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using travel_app.MVVM.Model;
 
 namespace travel_app.MVVM.View
 {
-    /// <summary>
-    /// Interaction logic for HomeView.xaml
-    /// </summary>
     public partial class HomeView : UserControl
     {
         public HomeView()
@@ -31,13 +29,11 @@ namespace travel_app.MVVM.View
         {
             get
             {
-                // You can populate the list from any source you want
-                return new List<Travel>()
+                using(var db = new TravelContext())
                 {
-                new Travel() { Name = "Paris", Description = "The city of love", Price = 1000, ShortDescription = "The city of love", Image="" },
-                new Travel() { Name = "London", Description = "The city of history", Price = 1200, ShortDescription = "The city of history", Image="" },
-                new Travel() { Name = "New York", Description = "The city of dreams", Price = 1500, ShortDescription = "The city of dreams", Image="" }
-            };
+                    return db.Travels.ToList();
+                }
+                
             }
         }
 
@@ -62,15 +58,5 @@ namespace travel_app.MVVM.View
                 }
             }
         }
-    }
-
-    public class Travel
-    {
-        public string Name { get; set; }
-        public string ShortDescription { get; set; }
-        public string Description { get; set; }
-        public string Image { get; set; }
-        public int Price { get; set; }
-        public ICommand Command { get; set; }
     }
 }
