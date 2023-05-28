@@ -99,7 +99,7 @@ namespace travel_app
                 }
                 else
                 {
-                    MessageBox.Show("Korisničko ime ili lozinka nisu ispravi. Pokušajte ponovo");
+                    MessageBox.Show("Korisničko ime ili lozinka nisu ispravni. Pokušajte ponovo.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
