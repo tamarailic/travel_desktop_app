@@ -11,7 +11,10 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        MouseDown="Window_MouseDown"
+        WindowStartupLocation="CenterScreen"
+        >
 
     <Window.Resources>
                 <converters:EmailToNameConverter x:Key="EmailToNameConverter" />
@@ -33,9 +36,10 @@
                     <Image Width="170"
                    Height="38"
                    Source="/Images/just-logo-white.png"/>
-
-                    <TextBlock Text="{Binding LogedInUser.Email, RelativeSource={RelativeSource AncestorType=Window}, StringFormat='Dobrodošli {0}', Converter={StaticResource EmailToNameConverter}}" Grid.Column="1" Margin="40,0,0,0" Foreground="White" FontSize="24" VerticalAlignment="Center"/>
-
+            <StackPanel Grid.Column="1" Margin="30 20 ">
+                <TextBlock Text="{Binding LogedInUser.Email, RelativeSource={RelativeSource AncestorType=Window}, StringFormat='Dobrodošli {0}', Converter={StaticResource EmailToNameConverter}}" VerticalAlignment="Center"   Foreground="White" FontSize="24" />
+            </StackPanel>
+            
                     <StackPanel Grid.Row="1">
                         <RadioButton Content="Početna"
                              Height="50"
@@ -44,25 +48,13 @@
                              Style="{StaticResource MenuButtonTheme}"
                              IsChecked="True"
                              Command="{Binding HomeViewCommand}"/>
-                        <RadioButton Content="Pregled prodaja"
+                <RadioButton Content="Moja Putovanja"
                              Height="50"
                              Foreground="White"
                              FontSize="16"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding SalesViewCommand}"/>
-                        <RadioButton Content="Atrakcije"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="16"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding AttractionsViewCommand}"/>
-                        <RadioButton Content="Podešavanja"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="16"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding SettingsViewCommand}"/>
-                        <RadioButton Content="Odjavi se"
+                             Command="{Binding MyTravelViewCommand}"/>
+                <RadioButton Content="Odjavi se"
                              Height="50"
                              Foreground="White"
                              FontSize="16"
@@ -73,27 +65,15 @@
             <ContentControl 
                 Grid.Row="1" 
                 Grid.Column="1" 
-                Margin="20,20,10,10"
-
                 Content="{Binding CurrentViewModel}">
                 <ContentControl.Resources>
 
                     <DataTemplate DataType="{x:Type viewModel:UserHomeViewModel}">
-                        <view:HomeView/>
+                        <view:UserHomeView/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type viewModel:SalesViewModel}">
-                        <view:SalesView/>
+                    <DataTemplate DataType="{x:Type viewModel:UserTravelViewModel}">
+                        <view:UserTravelView/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
-                        <view:SettingsView/>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type viewModel:AttractionsViewModel}">
-                        <view:AttractionsView/>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type viewModel:CreateNewTravelViewModel}">
-                        <view:CreateNewTravelView/>
-                    </DataTemplate>
-
                 </ContentControl.Resources>
             </ContentControl>
         </Grid>

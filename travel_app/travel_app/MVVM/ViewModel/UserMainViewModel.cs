@@ -21,7 +21,7 @@ namespace travel_app.MVVM.ViewModel
         {
             _navigationStore = navigationStore;
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
-            HomeViewCommand = new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));
+            HomeViewCommand = new NavigateCommand<UserHomeViewModel>(navigationStore, () => new UserHomeViewModel(navigationStore));
             MyTravelViewCommand = new NavigateCommand<UserTravelViewModel>(navigationStore, () => new UserTravelViewModel(navigationStore));
         }
         private void OnCurrentViewModelChanged()

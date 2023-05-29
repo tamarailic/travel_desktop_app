@@ -27,6 +27,7 @@
             <Style.Triggers>
                 <Trigger Property="IsChecked" Value="True">
                     <Setter Property="Background" Value="#22202f"/>
+                    <Setter Property="Foreground" Value="White"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -58,6 +59,17 @@
                                 </LinearGradientBrush>
                             </Border.Background>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8" TextElement.Foreground="White" TextElement.FontWeight="Bold"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SecondButton" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="6" BorderThickness="1" Cursor="Hand" >
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>

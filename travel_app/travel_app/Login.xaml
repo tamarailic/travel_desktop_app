@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    WindowStartupLocation="CenterScreen"
     Title="Login" Height="450" Width="800">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         
@@ -12,6 +13,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -32,6 +34,11 @@
             <PasswordBox x:Name="PasswordBox" Width="200" Margin="5" BorderThickness="0"/>
         </Border>
         <Button Click="LoginButton_Click" x:Name="LoginButton" Content= "Prijava" HorizontalAlignment= "Right" Margin= "5" Grid.Row ="4 " Grid.ColumnSpan ="2" Style="{StaticResource GradientButton}" />
+        <StackPanel Grid.Row ="5 " Grid.ColumnSpan ="2" Orientation="Horizontal" HorizontalAlignment= "Right">
+            <TextBlock   Text="Nemate nalog?"  VerticalAlignment="Center"/>
+            <Button Click="RegisterButton_Click" x:Name="RegisterButton" Content= "Registracija"  Margin= "5" Style="{StaticResource SecondButton}" />
+        </StackPanel>
+        
     </Grid>
 </Window>
     

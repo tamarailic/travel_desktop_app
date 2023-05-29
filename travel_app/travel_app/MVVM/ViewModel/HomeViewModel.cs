@@ -54,4 +54,6 @@ namespace travel_app.MVVM.ViewModel
             }
         }
     }
+
+    
 }
