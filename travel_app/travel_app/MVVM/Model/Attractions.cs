@@ -15,11 +15,13 @@ namespace travel_app.MVVM.Model
         public int Id { get; set; }
         [Required]
         [Index(IsUnique = true)]
+        [StringLength(450)]
         public string Name { get; set; }
         [Required]
         public string Address { get; set; }
         public int AttractionTypesId { get; set; }
         public AttractionTypes AttractionTypes { get; set; }
+        public List<Travel> Travels { get; } = new();
 
         public Attractions()
         {

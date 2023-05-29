@@ -86,7 +86,7 @@ namespace travel_app.MVVM.View
             var newTravelLongDescription = TravelLongDescription.Text.Trim();
             var newTravelPriceString = TravelPrice.Text.Trim();
             int newTravelPrice;
-            if (imageData.Length > 0 && newTravelName != "" && newTravelShortDesctiption != "" && newTravelLongDescription != "" && int.TryParse(newTravelPriceString, out newTravelPrice))
+            if (imageData.Length > 0 && newTravelName != "" && newTravelShortDesctiption != "" && newTravelLongDescription != "" && int.TryParse(newTravelPriceString, out newTravelPrice) && _fromAddress != "" && _toAddress != "")
             {
                 using (var db = new TravelContext())
                 {
@@ -96,17 +96,47 @@ namespace travel_app.MVVM.View
                         ShortDescription = newTravelShortDesctiption,
                         Description = newTravelLongDescription,
                         Price = newTravelPrice,
-                        Image = imageData
-
+                        Image = imageData,
+                        Start = _fromAddress,
+                        End = _toAddress
                     };
-                    db.Travels.Add(newTravel);
-                    db.SaveChanges();
-                    Trace.WriteLine("New travel sucessfully added");
+                    if(ChoosenAttractions.Count > 0)
+                    {
+                        newTravel.Attractions.AddRange(db.Attractions.Where(el => ChoosenAttractions.Contains(el.Name)));
+                    }
+                    if(ChoosenHotels.Count > 0)
+                    {
+                        newTravel.Hotels.AddRange(db.Hotels.Where(el => ChoosenHotels.Contains(el.Name)));
+                    }
+                    if(ChoosenRestaurants.Count > 0)
+                    {
+                        newTravel.Restaurants.AddRange(db.Restaurants.Where(el => ChoosenHotels.Contains(el.Name)));
+                    }
+
+                    try
+                    {
+                        db.Travels.Add(newTravel);
+                        db.SaveChanges();
+                        MessageBox.Show("Novo putovanje je uspešno kreirano");
+
+                        TravelName.Text = string.Empty;
+                        TravelShortDescription.Text = string.Empty;
+                        TravelLongDescription.Text = string.Empty;
+                        TravelPrice.Text = string.Empty;
+                        StartLocation.Text = string.Empty;
+                        EndLocation.Text = string.Empty;
+                        ChoosenAttractions.Clear();
+                        ChoosenHotels.Clear();
+                        ChoosenRestaurants.Clear();
+                        InitializeOptions();
+                    }catch(Exception ex) { 
+                        MessageBox.Show("Podaci putovanja nisu u ispravnom obliku. Proverite sva polja i pokušajte ponovo.", "Neuspelo kreiranje", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
             else
             {
-                MessageBox.Show("Dodavanje nije uspelo. Proverite da li su svi unosi ispravno popunjeni i pokušajte ponovo");
+                MessageBox.Show("Dodavanje nije uspelo. Proverite da li su svi unosi ispravno popunjeni i pokušajte ponovo", "Neuspelo dodavanje", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -246,7 +276,7 @@ namespace travel_app.MVVM.View
             var result = MessageBoxResult.Yes;
             if (!MainWindow.LogedInUser.Pro)
             {
-                result = MessageBox.Show($"Da li ste sigurni da želite da uključite hotel {attractionComboBox.SelectedItem}?", "Potvrdite dodavanje hotela", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                result = MessageBox.Show($"Da li ste sigurni da želite da uključite smeštaj {attractionComboBox.SelectedItem}?", "Potvrdite dodavanje smeštaja", MessageBoxButton.YesNo, MessageBoxImage.Question);
             }
             if (result == MessageBoxResult.Yes)
             {

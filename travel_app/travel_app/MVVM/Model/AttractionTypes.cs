@@ -15,6 +15,7 @@ namespace travel_app.MVVM.Model
         public int Id { get; set; }
         [Required]
         [Index(IsUnique = true)]
+        [StringLength(450)]
         public string Name { get; set; }
 
         public override bool Equals(object? obj)

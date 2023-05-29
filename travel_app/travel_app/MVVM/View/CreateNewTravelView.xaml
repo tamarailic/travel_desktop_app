@@ -102,7 +102,7 @@
                 </StackPanel>
                 
                 <StackPanel Grid.Column="2" Margin="20,5,20,5" >
-                    <TextBlock Text="Hoteli:" FontSize="20" FontWeight="Bold"/>
+                    <TextBlock Text="Smeštaj:" FontSize="20" FontWeight="Bold"/>
 
                     <ListBox AllowDrop="True" ItemsSource="{Binding ChoosenHotels, Mode=TwoWay}" Margin="0,20,0,0" MinHeight="100" Name="ChoosenHotelsListBox">
                         <ListBox.ItemTemplate>
@@ -113,7 +113,7 @@
                     </ListBox>
 
                     <ComboBox x:Name="hotelsComboBox" Foreground="#333" Margin="0,20,0,0" Height="28" VerticalAlignment="Center" />
-                    <Button Click="AddHotel" Content="Dodaj izabrani hotel" Style="{StaticResource SecondButton}" Margin="0,20,0,0"/>
+                    <Button Click="AddHotel" Content="Dodaj izabrani smeštaj" Style="{StaticResource SecondButton}" Margin="0,20,0,0"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
