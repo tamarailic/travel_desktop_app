@@ -85,17 +85,34 @@ namespace travel_app
                 {
 
                     NavigationStore navigationStore = new NavigationStore();
-                    HomeViewModel homeViewModel = new HomeViewModel(navigationStore);
-                    navigationStore.CurrentViewModel = homeViewModel;
-                    MainWindow mainWindow = new MainWindow()
+                    if (user.Role.Equals("user"))
                     {
-                        DataContext = new MainViewModel(navigationStore)
-                    };                    
-                    MainWindow.LogedInUser = user;
-                    var currentWindow = Application.Current.MainWindow;
-                    Application.Current.MainWindow = mainWindow;
-                    mainWindow.Show();
-                    currentWindow.Close();
+                        UserHomeViewModel userHomeViewModel = new UserHomeViewModel(navigationStore);
+                        navigationStore.CurrentViewModel = userHomeViewModel;
+                        UserMainWindow userMainWindow = new UserMainWindow()
+                        {
+                            DataContext = new UserMainViewModel(navigationStore)
+                        };
+                        UserMainWindow.LogedInUser = user;
+                        var currentWindow = Application.Current.MainWindow;
+                        Application.Current.MainWindow = userMainWindow;
+                        userMainWindow.Show();
+                        currentWindow.Close();
+                    }
+                    else {
+                        HomeViewModel homeViewModel = new HomeViewModel(navigationStore);
+                        navigationStore.CurrentViewModel = homeViewModel;
+                        MainWindow mainWindow = new MainWindow()
+                        {
+                            DataContext = new MainViewModel(navigationStore)
+                        };
+                        MainWindow.LogedInUser = user;
+                        var currentWindow = Application.Current.MainWindow;
+                        Application.Current.MainWindow = mainWindow;
+                        mainWindow.Show();
+                        currentWindow.Close();
+                    }
+                    
                 }
                 else
                 {
@@ -103,5 +120,14 @@ namespace travel_app
                 }
             }
         }
-    }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            Registration registration = new Registration();
+            var currentWindow = Application.Current.MainWindow;
+            Application.Current.MainWindow = registration;
+            registration.Show();
+            currentWindow.Close();
+        }
+        }
 }

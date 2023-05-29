@@ -10,21 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using travel_app.MVVM.Model;
 
 namespace travel_app
 {
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Interaction logic for UserMainWindow.xaml
+    /// </summary>
+    public partial class UserMainWindow : Window
     {
-
-        public static User? LogedInUser { get; set; }   
-
-        public MainWindow()
+        public UserMainWindow()
         {
             InitializeComponent();
         }
+
+        public static User? LogedInUser { get; set; }
+
 
         private void LogOut(object sender, RoutedEventArgs e)
         {
@@ -41,7 +43,7 @@ namespace travel_app
                 Application.Current.MainWindow = login;
                 login.Show();
                 currentWindow.Close();
-            }            
+            }
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

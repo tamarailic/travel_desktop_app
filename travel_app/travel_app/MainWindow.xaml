@@ -11,7 +11,9 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        MouseDown="Window_MouseDown"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <converters:EmailToNameConverter x:Key="EmailToNameConverter" />

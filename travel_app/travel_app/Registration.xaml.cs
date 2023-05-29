@@ -66,7 +66,7 @@ namespace travel_app
                     {
                         Email = username,
                         Password = password,
-                        Role = "agent",
+                        Role = "user",
                         Pro = false
                     };
                     db.Users.Add(newUser);
@@ -76,7 +76,18 @@ namespace travel_app
                 }
             }
         }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            Login login = new Login();
+            var currentWindow = Application.Current.MainWindow;
+            Application.Current.MainWindow = login;
+            login.Show();
+            currentWindow.Close();
+        }
     }
+
+    
 
     public class MinimumLengthValidationRule : ValidationRule
     {
