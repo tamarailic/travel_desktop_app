@@ -13,7 +13,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="#333333">
+        <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="#333333" Padding="0,0,20,0">
             <StackPanel>
                 <TextBlock Text="Dodajte novu atrakciju:" FontWeight="Bold" FontSize="20" Margin="00,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
@@ -30,11 +30,11 @@
                     </Grid.RowDefinitions>
 
                     <Label Content="Naziv:" Grid.Column="0" Grid.Row="0"/>
-                    <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="attractionName" Foreground="#333"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="attractionName" Foreground="#333" Height="25" FontSize="14"/>
                     <Label Content="Adresa:" Grid.Column="0" Grid.Row="1" Margin="0,10,20,10"/>
-                    <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="attractionAddress" Foreground="#333"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="attractionAddress" Foreground="#333" Height="25" FontSize="14"/>
                     <Label Content="Tip:" Grid.Column="0" Grid.Row="2"/>
-                    <ComboBox Grid.Column="1" Grid.Row="2" x:Name="attractionTypesComboBox" Foreground="#333" />
+                    <ComboBox Grid.Column="1" Grid.Row="2" x:Name="attractionTypesComboBox" Foreground="#333" Height="25" FontSize="14" />
                     <Button Click="CreateNewAttraction" Grid.Row="3" Grid.Column="1" Content="Kreiraj novu atrakciju" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/>
 
                 </Grid>
@@ -52,7 +52,7 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Column="1" BorderThickness="0,0,1,0" BorderBrush="#333333">
+        <Border Grid.Column="1" BorderThickness="0,0,1,0" BorderBrush="#333333"  Padding="0,0,20,0">
             <StackPanel>
                 <TextBlock Text="Dodajte novi restoran:" FontWeight="Bold" FontSize="20" Margin="00,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Grid Margin="20,20,0,0">
@@ -68,11 +68,11 @@
                     </Grid.RowDefinitions>
 
                     <Label Content="Naziv:" Grid.Column="0" Grid.Row="0"/>
-                    <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="restaurantName" Foreground="#333"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="restaurantName" Foreground="#333" Height="25" FontSize="14"/>
                     <Label Content="Mesto:" Grid.Column="0" Grid.Row="1" Margin="0,10,20,10"/>
-                    <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="restaurantLocation" Foreground="#333"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="restaurantLocation" Foreground="#333" Height="25" FontSize="14"/>
                     <Label Content="Tip:" Grid.Column="0" Grid.Row="2"/>
-                    <ComboBox Grid.Column="1" Grid.Row="2" x:Name="restaurantTypesComboBox" Foreground="#333" />
+                    <ComboBox Grid.Column="1" Grid.Row="2" x:Name="restaurantTypesComboBox" Foreground="#333" Height="25" FontSize="14" />
                     <Button Click="CreateNewRestaurant" Grid.Row="3" Grid.Column="1" Content="Kreiraj novi restoran" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/>
 
                 </Grid>
@@ -96,11 +96,11 @@
                     </Grid.RowDefinitions>
 
                     <Label Content="Naziv:" Grid.Column="0" Grid.Row="0"/>
-                    <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="hotelName" Foreground="#333"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="hotelName" Foreground="#333" Height="25" FontSize="14"/>
                     <Label Content="Mesto:" Grid.Column="0" Grid.Row="1" Margin="0,10,20,10"/>
-                    <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="hotelLocation" Foreground="#333"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="hotelLocation" Foreground="#333" Height="25" FontSize="14"/>
                     <Label Content="Broj zvezdica:" Grid.Column="0" Grid.Row="2"/>
-                    <ComboBox Grid.Column="1" Grid.Row="2" x:Name="hotelStarsComboBox" Foreground="#333"/>
+                    <ComboBox Grid.Column="1" Grid.Row="2" x:Name="hotelStarsComboBox" Foreground="#333" Height="25" FontSize="14"/>
                     <Button Click="CreateNewHotel" Grid.Row="3" Grid.Column="1" Content="Kreiraj novi smeštaj" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/>
 
                 </Grid>

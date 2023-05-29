@@ -23,6 +23,7 @@ using Microsoft.Maps.MapControl.WPF;
 using System.Resources;
 using System.Drawing;
 using Newtonsoft.Json;
+using System.Collections;
 
 namespace travel_app.MVVM.View
 {
@@ -34,11 +35,14 @@ namespace travel_app.MVVM.View
         private string _toAddress = string.Empty;
         private List<double> _toLocation = new List<double>();
 
-        private List<Attractions> ChoosenAttractions = new List<Attractions>();
+        public List<string> ChoosenAttractions { get; set; } = new List<string>() {};
+        public List<string> ChoosenRestaurants { get; set; } = new List<string>() {};
+        public List<string> ChoosenHotels { get; set; } = new List<string>() {};
 
         public CreateNewTravelView()
         {
             InitializeComponent();
+            DataContext = this;
 
             InitializeOptions();
         }
@@ -49,6 +53,12 @@ namespace travel_app.MVVM.View
             {
                 var attrations = db.Attractions.ToList();
                 attractionComboBox.ItemsSource = attrations;
+
+                var restaurants = db.Restaurants.ToList();
+                restaurantsComboBox.ItemsSource = restaurants;
+
+                var hotels = db.Hotels.ToList();
+                hotelsComboBox.ItemsSource = hotels;
             }
             
         }
@@ -104,20 +114,17 @@ namespace travel_app.MVVM.View
         {
             if (StartLocation.Text.Trim() != "" && StartLocation.Text.Trim() != _fromAddress)
             {
-                if (_fromAddress != "")
+                if (_fromAddress != "" && _toAddress != "")
                 {
                     mainMap.Children.Clear();
-                    Pushpin pinOld = new Pushpin();
-                    pinOld.Location = new Location(_toLocation[0], _toLocation[1]);
-                    mainMap.Children.Add(pinOld);
+                    AddMainPin(_toLocation[0], _toLocation[1]);
                 }
                 _fromAddress = StartLocation.Text.Trim();
                 var latlng = await GetLatLngFromAddress(_fromAddress);
                 _fromLocation = latlng;
-                Pushpin pin = new Pushpin();
 
-                pin.Location = new Location(_fromLocation[0], _fromLocation[1]);
-                mainMap.Children.Add(pin);
+                AddMainPin(_fromLocation[0], _fromLocation[1]);
+
                 mainMap.SetView(new Location(_fromLocation[0], _fromLocation[1]), 7);
 
                 if (_fromAddress != "" && _toAddress!= "")
@@ -127,20 +134,17 @@ namespace travel_app.MVVM.View
             }
             if (EndLocation.Text.Trim() != "" && EndLocation.Text.Trim() != _toAddress)
             {
-                if (_toAddress != "")
+                if (_toAddress != "" && _fromAddress != "")
                 {
                     mainMap.Children.Clear();
-                    Pushpin pinOld = new Pushpin();
-                    pinOld.Location = new Location(_fromLocation[0], _fromLocation[1]);
-                    mainMap.Children.Add(pinOld);
+                    AddMainPin(_fromLocation[0], _fromLocation[1]);
                 }
                 _toAddress = EndLocation.Text.Trim();
                 var latlng = await GetLatLngFromAddress(_toAddress);
                 _toLocation = latlng;
-                Pushpin pin = new Pushpin();
 
-                pin.Location = new Location(_toLocation[0], _toLocation[1]);
-                mainMap.Children.Add(pin);
+                AddMainPin(_toLocation[0], _toLocation[1]);
+
                 mainMap.SetView(new Location(_toLocation[0], _toLocation[1]), 7);
 
                 if (_fromAddress != "" && _toAddress != "")
@@ -187,11 +191,134 @@ namespace travel_app.MVVM.View
 
         private void AddAttraction(object sender, RoutedEventArgs e)
         {
-            using (var db = new TravelContext())
+            var result = MessageBoxResult.Yes;
+            if (!MainWindow.LogedInUser.Pro)
             {
-                var attractionName = attractionComboBox.SelectedItem;
-                ChoosenAttractions.Add(db.Attractions.Where(el => el.Name == attractionName).FirstOrDefault());
+                result = MessageBox.Show($"Da li ste sigurni da želite da uključite atrakciju {attractionComboBox.SelectedItem}?", "Potvrdite dodavanje atrakcije", MessageBoxButton.YesNo, MessageBoxImage.Question);
             }
+            if (result == MessageBoxResult.Yes)
+            {
+                using (var db = new TravelContext())
+                {
+                    string attractionName = attractionComboBox.SelectedItem.ToString();
+                    ChoosenAttractions.Add(attractionName);
+                    CollectionViewSource.GetDefaultView(ChoosenAttractionsListBox.ItemsSource).Refresh();
+
+                    AddAttractionToMap();
+
+                    var remainingAttractions = new List<Attractions>();
+                    foreach(var attraction in db.Attractions.ToList())
+                    {
+                        if (attraction.Name != attractionName) { remainingAttractions.Add(attraction); }
+                    }
+                    attractionComboBox.ItemsSource = remainingAttractions;
+                }
+            }
+        }
+
+        private void AddRestaurant(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBoxResult.Yes;
+            if (!MainWindow.LogedInUser.Pro)
+            {
+                result = MessageBox.Show($"Da li ste sigurni da želite da uključite restoran {attractionComboBox.SelectedItem}?", "Potvrdite dodavanje restorana", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            }
+            if (result == MessageBoxResult.Yes)
+            {
+                using (var db = new TravelContext())
+                {
+                    string restaurantName = restaurantsComboBox.SelectedItem.ToString();
+                    ChoosenRestaurants.Add(restaurantName);
+                    CollectionViewSource.GetDefaultView(ChoosenRestaurantsListBox.ItemsSource).Refresh();
+
+                    var remainingRestaurants = new List<Restaurants>();
+                    foreach (var restaurant in db.Restaurants.ToList())
+                    {
+                        if (restaurant.Name != restaurantName) { remainingRestaurants.Add(restaurant); }
+                    }
+                    restaurantsComboBox.ItemsSource = remainingRestaurants;
+                }
+            }
+        }
+
+        private void AddHotel(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBoxResult.Yes;
+            if (!MainWindow.LogedInUser.Pro)
+            {
+                result = MessageBox.Show($"Da li ste sigurni da želite da uključite hotel {attractionComboBox.SelectedItem}?", "Potvrdite dodavanje hotela", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            }
+            if (result == MessageBoxResult.Yes)
+            {
+                using (var db = new TravelContext())
+                {
+                    string hotelName = hotelsComboBox.SelectedItem.ToString();
+                    ChoosenHotels.Add(hotelName);
+                    CollectionViewSource.GetDefaultView(ChoosenHotelsListBox.ItemsSource).Refresh();
+
+                    var remainingHotels = new List<Hotels>();
+                    foreach (var hotel in db.Hotels.ToList())
+                    {
+                        if (hotel.Name != hotelName) { remainingHotels.Add(hotel); }
+                    }
+                    hotelsComboBox.ItemsSource = remainingHotels;
+                }
+            }
+        }
+
+        private async void AddAttractionToMap()
+        {
+            List<List<double>> attractionLocations = new List<List<double>>();
+            using(var db = new TravelContext())
+            {
+                foreach(var attractionName in ChoosenAttractions)
+                {
+                    var attraction = db.Attractions.Where(el => el.Name == attractionName).FirstOrDefault();
+                    
+                    mainMap.Children.Clear();
+
+                    if (_fromAddress != "")
+                    {
+                        AddMainPin(_fromLocation[0], _fromLocation[1]);
+                    }
+                    if (_toAddress != "")
+                    {
+                        AddMainPin(_toLocation[0], _toLocation[1]);
+                    }
+
+                    var latlng = await GetLatLngFromAddress(attraction.Address);
+
+                    AddAttractionPin(latlng[0], latlng[1]);
+                    mainMap.SetView(new Location(latlng[0], latlng[1]), 7);
+                    attractionLocations.Add(latlng);
+                }
+
+                if (_fromAddress != "" && _toAddress != "")
+                {
+                    var locationsToConnect = new List<List<double>> { _fromLocation };
+                    foreach (var location in attractionLocations)
+                    {
+                        locationsToConnect.Add(location);
+                    }
+                    locationsToConnect.Add(_toLocation);
+                    DrawRoute(locationsToConnect);
+                }
+            }
+        }
+
+        private void AddMainPin(double lat, double lng)
+        {
+            Pushpin startEndPin = new Pushpin();
+            startEndPin.Location = new Location(lat, lng);
+            startEndPin.Background = new SolidColorBrush(Colors.Blue);
+            mainMap.Children.Add(startEndPin);
+        }
+
+        private void AddAttractionPin(double lat, double lng)
+        {
+            Pushpin attractionPin = new Pushpin();
+            attractionPin.Location = new Location(lat, lng);
+            mainMap.Children.Add(attractionPin);
         }
     }
 }
