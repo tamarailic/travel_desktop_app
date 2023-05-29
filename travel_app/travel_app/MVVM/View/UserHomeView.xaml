@@ -9,6 +9,7 @@
               Background="White"
              d:DesignHeight="450" d:DesignWidth="800"
              Padding="50">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
     <StackPanel>
         <StackPanel.Resources>
             <converters:BytesToImageConverter x:Key="BytesToImageConverter" />
@@ -20,11 +21,11 @@
                    FontSize="28"
                    HorizontalAlignment="Left"
                    Margin="0,0,0,20"/>
-
+        
         <ItemsControl ItemsSource="{Binding Travels}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" />
+                    <WrapPanel />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
@@ -51,6 +52,7 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-
+        
     </StackPanel>
+    </ScrollViewer>
 </UserControl>

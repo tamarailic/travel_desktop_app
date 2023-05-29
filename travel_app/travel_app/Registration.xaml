@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:travel_app"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Registration" Height="450" Width="800">
+        Title="Registration" Height="450" Width="800"
+        MinWidth="350"
+        MinHeight="450">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

@@ -9,11 +9,11 @@
         mc:Ignorable="d"
         Height="800" Width="1400"
         WindowStyle="None"
-        ResizeMode="NoResize"
         Background="Transparent"
-        AllowsTransparency="True"
         MouseDown="Window_MouseDown"
         WindowStartupLocation="CenterScreen"
+        MinWidth="660"
+        MinHeight="500"
         >
 
     <Window.Resources>
@@ -74,6 +74,10 @@
                     <DataTemplate DataType="{x:Type viewModel:UserTravelViewModel}">
                         <view:UserTravelView/>
                     </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:UserDetailsViewModel}">
+                        <view:UserDetailsView/>
+                    </DataTemplate>
+                    
                 </ContentControl.Resources>
             </ContentControl>
         </Grid>
