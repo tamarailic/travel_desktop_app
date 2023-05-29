@@ -83,7 +83,7 @@
                     </ListBox>
 
                     <ComboBox x:Name="attractionComboBox" Foreground="#333" Margin="0,20,0,0" Height="28" VerticalAlignment="Center" />
-                    <Button Click="AddAttraction" Content="Dodaj izabranu atrakciju" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/>
+                    <Button Click="AddAttraction" Content="Dodaj izabranu atrakciju" Style="{StaticResource SecondButton}" Margin="0,20,0,0"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Margin="20,5,20,5" >
@@ -98,7 +98,7 @@
                     </ListBox>
 
                     <ComboBox x:Name="restaurantsComboBox" Foreground="#333" Margin="0,20,0,0" Height="28" VerticalAlignment="Center" />
-                    <Button Click="AddRestaurant" Content="Dodaj izabrani restoran" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/>
+                    <Button Click="AddRestaurant" Content="Dodaj izabrani restoran" Style="{StaticResource SecondButton}" Margin="0,20,0,0"/>
                 </StackPanel>
                 
                 <StackPanel Grid.Column="2" Margin="20,5,20,5" >
@@ -113,7 +113,7 @@
                     </ListBox>
 
                     <ComboBox x:Name="hotelsComboBox" Foreground="#333" Margin="0,20,0,0" Height="28" VerticalAlignment="Center" />
-                    <Button Click="AddHotel" Content="Dodaj izabrani hotel" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/>
+                    <Button Click="AddHotel" Content="Dodaj izabrani hotel" Style="{StaticResource SecondButton}" Margin="0,20,0,0"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
