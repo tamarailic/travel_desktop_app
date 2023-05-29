@@ -59,7 +59,7 @@ namespace travel_app.MVVM.ViewModel
                 Price = travel.Price;
                 Start = travel.Start == null ? "Nedostaju podaci" : travel.Start;
                 End = travel.End == null ? "Nedostaju podaci" : travel.End;
-                Command = new NavigateCommand<CreateNewTravelViewModel>(navigationStore, () => new CreateNewTravelViewModel(navigationStore));
+                Command = new NavigateCommand<UserDetailsViewModel>(navigationStore, () => new UserDetailsViewModel(navigationStore, travel));
             }
         }
     }

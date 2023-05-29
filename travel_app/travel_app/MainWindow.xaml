@@ -13,7 +13,9 @@
         Background="Transparent"
         AllowsTransparency="True"
         MouseDown="Window_MouseDown"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        MinWidth="500"
+        MinHeight="500">
 
     <Window.Resources>
         <converters:EmailToNameConverter x:Key="EmailToNameConverter" />
