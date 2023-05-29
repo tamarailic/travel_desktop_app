@@ -45,43 +45,78 @@ namespace travel_app.MVVM.View
 
         private void CreateNewHotel(object sender, RoutedEventArgs e)
         {
-            
-            using (var db = new TravelContext())
+            var result = MessageBoxResult.Yes;
+            if(!MainWindow.LogedInUser.Pro) 
             {
-                var name = hotelName.Text.Trim();
-                var address = hotelLocation.Text.Trim();
-                var stars = int.Parse(hotelStarsComboBox.SelectedItem.ToString());
-                
-                db.Hotels.Add(new Hotels(name, address, stars));
-                db.SaveChanges();
+                result = MessageBox.Show($"Da li ste sigurni da želite da dodate hotel {hotelName.Text.Trim()}?", "Potvrdite dodavanje hotela", MessageBoxButton.YesNo, MessageBoxImage.Question);
             }
+            if (result == MessageBoxResult.Yes) {
+                using (var db = new TravelContext())
+                {
+                    var name = hotelName.Text.Trim();
+                    var address = hotelLocation.Text.Trim();
+                    var stars = int.Parse(hotelStarsComboBox.SelectedItem.ToString());
+
+                    db.Hotels.Add(new Hotels(name, address, stars));
+                    db.SaveChanges();
+                    hotelName.Text = string.Empty;
+                    hotelLocation.Text = string.Empty;
+                    hotelStarsComboBox.SelectedIndex = -1;
+
+                    MessageBox.Show($"Novi hotel pod nazivom {name} je uspešno dodat");
+                }
+            }            
         }
 
         private void CreateNewRestaurant(object sender, RoutedEventArgs e)
         {
-            using (var db = new TravelContext())
+            var result = MessageBoxResult.Yes;
+            if (!MainWindow.LogedInUser.Pro)
             {
-                var name = restaurantName.Text.Trim();
-                var address = restaurantLocation.Text.Trim();
-                var typeName = restaurantTypesComboBox.SelectedItem.ToString();
-                var typeId = db.RestaurantTypes.Where(restaurent => restaurent.Name == typeName).Select(el => el.Id).FirstOrDefault();
+                result = MessageBox.Show($"Da li ste sigurni da želite da dodate restoran {restaurantName.Text.Trim()}?", "Potvrdite dodavanje restorana", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            }
+            if (result == MessageBoxResult.Yes)
+            {
+                using (var db = new TravelContext())
+                {
+                    var name = restaurantName.Text.Trim();
+                    var address = restaurantLocation.Text.Trim();
+                    var typeName = restaurantTypesComboBox.SelectedItem.ToString();
+                    var typeId = db.RestaurantTypes.Where(restaurent => restaurent.Name == typeName).Select(el => el.Id).FirstOrDefault();
 
-                db.Restaurants.Add(new Restaurants(name, address, typeId));
-                db.SaveChanges();
+                    db.Restaurants.Add(new Restaurants(name, address, typeId));
+                    db.SaveChanges();
+                    restaurantName.Text = string.Empty;
+                    restaurantLocation.Text = string.Empty;
+                    restaurantTypesComboBox.SelectedIndex = -1;
+                    MessageBox.Show($"Novi restoran pod nazivom {name} je uspešno dodat");
+                }
             }
         }
 
         private void CreateNewAttraction(object sender, RoutedEventArgs e)
         {
-            using(var db = new TravelContext() )
+            var result = MessageBoxResult.Yes;
+            if (!MainWindow.LogedInUser.Pro)
             {
-                var name = attractionName.Text.Trim();
-                var address = attractionAddress.Text.Trim();
-                var typeName = attractionTypesComboBox.SelectedItem.ToString();
-                var typeId = db.AttractionTypes.Where(attraction => attraction.Name == typeName).Select(el => el.Id).FirstOrDefault();
+                result = MessageBox.Show($"Da li ste sigurni da želite da kreirate atrakciju {attractionName.Text.Trim()}?", "Potvrdite kreiranje atrakcije", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            }
+            if (result == MessageBoxResult.Yes)
+            {
+                using (var db = new TravelContext())
+                {
+                    var name = attractionName.Text.Trim();
+                    var address = attractionAddress.Text.Trim();
+                    var typeName = attractionTypesComboBox.SelectedItem.ToString();
+                    var typeId = db.AttractionTypes.Where(attraction => attraction.Name == typeName).Select(el => el.Id).FirstOrDefault();
 
-                db.Attractions.Add(new Attractions(name, address, typeId));
-                db.SaveChanges();
+                    db.Attractions.Add(new Attractions(name, address, typeId));
+                    db.SaveChanges();
+                    attractionName.Text = string.Empty;
+                    attractionAddress.Text = string.Empty;
+                    attractionTypesComboBox.SelectedIndex = -1;
+                    MessageBox.Show("Nova trakcija je uspešno kreirana");
+                }
             }
         }
 
@@ -139,7 +174,6 @@ namespace travel_app.MVVM.View
                 db.SaveChanges();
 
                 MessageBox.Show($"Uspešno je dodat novih {attractions.Count} atrakcija");
-
             }
         }
 

@@ -34,8 +34,6 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <Label Content="Naziv putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="0" Grid.Column="0" Margin="0,5,0,5"/>
@@ -50,8 +48,6 @@
                 <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelLongDescription" Margin="0,5,0,5"/>
                 <Label Content="Cena putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="5" Grid.Column="0" Margin="0,5,0,5"/>
                 <TextBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelPrice" Margin="0,5,0,5"/>
-                <Label Grid.Row="6"/>
-                <Button Grid.Row="7" Grid.Column="1" Content="Kreiraj novo putovanje" Click="Create_Click" Style="{StaticResource GradientButton}" Margin="0,5,0,5" />
             </Grid>
         </StackPanel>
 
@@ -70,10 +66,15 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
                 <StackPanel Grid.Column="0" Margin="20,5,20,5" >
                     <TextBlock Text="Atrakcije:" FontSize="20" FontWeight="Bold"/>
-                    
-                    <ListBox AllowDrop="True" ItemsSource="{Binding ChoosenAttractions}" Margin="0,20,0,0" MinHeight="100">
+
+                    <ListBox AllowDrop="True" ItemsSource="{Binding ChoosenAttractions, Mode=TwoWay}" Margin="0,20,0,0" MinHeight="100" Name="ChoosenAttractionsListBox">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding}" />
@@ -84,7 +85,41 @@
                     <ComboBox x:Name="attractionComboBox" Foreground="#333" Margin="0,20,0,0" Height="28" VerticalAlignment="Center" />
                     <Button Click="AddAttraction" Content="Dodaj izabranu atrakciju" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/>
                 </StackPanel>
-               
+
+                <StackPanel Grid.Column="1" Margin="20,5,20,5" >
+                    <TextBlock Text="Restorani:" FontSize="20" FontWeight="Bold"/>
+
+                    <ListBox AllowDrop="True" ItemsSource="{Binding ChoosenRestaurants, Mode=TwoWay}" Margin="0,20,0,0" MinHeight="100" Name="ChoosenRestaurantsListBox">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <ComboBox x:Name="restaurantsComboBox" Foreground="#333" Margin="0,20,0,0" Height="28" VerticalAlignment="Center" />
+                    <Button Click="AddRestaurant" Content="Dodaj izabrani restoran" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="2" Margin="20,5,20,5" >
+                    <TextBlock Text="Hoteli:" FontSize="20" FontWeight="Bold"/>
+
+                    <ListBox AllowDrop="True" ItemsSource="{Binding ChoosenHotels, Mode=TwoWay}" Margin="0,20,0,0" MinHeight="100" Name="ChoosenHotelsListBox">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <ComboBox x:Name="hotelsComboBox" Foreground="#333" Margin="0,20,0,0" Height="28" VerticalAlignment="Center" />
+                    <Button Click="AddHotel" Content="Dodaj izabrani hotel" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
+                    <Button Content="Kreiraj novo putovanje" Click="Create_Click" Style="{StaticResource GradientButton}" Margin="0,5,0,20" HorizontalAlignment="Right" />
+                </StackPanel>
+                
             </Grid>
             
         </Grid>
