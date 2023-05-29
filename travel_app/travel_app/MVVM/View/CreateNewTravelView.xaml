@@ -34,6 +34,8 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <Label Content="Naziv putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="0" Grid.Column="0" Margin="0,5,0,5"/>
@@ -48,6 +50,8 @@
                 <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelLongDescription" Margin="0,5,0,5"/>
                 <Label Content="Cena putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="5" Grid.Column="0" Margin="0,5,0,5"/>
                 <TextBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelPrice" Margin="0,5,0,5"/>
+                <Label Content="Datum putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="6" Grid.Column="0" Margin="0,5,0,5"/>
+                <DatePicker Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelDate" Margin="0,5,0,5"/>
             </Grid>
         </StackPanel>
 

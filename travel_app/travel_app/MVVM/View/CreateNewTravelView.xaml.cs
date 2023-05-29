@@ -85,8 +85,9 @@ namespace travel_app.MVVM.View
             var newTravelShortDesctiption = TravelShortDescription.Text.Trim();
             var newTravelLongDescription = TravelLongDescription.Text.Trim();
             var newTravelPriceString = TravelPrice.Text.Trim();
+            string travelDate = TravelDate.SelectedDate.Value.ToString("s");
             int newTravelPrice;
-            if (imageData.Length > 0 && newTravelName != "" && newTravelShortDesctiption != "" && newTravelLongDescription != "" && int.TryParse(newTravelPriceString, out newTravelPrice) && _fromAddress != "" && _toAddress != "")
+            if (imageData.Length > 0 && newTravelName != "" && newTravelShortDesctiption != "" && newTravelLongDescription != "" && travelDate != "" && int.TryParse(newTravelPriceString, out newTravelPrice) && _fromAddress != "" && _toAddress != "")
             {
                 using (var db = new TravelContext())
                 {
@@ -98,7 +99,8 @@ namespace travel_app.MVVM.View
                         Price = newTravelPrice,
                         Image = imageData,
                         Start = _fromAddress,
-                        End = _toAddress
+                        End = _toAddress,
+                        Date= travelDate
                     };
                     if(ChoosenAttractions.Count > 0)
                     {
@@ -125,9 +127,14 @@ namespace travel_app.MVVM.View
                         TravelPrice.Text = string.Empty;
                         StartLocation.Text = string.Empty;
                         EndLocation.Text = string.Empty;
+                        TravelDate.SelectedDate = null;
+                        photo.Source = null;
                         ChoosenAttractions.Clear();
                         ChoosenHotels.Clear();
                         ChoosenRestaurants.Clear();
+                        CollectionViewSource.GetDefaultView(ChoosenAttractionsListBox.ItemsSource).Refresh();
+                        CollectionViewSource.GetDefaultView(ChoosenHotelsListBox.ItemsSource).Refresh();
+                        CollectionViewSource.GetDefaultView(ChoosenRestaurantsListBox.ItemsSource).Refresh();
                         InitializeOptions();
                     }catch(Exception ex) { 
                         MessageBox.Show("Podaci putovanja nisu u ispravnom obliku. Proverite sva polja i pokušajte ponovo.", "Neuspelo kreiranje", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -144,11 +151,15 @@ namespace travel_app.MVVM.View
         {
             if (StartLocation.Text.Trim() != "" && StartLocation.Text.Trim() != _fromAddress)
             {
-                if (_fromAddress != "" && _toAddress != "")
+                if (_fromAddress != "")
                 {
                     mainMap.Children.Clear();
-                    AddMainPin(_toLocation[0], _toLocation[1]);
+                    if(_toAddress != "")
+                    {
+                        AddMainPin(_toLocation[0], _toLocation[1]);
+                    }
                 }
+                
                 _fromAddress = StartLocation.Text.Trim();
                 var latlng = await GetLatLngFromAddress(_fromAddress);
                 _fromLocation = latlng;
@@ -164,10 +175,13 @@ namespace travel_app.MVVM.View
             }
             if (EndLocation.Text.Trim() != "" && EndLocation.Text.Trim() != _toAddress)
             {
-                if (_toAddress != "" && _fromAddress != "")
+                if (_toAddress != "")
                 {
                     mainMap.Children.Clear();
-                    AddMainPin(_fromLocation[0], _fromLocation[1]);
+                    if(_fromAddress != "")
+                    {
+                        AddMainPin(_fromLocation[0], _fromLocation[1]);
+                    }
                 }
                 _toAddress = EndLocation.Text.Trim();
                 var latlng = await GetLatLngFromAddress(_toAddress);

@@ -19,8 +19,8 @@ namespace travel_app
         {
             InitializeComponent();
 
-            //InitializeAttractionTypes();
-            //InitializeRestaurentTypes();
+            InitializeAttractionTypes();
+            InitializeRestaurentTypes();
             //ListAll();
         }
 

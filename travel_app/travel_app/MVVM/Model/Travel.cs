@@ -25,6 +25,8 @@ namespace travel_app.MVVM.Model
         public int Price { get; set; }
         public string Start { get; set; }
         public string End { get; set; }
+        public string Date { get; set; }
+        public bool Canceled { get; set; }
         public List<Attractions> Attractions { get; } = new();
         public List<Hotels> Hotels { get; } = new();
         public List<Restaurants> Restaurants { get; } = new();

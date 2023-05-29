@@ -25,6 +25,8 @@ namespace travel_app.MVVM.Model
         public string Password { get; set; }
         public string Role { get; set; }
         public bool Pro { get; set; }
+        public List<Travel> BookedTravels { get; } = new();
+        public List<Travel> PurchasedTravels { get; } = new();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
