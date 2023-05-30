@@ -16,6 +16,20 @@
         WindowStartupLocation="CenterScreen"
         MinWidth="660"
         MinHeight="500">
+
+    <Window.InputBindings>
+        <KeyBinding Gesture="Control+N"
+                Command="{Binding CreateNewTravelCommand}"/>
+        <KeyBinding Gesture="Control+P"
+                Command="{Binding SalesViewCommand}"/>
+        <KeyBinding Gesture="Control+A"
+                Command="{Binding AttractionsViewCommand}"/>
+        <KeyBinding Gesture="Control+S"
+                Command="{Binding SettingsViewCommand}"/>
+        <KeyBinding Gesture="Control+H"
+                Command="{Binding HomeViewCommand}"/>
+    </Window.InputBindings>
+
     <Window.Resources>
         <converters:EmailToNameConverter x:Key="EmailToNameConverter" />
     </Window.Resources>

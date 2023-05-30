@@ -120,7 +120,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <m:Map Center="45.255,19.833"  ZoomLevel="7" CredentialsProvider="AoDHQrsDjWxAd2BBTIt1TbvTMLqIHZ_Gki6iY1HMq-dcSVwoyF2K4QWog7Fi5QK8" Mode="Road" Grid.Row="0" Margin="20" Name="mainMap"/>
+            <m:Map MouseLeftButtonDown="Map_MouseLeftButtonDown" AnimationLevel="Full" UseInertia="True" Center="45.255,19.833"  ZoomLevel="7" Mode="Road" Grid.Row="0" Margin="20" CredentialsProvider="AoDHQrsDjWxAd2BBTIt1TbvTMLqIHZ_Gki6iY1HMq-dcSVwoyF2K4QWog7Fi5QK8" Name="mainMap"/>
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>

@@ -211,14 +211,6 @@ namespace travel_app.MVVM.View
                 return false;
             }
 
-            var bindingExpressionPhoto = Photo.GetBindingExpression(TextBox.TextProperty);
-            bindingExpressionPhoto.UpdateSource();
-            if (Validation.GetHasError(TravelName))
-            {
-                var errors = Validation.GetErrors(TravelName);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
             return true;
 
         }
@@ -441,7 +433,9 @@ namespace travel_app.MVVM.View
             mainMap.Children.Add(attractionPin);
         }
 
-        
+        private void Map_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
-   
 }
