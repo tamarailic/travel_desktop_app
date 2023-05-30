@@ -8,7 +8,12 @@
     WindowStartupLocation="CenterScreen"
     Title="Login" Height="450" Width="800"
         MinWidth="250"
-        MinHeight="400">
+        MinHeight="400"
+        xmlns:l="clr-namespace:travel_app"
+        l:HelpProvider.HelpKey="index">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </Window.CommandBindings>
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         
         <Grid.RowDefinitions>
