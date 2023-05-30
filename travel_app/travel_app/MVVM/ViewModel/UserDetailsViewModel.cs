@@ -16,7 +16,6 @@ namespace travel_app.MVVM.ViewModel
 {
     class UserDetailsViewModel:ObservableObject
     {
-
         public RelayCommand ReserveCommand { get; set; }
         public RelayCommand BuyCommand { get; set; }
         public int Id { get; set; }

@@ -10,6 +10,7 @@ using System.Net.Http.Json;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Linq;
@@ -22,6 +23,7 @@ namespace travel_app.MVVM.ViewModel
 {
     class DetailsViewModel:ObservableObject
     {
+        public RelayCommand DeleteCommand { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public string ShortDescription { get; set; }
@@ -36,6 +38,7 @@ namespace travel_app.MVVM.ViewModel
         public List<Restaurants> Restaurants { get; set; }
 
         public ICommand BackCommand { get; }
+        public ICommand EditCommand { get; set; }
 
         public DetailsViewModel(NavigationStore navigationStore, Travel travel)
         {
@@ -57,7 +60,30 @@ namespace travel_app.MVVM.ViewModel
                 Hotels = t.Hotels;
             }
 
+            DeleteCommand = new RelayCommand(Delete);
+            //EditCommand = new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));
             BackCommand = new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));
+        }
+
+        private void Delete(object element)
+        {
+            var result = MessageBox.Show("Da li ste sigurni da želite da otkažete ovo putovanje?", "Otkazivanje", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                using (var db = new TravelContext())
+                {
+                    var currentTravel = db.Travels.Find(Id);
+                    if (currentTravel.Canceled)
+                    {
+                        MessageBox.Show($"Putovanje je već otkazano", "Neuspelo brisanje", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    currentTravel.Canceled = true;
+                    db.SaveChanges();
+                    MessageBox.Show("Uspešno otkazivanje putovanja.", "Otkazivanje", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
         }
     }
 }
