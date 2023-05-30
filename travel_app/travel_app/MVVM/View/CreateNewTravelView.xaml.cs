@@ -312,7 +312,6 @@ namespace travel_app.MVVM.View
                 return false;
             }
 
-            
             return true;
 
         }
@@ -535,7 +534,9 @@ namespace travel_app.MVVM.View
             mainMap.Children.Add(attractionPin);
         }
 
-        
+        private void Map_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
-   
 }

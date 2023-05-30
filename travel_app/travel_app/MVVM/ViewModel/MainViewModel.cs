@@ -13,6 +13,7 @@ namespace travel_app.MVVM.ViewModel
         public ICommand SalesViewCommand { get; }
         public ICommand SettingsViewCommand { get; }
         public ICommand AttractionsViewCommand { get; }
+        public ICommand CreateNewTravelCommand { get; }
 
         public MainViewModel(NavigationStore navigationStore) {
             _navigationStore = navigationStore;
@@ -21,6 +22,7 @@ namespace travel_app.MVVM.ViewModel
             SalesViewCommand = new NavigateCommand<SalesViewModel>(navigationStore, () => new SalesViewModel(navigationStore));
             SettingsViewCommand = new NavigateCommand<SettingsViewModel>(navigationStore, () => new SettingsViewModel(navigationStore));
             AttractionsViewCommand = new NavigateCommand<AttractionsViewModel>(navigationStore, () => new AttractionsViewModel(navigationStore));
+            CreateNewTravelCommand = new NavigateCommand<CreateNewTravelViewModel>(navigationStore, () => new CreateNewTravelViewModel(navigationStore));
         }
         private void OnCurrentViewModelChanged()
         {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -25,19 +26,16 @@ namespace travel_app.MVVM.View
         public UserDetailsView()
         {
             InitializeComponent();
-            drawRoute();
-            
+            InitRoute();
         }
 
-        
-
-        private async void drawRoute()
+        private async void InitRoute()
         {
+            await Task.Delay(1000);
             String _fromAddress = StartLocation.Text.Trim();
             var latlngStart = await GetLatLngFromAddress(_fromAddress);
             String _toAddress = EndLocation.Text.Trim();
             var latlngEnd = await GetLatLngFromAddress(_toAddress);
-            mainMap.Children.Clear();
             if (_fromAddress != "")
             {
                 AddMainPin(latlngStart[0], latlngStart[1]);
@@ -46,6 +44,33 @@ namespace travel_app.MVVM.View
             if (_toAddress != "")
             {
                 AddMainPin(latlngEnd[0], latlngEnd[1]);
+            }
+
+            Travel currentTravel;
+
+            using (var db = new TravelContext())
+            {
+                currentTravel = db.Travels.Include("Attractions").Single(item => item.Name == TravelName.Text);
+            }
+
+            List<List<double>> attractionLocations = new List<List<double>>();
+
+            foreach (var att in currentTravel.Attractions)
+            {
+                var latlngAttraction = await GetLatLngFromAddress(att.Address);
+                attractionLocations.Add(latlngAttraction);
+                AddAttractionPin(latlngAttraction[0], latlngAttraction[1]);
+            }
+
+            if (_fromAddress != "" && _toAddress != "")
+            {
+                var locationsToConnect = new List<List<double>> { latlngStart };
+                foreach (var location in attractionLocations)
+                {
+                    locationsToConnect.Add(location);
+                }
+                locationsToConnect.Add(latlngEnd);
+                DrawRoute(locationsToConnect);
             }
 
             if (_fromAddress != "" && _toAddress != "")
@@ -96,6 +121,17 @@ namespace travel_app.MVVM.View
             startEndPin.Location = new Location(lat, lng);
             startEndPin.Background = new SolidColorBrush(Colors.Blue);
             mainMap.Children.Add(startEndPin);
+        }
+        private void AddAttractionPin(double lat, double lng)
+        {
+            Pushpin attractionPin = new Pushpin();
+            attractionPin.Location = new Location(lat, lng);
+            mainMap.Children.Add(attractionPin);
+        }
+
+        private void Map_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }
