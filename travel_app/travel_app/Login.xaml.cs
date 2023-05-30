@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Input;
 using travel_app.MVVM.Model;
 using travel_app.MVVM.ViewModel;
 using travel_app.Store;
@@ -128,6 +129,21 @@ namespace travel_app
             Application.Current.MainWindow = registration;
             registration.Show();
             currentWindow.Close();
+        }
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                HelpProvider.ShowHelp(str, this);
+            }
+        }
+
+        public void doThings(string param)
+        {
+            //btnOK.Background = new SolidColorBrush(Color.FromRgb(32, 64, 128));
+            Title = param;
         }
     }
 }
