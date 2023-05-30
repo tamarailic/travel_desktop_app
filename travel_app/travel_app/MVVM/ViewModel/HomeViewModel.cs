@@ -12,47 +12,61 @@ using travel_app.MVVM.Model;
 using travel_app.MVVM.View;
 using travel_app.Services;
 using travel_app.Store;
+using static travel_app.MVVM.ViewModel.UserHomeViewModel;
 
 namespace travel_app.MVVM.ViewModel
 {
     public class HomeViewModel : ObservableObject
     {
-        public ICommand NavigateDetailsCommand { get; }
+        public NavigationStore NavigationStore { get; }
         public ICommand CreateNewCommand { get; }
+        public ICommand DetailsCommand { get; }
 
         public HomeViewModel(NavigationStore navigationStore)
         {
-            NavigateDetailsCommand = new NavigateCommand<SalesViewModel>(navigationStore, () => new SalesViewModel(navigationStore));
+            NavigationStore = navigationStore;
             CreateNewCommand = new NavigateCommand<CreateNewTravelViewModel>(navigationStore, () => new CreateNewTravelViewModel(navigationStore));
         }
 
-        public static List<Travel> Travels
+        public List<TravelCard> Travels
         {
             get
             {
                 using (var db = new TravelContext())
                 {
-                    return db.Travels.ToList();
+                    List<TravelCard> travels = new List<TravelCard>();
+                    db.Travels.ToList().ForEach(t => travels.Add(new TravelCard(t, NavigationStore)));
+                    return travels;
                 }
 
             }
         }
 
-        private void SeeDetailes(object sender, MouseButtonEventArgs e)
+        public class TravelCard
         {
-            Border? border = sender as Border;
-            if (border != null)
+            public string Name { get; set; }
+            public string ShortDescription { get; set; }
+            public string Description { get; set; }
+            public byte[] Image { get; set; }
+            public int Price { get; set; }
+            public string Start { get; set; }
+            public string End { get; set; }
+            public ICommand Command { get; }
+
+            public TravelCard(Travel travel, NavigationStore navigationStore)
             {
-                Travel? travel = border.DataContext as Travel;
-                if (travel != null)
-                {
-                    // You can use any method you want to navigate, such as using a Frame or a NavigationWindow
-                    var detailsView = new DetailsView();
-                    detailsView.DataContext = travel;
-                    detailsView.Show();
-                }
+                Name = travel.Name == null ? "Nedostaju podaci" : travel.Name;
+                ShortDescription = travel.ShortDescription == null ? "Nedostaju podaci" : travel.ShortDescription;
+                Description = travel.Description == null ? "Nedostaju podaci" : travel.Description;
+                Image = travel.Image;
+                Price = travel.Price;
+                Start = travel.Start == null ? "Nedostaju podaci" : travel.Start;
+                End = travel.End == null ? "Nedostaju podaci" : travel.End;
+                Command = new NavigateCommand<DetailsViewModel>(navigationStore, () => new DetailsViewModel(navigationStore, travel));
             }
         }
+
+
     }
 
     
