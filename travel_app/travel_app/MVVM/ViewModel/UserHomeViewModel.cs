@@ -32,7 +32,7 @@ namespace travel_app.MVVM.ViewModel
                 using (var db = new TravelContext())
                 {
                     List<TravelCard> travels = new List<TravelCard>();  
-                   db.Travels.ToList().ForEach(t => travels.Add(new TravelCard(t, NavigationStore)));
+                    db.Travels.ToList().ForEach(t => travels.Add(new TravelCard(t, NavigationStore)));
                     return travels;
                 }
 

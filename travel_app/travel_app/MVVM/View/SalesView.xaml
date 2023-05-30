@@ -6,8 +6,50 @@
              xmlns:local="clr-namespace:travel_app.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="#fcfcfc">
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+             Background="#fcfcfc"
+             >
+    <UserControl.Resources>
+        <Color x:Key="PrimaryColor">#f87590</Color>
+        <Color x:Key="SecondaryColor">#FFEEEEEE</Color>
+        <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
+        <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}"/>
+    </UserControl.Resources>
+    <ScrollViewer>
+        <StackPanel Margin="40">
 
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="ByMonthTitle" FontSize="24" FontWeight="Bold"/>
+                <Label Content="Izaberite mesec za analizu" Margin="50,0,0,0"/>
+                <ComboBox x:Name="monthComboBox" Foreground="#333" Height="25" FontSize="14" Margin="10,0,0,0" SelectionChanged="monthComboBox_SelectionChanged" />
+
+            </StackPanel>
+            <DataGrid x:Name="salesByMonth" Margin="20" VerticalAlignment="Top" AutoGenerateColumns="False" HorizontalAlignment="Stretch"
+          CellStyle="{StaticResource DataGridCellStyle}" RowStyle="{StaticResource DataGridRowStyle}" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+          BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="1" AlternationCount="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Datum transakcije" Binding="{Binding DateTime}"/>
+                    <DataGridTextColumn Header="Tip transakcije" Binding="{Binding Type}"/>
+                    <DataGridTextColumn Header="Putovanje" Binding="{Binding Travel.Name}"/>
+                    <DataGridTextColumn Header="Kupac" Binding="{Binding User.Email}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="ByTravelTitle" FontSize="24" FontWeight="Bold"/>
+            </StackPanel>
+            <DataGrid x:Name="salesByTravel" Margin="20" VerticalAlignment="Top" AutoGenerateColumns="False" HorizontalAlignment="Stretch" CellStyle="{StaticResource DataGridCellStyle}" RowStyle="{StaticResource DataGridRowStyle}" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+          BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="1" AlternationCount="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Ime putovanja" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Cena" Binding="{Binding Price}"/>
+                    <DataGridTextColumn Header="Polazište" Binding="{Binding Start}"/>
+                    <DataGridTextColumn Header="Odredište" Binding="{Binding End}"/>
+                    <DataGridTextColumn Header="Otkazano" Binding="{Binding Canceled}"/>
+                    <DataGridTextColumn Header="Prodaja" Binding="{Binding Sales.Count}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </StackPanel>
     </ScrollViewer>
 </UserControl>

@@ -30,6 +30,7 @@ namespace travel_app.MVVM.Model
         public List<Attractions> Attractions { get; } = new();
         public List<Hotels> Hotels { get; } = new();
         public List<Restaurants> Restaurants { get; } = new();
-
+        public List<User> Users { get; } = new();
+        public List<Sale> Sales { get; } = new();
     }
 }

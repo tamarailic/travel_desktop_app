@@ -81,8 +81,7 @@ namespace travel_app.MVVM.View
         }
 
         private void Create_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {            
             if (ValidateData()) {
                 var newTravelName = TravelName.Text.Trim();
                 var newTravelShortDesctiption = TravelShortDescription.Text.Trim();
@@ -115,7 +114,7 @@ namespace travel_app.MVVM.View
                     }
                     if (ChoosenRestaurants.Count > 0)
                     {
-                        newTravel.Restaurants.AddRange(db.Restaurants.Where(el => ChoosenHotels.Contains(el.Name)));
+                        newTravel.Restaurants.AddRange(db.Restaurants.Where(el => ChoosenRestaurants.Contains(el.Name)));
                     }
 
                     try

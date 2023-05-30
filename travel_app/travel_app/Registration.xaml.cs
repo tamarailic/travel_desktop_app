@@ -63,7 +63,7 @@ namespace travel_app
                 {
                     if (db.Users.Where(user => user.Email == username).Any())
                     {
-                        Trace.WriteLine("User already exists");
+                        MessageBox.Show("Podaci nisu uneti u ispravnom obliku", "Neuspela registracija", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                         return;
                     }
                     User newUser = new User
@@ -76,8 +76,6 @@ namespace travel_app
                     db.Users.Add(newUser);
                     db.SaveChanges();
                     MessageBox.Show("Uspešna registracija", "Uspešno", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Trace.WriteLine($"Sucessfull registration {newUser.Email}");
-
                     NavigationStore navigationStore = new NavigationStore();
                     if (newUser.Role.Equals("user"))
                     {
@@ -148,6 +146,4 @@ namespace travel_app
             
         }
     }
-
-
 }

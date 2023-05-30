@@ -14,6 +14,7 @@ namespace travel_app.MVVM.ViewModel
     {
         public ICommand NavigateDetailsCommand { get; }
 
+        
         public CreateNewTravelViewModel(NavigationStore navigationStore)
         {
             NavigateDetailsCommand = new NavigateCommand<SalesViewModel>(navigationStore, () => new SalesViewModel(navigationStore));

@@ -22,7 +22,9 @@
                    HorizontalAlignment="Left"
                    Margin="0,0,0,20"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button VerticalContentAlignment="Center" Style="{StaticResource GradientButton}" Command="{Binding CreateNewCommand}">Dodaj novo putovanje:</Button>
+            <Button VerticalContentAlignment="Center" Style="{StaticResource GradientButton}" Command="{Binding CreateNewCommand}">
+                <AccessText Foreground="White">_Dodaj novo putovanje:</AccessText>  
+            </Button>
             
         </StackPanel>
 

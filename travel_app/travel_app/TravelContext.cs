@@ -17,5 +17,6 @@ namespace travel_app
         public DbSet<Hotels> Hotels { get; set; }
         public DbSet<RestaurantTypes> RestaurantTypes { get; set; }
         public DbSet<Restaurants> Restaurants { get; set;}
+        public DbSet<Sale> Sales { get; set; }
     }
 }

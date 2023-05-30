@@ -20,8 +20,8 @@ namespace travel_app
         {
             InitializeComponent();
 
-            InitializeAttractionTypes();
-            InitializeRestaurentTypes();
+            //InitializeAttractionTypes();
+            //InitializeRestaurentTypes();
             //ListAll();
         }
 
@@ -130,7 +130,6 @@ namespace travel_app
             registration.Show();
             currentWindow.Close();
         }
-
         private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);

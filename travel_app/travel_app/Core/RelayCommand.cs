@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace travel_app.Core
 {
-    internal class RelayCommand : ICommand
+    public class RelayCommand : ICommand
     {
 
         private Action<object> _execute;

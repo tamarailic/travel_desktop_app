@@ -12,6 +12,7 @@ using travel_app.MVVM.Model;
 using travel_app.MVVM.View;
 using travel_app.Services;
 using travel_app.Store;
+using System.Diagnostics;
 using static travel_app.MVVM.ViewModel.UserHomeViewModel;
 
 namespace travel_app.MVVM.ViewModel
@@ -38,7 +39,6 @@ namespace travel_app.MVVM.ViewModel
                     db.Travels.ToList().ForEach(t => travels.Add(new TravelCard(t, NavigationStore)));
                     return travels;
                 }
-
             }
         }
 
@@ -65,9 +65,5 @@ namespace travel_app.MVVM.ViewModel
                 Command = new NavigateCommand<DetailsViewModel>(navigationStore, () => new DetailsViewModel(navigationStore, travel));
             }
         }
-
-
     }
-
-    
 }

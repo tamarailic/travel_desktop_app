@@ -22,7 +22,6 @@ namespace travel_app.MVVM.View
         public HomeView()
         {
             InitializeComponent();
-            
         }
     }
 }
