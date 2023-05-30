@@ -7,6 +7,7 @@
         xmlns:view="clr-namespace:travel_app.MVVM.View"
         xmlns:converters="clr-namespace:travel_app.MVVM.Converters"
         mc:Ignorable="d"
+        xmlns:l="clr-namespace:travel_app"
         Height="800" Width="1400"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -15,14 +16,13 @@
         WindowStartupLocation="CenterScreen"
         MinWidth="660"
         MinHeight="500">
-
     <Window.Resources>
         <converters:EmailToNameConverter x:Key="EmailToNameConverter" />
     </Window.Resources>
-
     <Border Background="#272537"
             CornerRadius="20">
-
+      
+        
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="75"/>
@@ -38,7 +38,7 @@
                    Source="/Images/just-logo-white.png"/>
 
             <TextBlock Text="{Binding LogedInUser.Email, RelativeSource={RelativeSource AncestorType=Window}, StringFormat='Dobrodošli {0}', Converter={StaticResource EmailToNameConverter}}" Grid.Column="1" Margin="40,0,0,0" Foreground="White" FontSize="24" VerticalAlignment="Center"/>
-            
+
             <StackPanel Grid.Row="1">
                 <RadioButton Content="Početna"
                              Height="50"
@@ -80,7 +80,7 @@
 
                 Content="{Binding CurrentViewModel}">
                 <ContentControl.Resources>
-                  
+
                     <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
                         <view:HomeView/>
                     </DataTemplate>
@@ -99,8 +99,9 @@
                     <DataTemplate DataType="{x:Type viewModel:DetailsViewModel}">
                         <view:DetailsView/>
                     </DataTemplate>
-                </ContentControl.Resources>              
+                </ContentControl.Resources>
             </ContentControl>
         </Grid>
+
     </Border>
 </Window>
