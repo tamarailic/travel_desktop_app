@@ -6,7 +6,6 @@
               xmlns:converters="clr-namespace:travel_app.MVVM.Converters"
              xmlns:local="clr-namespace:travel_app.MVVM.View" xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              mc:Ignorable="d" 
-             
              Background="White">
     <UserControl.Resources>
         <converters:BytesToImageConverter x:Key="BytesToImageConverter" />
@@ -14,7 +13,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -26,9 +25,12 @@
             <Image Grid.Row="5" Grid.Column="0" x:Name="photo" Height="200" />
             <TextBlock Text="{Binding Name}" Foreground="#333" FontSize="24" Margin="20,20,10,0"/>
             <TextBlock Text="{Binding Description}" Foreground="#333" FontSize="16" Margin="20,20,10,0"/>
+            <TextBlock Name="StartLocation" Text="{Binding Start}" Foreground="#333" FontSize="16" Margin="20,20,10,0"/>
+            <TextBlock Name="EndLocation" Text="{Binding End}" Foreground="#333" FontSize="16" Margin="20,20,10,0"/>
             <TextBlock Text="{Binding Price}" Foreground="#333" FontSize="16" Margin="20,20,10,0"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 40 0 0">
-                <Button Content="Rezerviši" Click="Reserve" Style="{StaticResource GradientButton}" Margin="0,20,0,20"/>
+                <Button Content="Rezerviši"  Style="{StaticResource GradientButton}" Margin="0,20,5,20"/>
+                <Button Content="Kupi"  Style="{StaticResource GradientButton}" Margin="5,20,0,20"/>
             </StackPanel>
         </StackPanel>
 

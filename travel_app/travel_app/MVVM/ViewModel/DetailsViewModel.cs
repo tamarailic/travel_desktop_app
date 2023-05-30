@@ -1,19 +1,26 @@
-﻿using System;
+﻿using Microsoft.Maps.MapControl.WPF;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Xml.Linq;
 using travel_app.Command;
 using travel_app.Core;
 using travel_app.MVVM.Model;
 using travel_app.Store;
-using static travel_app.MVVM.ViewModel.UserHomeViewModel;
 
 namespace travel_app.MVVM.ViewModel
 {
-    class UserDetailsViewModel:ObservableObject
+    class DetailsViewModel:ObservableObject
     {
         public string Name { get; set; }
         public string ShortDescription { get; set; }
@@ -23,9 +30,8 @@ namespace travel_app.MVVM.ViewModel
         public string Start { get; set; }
         public string End { get; set; }
         public ICommand BackCommand { get; }
-
-        public ICommand ReserveCommand { get; set; }
-        public UserDetailsViewModel(NavigationStore navigationStore, Travel travel) {
+        public DetailsViewModel(NavigationStore navigationStore, Travel travel)
+        {
 
             Name = travel.Name == null ? "Nedostaju podaci" : travel.Name;
             ShortDescription = travel.ShortDescription == null ? "Nedostaju podaci" : travel.ShortDescription;
@@ -34,22 +40,8 @@ namespace travel_app.MVVM.ViewModel
             Price = travel.Price;
             Start = travel.Start == null ? "Nedostaju podaci" : travel.Start;
             End = travel.End == null ? "Nedostaju podaci" : travel.End;
-            BackCommand = new NavigateCommand<UserHomeViewModel>(navigationStore, () => new UserHomeViewModel(navigationStore));
-            
-        }
+            BackCommand = new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));
 
-        private void Reserve()
-        {
-            var result = MessageBox.Show("Želite da rezervišete ovo putovanje?", "Rezervacija", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.Yes)
-            {
-                MessageBox.Show("Uspešna rezervacija.", "Rezervacija", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                MessageBox.Show("Rezervacija odbijena.", "Rezervacija", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
         }
 
     }

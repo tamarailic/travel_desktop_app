@@ -18,6 +18,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -48,8 +49,13 @@
         <Border CornerRadius="8" BorderThickness="1" Background="White"  Grid.Row="4" Grid.Column="1" Margin="5">
             <PasswordBox x:Name="RePasswordBox" Width="200" Margin="5" BorderThickness="0"/>
         </Border>
-        <Button Click="RegistrationButton_Click" Content="Registracija" HorizontalAlignment="Right" Margin="5" Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource GradientButton}" />
-        <StackPanel Grid.Row ="6 " Grid.ColumnSpan ="2" Orientation="Horizontal" HorizontalAlignment= "Right">
+        <TextBlock Style="{StaticResource Label}"  Text="Uloga:" VerticalAlignment="Center" Margin="5" Grid.Row="5" Grid.Column="0"/>
+        <ComboBox x:Name="RoleComboBox" Foreground="#333" Margin="5" Height="28" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center">
+            <ComboBoxItem Name="agent">Agent</ComboBoxItem>
+            <ComboBoxItem Name="user">Korisnik</ComboBoxItem>
+        </ComboBox>
+        <Button Click="RegistrationButton_Click" Content="Registracija" HorizontalAlignment="Right" Margin="5" Grid.Row="6" Grid.ColumnSpan="2" Style="{StaticResource GradientButton}" />
+        <StackPanel Grid.Row ="7 " Grid.ColumnSpan ="2" Orientation="Horizontal" HorizontalAlignment= "Right">
             <TextBlock   Text="Imate nalog?"  VerticalAlignment="Center"/>
             <Button Click="LoginButton_Click" x:Name="LoginButton" Content= "Prijava" HorizontalAlignment= "Right" Margin= "5"  Style="{StaticResource SecondButton}" />
         </StackPanel>

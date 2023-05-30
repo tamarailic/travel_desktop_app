@@ -24,12 +24,13 @@ using System.Resources;
 using System.Drawing;
 using Newtonsoft.Json;
 using System.Collections;
+using System.Globalization;
 
 namespace travel_app.MVVM.View
 {
     public partial class CreateNewTravelView : UserControl
     {
-
+        public string check { get; set; }
         private string _fromAddress = string.Empty;
         private List<double> _fromLocation = new List<double>();
         private string _toAddress = string.Empty;
@@ -74,23 +75,25 @@ namespace travel_app.MVVM.View
 
             if (op.ShowDialog() == true)
             {
-                photo.Source = new BitmapImage(new Uri(op.FileName));
+                Photo.Source = new BitmapImage(new Uri(op.FileName));
                 imageData = File.ReadAllBytes(op.FileName);
             }
         }
 
         private void Create_Click(object sender, RoutedEventArgs e)
         {
-            var newTravelName = TravelName.Text.Trim();
-            var newTravelShortDesctiption = TravelShortDescription.Text.Trim();
-            var newTravelLongDescription = TravelLongDescription.Text.Trim();
-            var newTravelPriceString = TravelPrice.Text.Trim();
-            string travelDate = TravelDate.SelectedDate.Value.ToString("s");
-            int newTravelPrice;
-            if (imageData.Length > 0 && newTravelName != "" && newTravelShortDesctiption != "" && newTravelLongDescription != "" && travelDate != "" && int.TryParse(newTravelPriceString, out newTravelPrice) && _fromAddress != "" && _toAddress != "")
-            {
+            
+            if (ValidateData()) {
+                var newTravelName = TravelName.Text.Trim();
+                var newTravelShortDesctiption = TravelShortDescription.Text.Trim();
+                var newTravelLongDescription = TravelLongDescription.Text.Trim();
+                var newTravelPriceString = TravelPrice.Text.Trim();
+                string travelDate = TravelDate.SelectedDate.Value.ToString("s");
+                int newTravelPrice;
+                int.TryParse(newTravelPriceString, out newTravelPrice);
                 using (var db = new TravelContext())
                 {
+
                     Travel newTravel = new Travel()
                     {
                         Name = newTravelName,
@@ -100,17 +103,17 @@ namespace travel_app.MVVM.View
                         Image = imageData,
                         Start = _fromAddress,
                         End = _toAddress,
-                        Date= travelDate
+                        Date = travelDate
                     };
-                    if(ChoosenAttractions.Count > 0)
+                    if (ChoosenAttractions.Count > 0)
                     {
                         newTravel.Attractions.AddRange(db.Attractions.Where(el => ChoosenAttractions.Contains(el.Name)));
                     }
-                    if(ChoosenHotels.Count > 0)
+                    if (ChoosenHotels.Count > 0)
                     {
                         newTravel.Hotels.AddRange(db.Hotels.Where(el => ChoosenHotels.Contains(el.Name)));
                     }
-                    if(ChoosenRestaurants.Count > 0)
+                    if (ChoosenRestaurants.Count > 0)
                     {
                         newTravel.Restaurants.AddRange(db.Restaurants.Where(el => ChoosenHotels.Contains(el.Name)));
                     }
@@ -128,7 +131,7 @@ namespace travel_app.MVVM.View
                         StartLocation.Text = string.Empty;
                         EndLocation.Text = string.Empty;
                         TravelDate.SelectedDate = null;
-                        photo.Source = null;
+                        Photo.Source = null;
                         ChoosenAttractions.Clear();
                         ChoosenHotels.Clear();
                         ChoosenRestaurants.Clear();
@@ -136,15 +139,89 @@ namespace travel_app.MVVM.View
                         CollectionViewSource.GetDefaultView(ChoosenHotelsListBox.ItemsSource).Refresh();
                         CollectionViewSource.GetDefaultView(ChoosenRestaurantsListBox.ItemsSource).Refresh();
                         InitializeOptions();
-                    }catch(Exception ex) { 
+                    }
+                    catch (Exception ex)
+                    {
                         MessageBox.Show("Podaci putovanja nisu u ispravnom obliku. Proverite sva polja i pokušajte ponovo.", "Neuspelo kreiranje", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
-            else
+        }
+
+        private bool ValidateData() {
+            var bindingExpressionTravelName = TravelName.GetBindingExpression(TextBox.TextProperty);
+            bindingExpressionTravelName.UpdateSource();
+            if (Validation.GetHasError(TravelName))
             {
-                MessageBox.Show("Dodavanje nije uspelo. Proverite da li su svi unosi ispravno popunjeni i pokušajte ponovo", "Neuspelo dodavanje", MessageBoxButton.OK, MessageBoxImage.Error);
+                var errors = Validation.GetErrors(TravelName);
+                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
+
+            var bindingExpressionStartLocation = StartLocation.GetBindingExpression(TextBox.TextProperty);
+            bindingExpressionStartLocation.UpdateSource();
+            if (Validation.GetHasError(StartLocation))
+            {
+                var errors = Validation.GetErrors(StartLocation);
+                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            var bindingExpressionEndLocation = EndLocation.GetBindingExpression(TextBox.TextProperty);
+            bindingExpressionEndLocation.UpdateSource();
+            if (Validation.GetHasError(EndLocation))
+            {
+                var errors = Validation.GetErrors(EndLocation);
+                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            var bindingExpressionTravelShortDescription = TravelShortDescription.GetBindingExpression(TextBox.TextProperty);
+            bindingExpressionTravelShortDescription.UpdateSource();
+            if (Validation.GetHasError(TravelShortDescription))
+            {
+                var errors = Validation.GetErrors(TravelShortDescription);
+                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            var bindingExpressionTravelLongDescription = TravelLongDescription.GetBindingExpression(TextBox.TextProperty);
+            bindingExpressionTravelLongDescription.UpdateSource();
+            if (Validation.GetHasError(TravelLongDescription))
+            {
+                var errors = Validation.GetErrors(TravelLongDescription);
+                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            var bindingExpressionTravelPrice = TravelPrice.GetBindingExpression(TextBox.TextProperty);
+            bindingExpressionTravelPrice.UpdateSource();
+            if (Validation.GetHasError(TravelPrice))
+            {
+                var errors = Validation.GetErrors(TravelPrice);
+                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            var bindingExpressionTravelDate = TravelDate.GetBindingExpression(DatePicker.SelectedDateProperty);
+            bindingExpressionTravelDate.UpdateSource();
+            if (Validation.GetHasError(TravelDate))
+            {
+                var errors = Validation.GetErrors(TravelDate);
+                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            var bindingExpressionPhoto = Photo.GetBindingExpression(TextBox.TextProperty);
+            bindingExpressionPhoto.UpdateSource();
+            if (Validation.GetHasError(TravelName))
+            {
+                var errors = Validation.GetErrors(TravelName);
+                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
+
         }
 
         private async void UpdateMap(object sender, RoutedEventArgs e)
@@ -364,5 +441,8 @@ namespace travel_app.MVVM.View
             attractionPin.Location = new Location(lat, lng);
             mainMap.Children.Add(attractionPin);
         }
+
+        
     }
+   
 }
