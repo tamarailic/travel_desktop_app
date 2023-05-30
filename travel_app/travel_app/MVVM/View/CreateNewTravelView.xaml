@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:travel_app.MVVM.View"
+             xmlns:v="clr-namespace:travel_app.Validators"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1300"
@@ -20,7 +21,7 @@
         <StackPanel Grid.Column="0" Margin="20,20,80,0">
             <TextBlock Text="Novo putovanje:" Margin="0,0,0,20" FontSize="24" FontWeight="Bold"/>
             <Label Content="Poster (slika) putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="4" Grid.Column="0"/>
-            <Image Grid.Row="5" Grid.Column="0" x:Name="photo" Height="200" />
+            <Image Grid.Row="5" Grid.Column="0" x:Name="Photo" Height="200" />
             <Button Grid.Row="5" Grid.Column="1" Content="Izaberi sliku" Click="BrowseButton_Click" Margin="0,20,0,20" />
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -39,19 +40,77 @@
                 </Grid.RowDefinitions>
 
                 <Label Content="Naziv putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="0" Grid.Column="0" Margin="0,5,0,5"/>
-                <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelName" Margin="0,5,0,5" />
+                <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelName" Margin="0,5,0,5">
+                    <TextBox.Text>
+                        <Binding Path="check" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <v:NotEmptyValidationRule Message="Niste uneli naziv putovanja." />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <Label Content="Adresa okupljanja:" FontWeight="Bold" FontSize="14" Grid.Row="1" Grid.Column="0" Margin="0,5,0,5"/>
-                <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="StartLocation" Margin="0,5,0,5" LostFocus="UpdateMap"/>
+                <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="StartLocation" Margin="0,5,0,5" LostFocus="UpdateMap">
+                <TextBox.Text>
+                        <Binding Path="check" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <v:NotEmptyValidationRule Message="Niste uneli polazište putovanja." />
+                    </Binding.ValidationRules>
+                </Binding>
+                </TextBox.Text>
+                </TextBox>
                 <Label Content="Adresa destinacije:" FontWeight="Bold" FontSize="14" Grid.Row="2" Grid.Column="0" Margin="0,5,0,5"/>
-                <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="EndLocation" Margin="0,5,0,5" LostFocus="UpdateMap"/>
+                <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="EndLocation" Margin="0,5,0,5" LostFocus="UpdateMap">
+                <TextBox.Text>
+                        <Binding Path="check" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <v:NotEmptyValidationRule Message="Niste uneli destinaciju putovanja." />
+                    </Binding.ValidationRules>
+                </Binding>
+                </TextBox.Text>
+                </TextBox>
                 <Label Content="Kratak opis:" FontWeight="Bold" FontSize="14" Grid.Row="3" Grid.Column="0" Margin="0,5,0,5"/>
-                <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelShortDescription" Margin="0,5,0,5"/>
+                <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelShortDescription" Margin="0,5,0,5">
+                <TextBox.Text>
+                        <Binding Path="check" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <v:NotEmptyValidationRule Message="Niste uneli kraći opis putovanja." />
+                    </Binding.ValidationRules>
+                </Binding>
+                </TextBox.Text>
+                </TextBox>
                 <Label Content="Detaljan opis:" FontWeight="Bold" FontSize="14" Grid.Row="4" Grid.Column="0" Margin="0,5,0,5"/>
-                <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelLongDescription" Margin="0,5,0,5"/>
+                <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelLongDescription" Margin="0,5,0,5">
+                <TextBox.Text>
+                        <Binding Path="check" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <v:NotEmptyValidationRule Message="Niste uneli duži opis putovanja." />
+                    </Binding.ValidationRules>
+                </Binding>
+                </TextBox.Text>
+                </TextBox>
                 <Label Content="Cena putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="5" Grid.Column="0" Margin="0,5,0,5"/>
-                <TextBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelPrice" Margin="0,5,0,5"/>
+                <TextBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelPrice" Margin="0,5,0,5">
+                <TextBox.Text>
+                        <Binding Path="check" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <v:NotEmptyValidationRule Message="Niste uneli cenu putovanja." />
+                        <v:PositiveIntegerValidationRule Message="Cena putovanja mora biti pozitivan ceo broj." />
+                    </Binding.ValidationRules>
+                </Binding>
+                </TextBox.Text>
+                </TextBox>
                 <Label Content="Datum putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="6" Grid.Column="0" Margin="0,5,0,5"/>
-                <DatePicker Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelDate" Margin="0,5,0,5"/>
+                <DatePicker Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelDate" Margin="0,5,0,5">
+                    <DatePicker.SelectedDate>
+                        <Binding Path="check">
+                            <Binding.ValidationRules>
+                                <v:NotEmptyDateValidationRule Message="Niste uneli datum putovanja." />
+                                <v:NoPastDateValidationRule Message="Ne možete da odaberete datum iz prošlosti." />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                </DatePicker>
             </Grid>
         </StackPanel>
 

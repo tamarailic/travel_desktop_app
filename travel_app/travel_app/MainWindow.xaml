@@ -11,10 +11,9 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
-        AllowsTransparency="True"
         MouseDown="Window_MouseDown"
         WindowStartupLocation="CenterScreen"
-        MinWidth="500"
+        MinWidth="660"
         MinHeight="500">
 
     <Window.Resources>
@@ -97,7 +96,9 @@
                     <DataTemplate DataType="{x:Type viewModel:CreateNewTravelViewModel}">
                         <view:CreateNewTravelView/>
                     </DataTemplate>
-
+                    <DataTemplate DataType="{x:Type viewModel:DetailsViewModel}">
+                        <view:DetailsView/>
+                    </DataTemplate>
                 </ContentControl.Resources>              
             </ContentControl>
         </Grid>

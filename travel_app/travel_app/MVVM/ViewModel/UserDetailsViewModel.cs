@@ -33,6 +33,7 @@ namespace travel_app.MVVM.ViewModel
         public List<Restaurants> Restaurants { get; set; }
         public ICommand BackCommand { get; }
 
+        public ICommand ReserveCommand { get; set; }
         public UserDetailsViewModel(NavigationStore navigationStore, Travel travel) {
             Id = travel.Id;
             Name = travel.Name == null ? "Nedostaju podaci" : travel.Name;
@@ -100,7 +101,6 @@ namespace travel_app.MVVM.ViewModel
                     db.SaveChanges();
                     MessageBox.Show("Uspešna kupovina.", "Kupovina", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                
             }
         }
 

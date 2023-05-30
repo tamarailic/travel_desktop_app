@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using travel_app.MVVM.Model;
+using travel_app.MVVM.ViewModel;
+using travel_app.Store;
 
 namespace travel_app
 {
@@ -32,6 +34,8 @@ namespace travel_app
             var username = UsernameTextBox.Text.Trim();
             var password = PasswordBox.Password.Trim();
             var repassword = RePasswordBox.Password.Trim();
+            ComboBoxItem roleItem = (ComboBoxItem)RoleComboBox.SelectedItem;
+            string role = roleItem.Name.ToString();
 
             var bindingExpressionUsername = UsernameTextBox.GetBindingExpression(TextBox.TextProperty);
             bindingExpressionUsername.UpdateSource();
@@ -66,12 +70,41 @@ namespace travel_app
                     {
                         Email = username,
                         Password = password,
-                        Role = "user",
+                        Role = role,
                         Pro = false
                     };
                     db.Users.Add(newUser);
                     db.SaveChanges();
                     MessageBox.Show("Uspešna registracija", "Uspešno", MessageBoxButton.OK, MessageBoxImage.Information);
+                    NavigationStore navigationStore = new NavigationStore();
+                    if (newUser.Role.Equals("user"))
+                    {
+                        UserHomeViewModel userHomeViewModel = new UserHomeViewModel(navigationStore);
+                        navigationStore.CurrentViewModel = userHomeViewModel;
+                        UserMainWindow userMainWindow = new UserMainWindow()
+                        {
+                            DataContext = new UserMainViewModel(navigationStore)
+                        };
+                        UserMainWindow.LogedInUser = newUser;
+                        var currentWindow = Application.Current.MainWindow;
+                        Application.Current.MainWindow = userMainWindow;
+                        userMainWindow.Show();
+                        currentWindow.Close();
+                    }
+                    else
+                    {
+                        HomeViewModel homeViewModel = new HomeViewModel(navigationStore);
+                        navigationStore.CurrentViewModel = homeViewModel;
+                        MainWindow mainWindow = new MainWindow()
+                        {
+                            DataContext = new MainViewModel(navigationStore)
+                        };
+                        MainWindow.LogedInUser = newUser;
+                        var currentWindow = Application.Current.MainWindow;
+                        Application.Current.MainWindow = mainWindow;
+                        mainWindow.Show();
+                        currentWindow.Close();
+                    }
                 }
             }
         }
@@ -113,6 +146,4 @@ namespace travel_app
             
         }
     }
-
-
 }
