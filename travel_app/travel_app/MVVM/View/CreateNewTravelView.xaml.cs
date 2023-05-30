@@ -25,6 +25,8 @@ using System.Drawing;
 using Newtonsoft.Json;
 using System.Collections;
 using System.Globalization;
+using System.Collections.ObjectModel;
+using travel_app.MVVM.ViewModel;
 
 namespace travel_app.MVVM.View
 {
@@ -36,9 +38,9 @@ namespace travel_app.MVVM.View
         private string _toAddress = string.Empty;
         private List<double> _toLocation = new List<double>();
 
-        public List<string> ChoosenAttractions { get; set; } = new List<string>() {};
-        public List<string> ChoosenRestaurants { get; set; } = new List<string>() {};
-        public List<string> ChoosenHotels { get; set; } = new List<string>() {};
+        public new ObservableCollection<string> ChoosenAttractions { get; set; } = new ObservableCollection<string>() {};
+        public ObservableCollection<string> ChoosenRestaurants { get; set; } = new ObservableCollection<string>() {};
+        public ObservableCollection<string> ChoosenHotels { get; set; } = new ObservableCollection<string>() {};
 
         public CreateNewTravelView()
         {
@@ -46,6 +48,105 @@ namespace travel_app.MVVM.View
             DataContext = this;
 
             InitializeOptions();
+            Style itemContainerStyle1 = new Style(typeof(ListBoxItem));
+            itemContainerStyle1.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
+            itemContainerStyle1.Setters.Add(new EventSetter(ListBoxItem.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(s_PreviewMouseLeftButtonDown)));
+            itemContainerStyle1.Setters.Add(new EventSetter(ListBoxItem.DropEvent, new DragEventHandler(listboxAttractions_Drop)));
+            ChoosenAttractionsListBox.ItemContainerStyle = itemContainerStyle1;
+
+            Style itemContainerStyle2 = new Style(typeof(ListBoxItem));
+            itemContainerStyle2.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
+            itemContainerStyle2.Setters.Add(new EventSetter(ListBoxItem.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(s_PreviewMouseLeftButtonDown)));
+            itemContainerStyle2.Setters.Add(new EventSetter(ListBoxItem.DropEvent, new DragEventHandler(listboxRestaurants_Drop)));
+            ChoosenRestaurantsListBox.ItemContainerStyle = itemContainerStyle2;
+
+            Style itemContainerStyle3 = new Style(typeof(ListBoxItem));
+            itemContainerStyle3.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
+            itemContainerStyle3.Setters.Add(new EventSetter(ListBoxItem.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(s_PreviewMouseLeftButtonDown)));
+            itemContainerStyle3.Setters.Add(new EventSetter(ListBoxItem.DropEvent, new DragEventHandler(listboxHotels_Drop)));
+            ChoosenHotelsListBox.ItemContainerStyle = itemContainerStyle3;
+        }
+
+        void s_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is ListBoxItem)
+            {
+                ListBoxItem draggedItem = sender as ListBoxItem;
+                DragDrop.DoDragDrop(draggedItem, draggedItem.DataContext, DragDropEffects.Move);
+                draggedItem.IsSelected = true;
+            }
+        }
+
+        void listboxAttractions_Drop(object sender, DragEventArgs e)
+        {
+            string droppedData = e.Data.GetData(typeof(string)) as string;
+            string target = ((ListBoxItem)(sender)).DataContext as string;
+
+            int removedIdx = ChoosenAttractionsListBox.Items.IndexOf(droppedData);
+            int targetIdx = ChoosenAttractionsListBox.Items.IndexOf(target);
+
+            if (removedIdx < targetIdx)
+            {
+                ChoosenAttractions.Insert(targetIdx + 1, droppedData);
+                ChoosenAttractions.RemoveAt(removedIdx);
+            }
+            else
+            {
+                int remIdx = removedIdx + 1;
+                if (ChoosenAttractions.Count + 1 > remIdx)
+                {
+                    ChoosenAttractions.Insert(targetIdx, droppedData);
+                    ChoosenAttractions.RemoveAt(remIdx);
+                }
+            }
+        }
+
+        void listboxRestaurants_Drop(object sender, DragEventArgs e)
+        {
+            string droppedData = e.Data.GetData(typeof(string)) as string;
+            string target = ((ListBoxItem)(sender)).DataContext as string;
+
+            int removedIdx = ChoosenRestaurantsListBox.Items.IndexOf(droppedData);
+            int targetIdx = ChoosenRestaurantsListBox.Items.IndexOf(target);
+
+            if (removedIdx < targetIdx)
+            {
+                ChoosenRestaurants.Insert(targetIdx + 1, droppedData);
+                ChoosenRestaurants.RemoveAt(removedIdx);
+            }
+            else
+            {
+                int remIdx = removedIdx + 1;
+                if (((UserDetailsViewModel)DataContext).Attractions.Count + 1 > remIdx)
+                {
+                    ChoosenRestaurants.Insert(targetIdx, droppedData);
+                    ChoosenRestaurants.RemoveAt(remIdx);
+                }
+            }
+        }
+
+        void listboxHotels_Drop(object sender, DragEventArgs e)
+        {
+            string droppedData = e.Data.GetData(typeof(string)) as string;
+            string target = ((ListBoxItem)(sender)).DataContext as string;
+
+            int removedIdx = ChoosenHotelsListBox.Items.IndexOf(droppedData);
+            int targetIdx = ChoosenHotelsListBox.Items.IndexOf(target);
+
+            if (removedIdx < targetIdx)
+            {
+                ChoosenHotels.Insert(targetIdx + 1, droppedData);
+                ChoosenHotels.RemoveAt(removedIdx);
+            }
+            else
+            {
+                int remIdx = removedIdx + 1;
+                if (ChoosenHotels.Count + 1 > remIdx)
+                {
+                    ChoosenHotels.Insert(targetIdx, droppedData);
+                    ChoosenHotels.RemoveAt(remIdx);
+                }
+            }
         }
 
         private void InitializeOptions()
@@ -211,14 +312,7 @@ namespace travel_app.MVVM.View
                 return false;
             }
 
-            var bindingExpressionPhoto = Photo.GetBindingExpression(TextBox.TextProperty);
-            bindingExpressionPhoto.UpdateSource();
-            if (Validation.GetHasError(TravelName))
-            {
-                var errors = Validation.GetErrors(TravelName);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+            
             return true;
 
         }

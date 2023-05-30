@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using travel_app.MVVM.Model;
+using travel_app.MVVM.ViewModel;
 
 namespace travel_app.MVVM.View
 {
@@ -25,7 +26,10 @@ namespace travel_app.MVVM.View
         {
             InitializeComponent();
             drawRoute();
+            
         }
+
+        
 
         private async void drawRoute()
         {
