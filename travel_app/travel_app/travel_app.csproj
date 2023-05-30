@@ -13,6 +13,7 @@
     <None Remove="Images\just-logo.png" />
     <None Remove="Images\Putokazi_logo.PNG" />
     <None Remove="MainWindow.xaml~RFc5b468ac.TMP" />
+    <None Remove="MVVM\Model\User.cs~RFd3b637a7.TMP" />
     <None Remove="MVVM\View\CreateNewTravelView.xaml.cs~RFc5913978.TMP" />
   </ItemGroup>
 

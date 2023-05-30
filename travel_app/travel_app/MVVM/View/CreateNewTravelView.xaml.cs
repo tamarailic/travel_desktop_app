@@ -87,7 +87,7 @@ namespace travel_app.MVVM.View
             var newTravelPriceString = TravelPrice.Text.Trim();
             string travelDate = TravelDate.SelectedDate.Value.ToString("s");
             int newTravelPrice;
-            if (imageData.Length > 0 && newTravelName != "" && newTravelShortDesctiption != "" && newTravelLongDescription != "" && travelDate != "" && int.TryParse(newTravelPriceString, out newTravelPrice) && _fromAddress != "" && _toAddress != "")
+            if (imageData != null && newTravelName != "" && newTravelShortDesctiption != "" && newTravelLongDescription != "" && travelDate != "" && int.TryParse(newTravelPriceString, out newTravelPrice) && _fromAddress != "" && _toAddress != "")
             {
                 using (var db = new TravelContext())
                 {
@@ -112,7 +112,7 @@ namespace travel_app.MVVM.View
                     }
                     if(ChoosenRestaurants.Count > 0)
                     {
-                        newTravel.Restaurants.AddRange(db.Restaurants.Where(el => ChoosenHotels.Contains(el.Name)));
+                        newTravel.Restaurants.AddRange(db.Restaurants.Where(el => ChoosenRestaurants.Contains(el.Name)));
                     }
 
                     try

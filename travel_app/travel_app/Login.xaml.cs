@@ -19,8 +19,8 @@ namespace travel_app
         {
             InitializeComponent();
 
-            InitializeAttractionTypes();
-            InitializeRestaurentTypes();
+            //InitializeAttractionTypes();
+            //InitializeRestaurentTypes();
             //ListAll();
         }
 
@@ -129,5 +129,5 @@ namespace travel_app
             registration.Show();
             currentWindow.Close();
         }
-        }
+    }
 }

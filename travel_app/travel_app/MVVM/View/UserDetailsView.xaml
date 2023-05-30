@@ -20,15 +20,17 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Grid.Column="0" Command="{Binding BackCommand}" Height="35" VerticalAlignment="Top" Content="Nazad"  Style="{StaticResource SecondButton}" Margin="10"/>
+        <Button Grid.Column="0" Command="{Binding BackCommand}" Height="35" VerticalAlignment="Top" Content="&lt; Nazad"  Style="{StaticResource SecondButton}" Margin="10"/>
         <StackPanel Grid.Column="1" Margin="5" HorizontalAlignment="Center">
             <TextBlock Text="Detalji putovanja" FontSize="24" Margin="20"/>
-            <Image Grid.Row="5" Grid.Column="0" x:Name="photo" Height="200" />
+            <Image Source="{Binding Image}" Grid.Row="5" Grid.Column="0" x:Name="photo" Height="200" />
             <TextBlock Text="{Binding Name}" Foreground="#333" FontSize="24" Margin="20,20,10,0"/>
             <TextBlock Text="{Binding Description}" Foreground="#333" FontSize="16" Margin="20,20,10,0"/>
             <TextBlock Text="{Binding Price}" Foreground="#333" FontSize="16" Margin="20,20,10,0"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 40 0 0">
-                <Button Content="Rezerviši" Click="Reserve" Style="{StaticResource GradientButton}" Margin="0,20,0,20"/>
+            <TextBlock Text="{Binding Date}" Foreground="#333" FontSize="16" Margin="20,20,10,0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 80 0 0">
+                <Button Content="Rezerviši" Command="{Binding ReserveCommand}" Style="{StaticResource GradientButton}" Margin="0,20,10,20"/>
+                <Button Content="Kupi" Command="{Binding BuyCommand}" Style="{StaticResource GradientButton}" Margin="10,20,0,20"/>
             </StackPanel>
         </StackPanel>
 
@@ -51,16 +53,35 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Column="0" Margin="20,5,20,5" >
                     <TextBlock Text="Atrakcije:" FontSize="20" FontWeight="Bold"/>
+                    <ListBox AllowDrop="True" ItemsSource="{Binding Attractions, Mode=TwoWay}" Margin="0,20,0,0" MinHeight="100" Name="ChoosenAttractionsListBox">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Margin="20,5,20,5" >
                     <TextBlock Text="Restorani:" FontSize="20" FontWeight="Bold"/>
+                    <ListBox AllowDrop="True" ItemsSource="{Binding Restaurants, Mode=TwoWay}" Margin="0,20,0,0" MinHeight="100" Name="ChoosenRestaurantsListBox">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </StackPanel>
                 <StackPanel Grid.Column="2" Margin="20,5,20,5" >
                     <TextBlock Text="Hoteli:" FontSize="20" FontWeight="Bold"/>
+                    <ListBox AllowDrop="True" ItemsSource="{Binding Hotels, Mode=TwoWay}" Margin="0,20,0,0" MinHeight="100" Name="ChoosenHotelsListBox">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </StackPanel>
             </Grid>
-
         </Grid>
-
     </Grid>
 </UserControl>

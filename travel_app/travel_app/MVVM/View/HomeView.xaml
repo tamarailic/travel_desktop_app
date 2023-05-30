@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:travel_app.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-   
+
     <StackPanel>
         <StackPanel.Resources>
             <converters:BytesToImageConverter x:Key="BytesToImageConverter" />
@@ -20,7 +20,9 @@
                    HorizontalAlignment="Left"
                    Margin="0,0,0,20"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button VerticalContentAlignment="Center" Style="{StaticResource GradientButton}" Command="{Binding CreateNewCommand}">Dodaj novo putovanje:</Button>
+            <Button VerticalContentAlignment="Center" Style="{StaticResource GradientButton}" Command="{Binding CreateNewCommand}">
+                <AccessText Foreground="White">_Dodaj novo putovanje:</AccessText>  
+            </Button>
             
         </StackPanel>
 

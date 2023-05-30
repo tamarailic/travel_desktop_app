@@ -12,6 +12,7 @@ using travel_app.MVVM.Model;
 using travel_app.MVVM.View;
 using travel_app.Services;
 using travel_app.Store;
+using System.Diagnostics;
 
 namespace travel_app.MVVM.ViewModel
 {
@@ -34,26 +35,7 @@ namespace travel_app.MVVM.ViewModel
                 {
                     return db.Travels.ToList();
                 }
-
-            }
-        }
-
-        private void SeeDetailes(object sender, MouseButtonEventArgs e)
-        {
-            Border? border = sender as Border;
-            if (border != null)
-            {
-                Travel? travel = border.DataContext as Travel;
-                if (travel != null)
-                {
-                    // You can use any method you want to navigate, such as using a Frame or a NavigationWindow
-                    var detailsView = new DetailsView();
-                    detailsView.DataContext = travel;
-                    detailsView.Show();
-                }
             }
         }
     }
-
-    
 }
