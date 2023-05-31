@@ -7,15 +7,11 @@
              xmlns:v="clr-namespace:travel_app.Validators"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1000" Background="White">
-    <Grid Margin="40,10,40,10">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <WrapPanel Margin="40,10,40,10">
 
-        <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="#333333" Padding="0,0,20,0">
-            <StackPanel>
+        <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="#333333" Padding="0,0,20,0" >
+                <StackPanel Width="300">
                 <TextBlock Text="Dodajte novu atrakciju:" FontWeight="Bold" FontSize="20" Margin="00,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                 <Grid Margin="0,20,0,0">
@@ -86,7 +82,7 @@
         </Border>
 
         <Border Grid.Column="1" BorderThickness="0,0,1,0" BorderBrush="#333333"  Padding="0,0,20,0">
-            <StackPanel>
+                <StackPanel  Width="300">
                 <TextBlock Text="Dodajte novi restoran:" FontWeight="Bold" FontSize="20" Margin="00,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Grid Margin="20,20,0,0">
                     <Grid.ColumnDefinitions>
@@ -138,7 +134,7 @@
         </Border>
 
         <Border Grid.Column="2">
-            <StackPanel>
+                <StackPanel  Width="300">
                 <TextBlock Text="Dodajte novi smeštaj:" FontWeight="Bold" FontSize="20" Margin="00,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Grid Margin="20,20,0,0">
                     <Grid.ColumnDefinitions>
@@ -189,5 +185,6 @@
             </StackPanel>
         </Border>
 
-    </Grid>
+    </WrapPanel>
+    </ScrollViewer>
 </UserControl>

@@ -10,7 +10,6 @@
         xmlns:l="clr-namespace:travel_app"
         Height="800" Width="1400"
         WindowStyle="None"
-        ResizeMode="NoResize"
         Background="Transparent"
         MouseDown="Window_MouseDown"
         WindowStartupLocation="CenterScreen"
