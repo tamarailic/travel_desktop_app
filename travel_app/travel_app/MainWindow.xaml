@@ -112,6 +112,9 @@
                     <DataTemplate DataType="{x:Type viewModel:DetailsViewModel}">
                         <view:DetailsView/>
                     </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:EditTravelViewModel}">
+                        <view:EditTravelView/>
+                    </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>
         </Grid>
