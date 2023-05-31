@@ -1,18 +1,13 @@
-﻿using Microsoft.Maps.MapControl.WPF;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Xml.Linq;
 using travel_app.Command;
 using travel_app.Core;
@@ -21,9 +16,11 @@ using travel_app.Store;
 
 namespace travel_app.MVVM.ViewModel
 {
-    class DetailsViewModel:ObservableObject
+    internal class EditTravelViewModel : ObservableObject
     {
-        public RelayCommand DeleteCommand { get; set; }
+        public RelayCommand SaveCommand { get; set; }
+        public ICommand BackCommand { get; }
+        public Travel currentTravel { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public string ShortDescription { get; set; }
@@ -36,12 +33,12 @@ namespace travel_app.MVVM.ViewModel
         public List<Attractions> Attractions { get; set; }
         public List<Hotels> Hotels { get; set; }
         public List<Restaurants> Restaurants { get; set; }
+        public NavigationStore NavigationStore { get; }
 
-        public ICommand BackCommand { get; }
-        public ICommand EditCommand { get; set; }
-
-        public DetailsViewModel(NavigationStore navigationStore, Travel travel)
+        public EditTravelViewModel(NavigationStore navigationStore, Travel travel)
         {
+            NavigationStore = navigationStore;
+            currentTravel = travel;
             Id = travel.Id;
             Name = travel.Name == null ? "Nedostaju podaci" : travel.Name;
             ShortDescription = travel.ShortDescription == null ? "Nedostaju podaci" : travel.ShortDescription;
@@ -60,32 +57,33 @@ namespace travel_app.MVVM.ViewModel
                 Hotels = t.Hotels;
             }
 
-            DeleteCommand = new RelayCommand(Delete);
-            EditCommand = new NavigateCommand<EditTravelViewModel>(navigationStore, () => new EditTravelViewModel(navigationStore, travel));
-            BackCommand = new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));
+            SaveCommand = new RelayCommand(SaveChanges);
+            BackCommand = new NavigateCommand<DetailsViewModel>(navigationStore, () => new DetailsViewModel(navigationStore, currentTravel));
         }
 
-        private void Delete(object element)
+        private void SaveChanges(object element)
         {
             var result = MessageBoxResult.Yes;
             if (!MainWindow.LogedInUser.Pro)
             {
-                result = MessageBox.Show("Da li ste sigurni da želite da otkažete ovo putovanje?", "Otkazivanje", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                result = MessageBox.Show("Da li ste sigurni da želite da izmenite ovo putovanje?", "Izmena putovanja", MessageBoxButton.YesNo, MessageBoxImage.Question);
             }
 
             if (result == MessageBoxResult.Yes)
             {
                 using (var db = new TravelContext())
                 {
-                    var currentTravel = db.Travels.Find(Id);
-                    if (currentTravel.Canceled)
-                    {
-                        MessageBox.Show($"Putovanje je već otkazano", "Neuspelo brisanje", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    currentTravel.Canceled = true;
+                    currentTravel = db.Travels.Include("Attractions").Include("Hotels").Include("Restaurants").Single(item => item.Id == Id);
+                    currentTravel.Name = Name;
+                    currentTravel.Description = Description;
+                    currentTravel.ShortDescription = ShortDescription;
+                    currentTravel.Price = Price;
+                    currentTravel.Start = Start; 
+                    currentTravel.End = End;
                     db.SaveChanges();
-                    MessageBox.Show("Uspešno otkazivanje putovanja.", "Otkazivanje", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    MessageBox.Show("Izmena uspešno odrađena :)");
+
                 }
             }
         }

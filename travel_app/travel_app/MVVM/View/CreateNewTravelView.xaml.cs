@@ -182,67 +182,78 @@ namespace travel_app.MVVM.View
         }
 
         private void Create_Click(object sender, RoutedEventArgs e)
-        {            
-            if (ValidateData()) {
-                var newTravelName = TravelName.Text.Trim();
-                var newTravelShortDesctiption = TravelShortDescription.Text.Trim();
-                var newTravelLongDescription = TravelLongDescription.Text.Trim();
-                var newTravelPriceString = TravelPrice.Text.Trim();
-                string travelDate = TravelDate.SelectedDate.Value.ToString("s");
-                int newTravelPrice;
-                int.TryParse(newTravelPriceString, out newTravelPrice);
-                using (var db = new TravelContext())
+        {
+
+            var result = MessageBoxResult.Yes;
+            if (!MainWindow.LogedInUser.Pro)
+            {
+                result = MessageBox.Show("Da li ste sigurni da želite da kreirate ovo putovanje?", "Kreiranje putovanja", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            }
+
+            if (result == MessageBoxResult.Yes)
+            {
+                if (ValidateData())
                 {
+                    var newTravelName = TravelName.Text.Trim();
+                    var newTravelShortDesctiption = TravelShortDescription.Text.Trim();
+                    var newTravelLongDescription = TravelLongDescription.Text.Trim();
+                    var newTravelPriceString = TravelPrice.Text.Trim();
+                    string travelDate = TravelDate.SelectedDate.Value.ToString("s");
+                    int newTravelPrice;
+                    int.TryParse(newTravelPriceString, out newTravelPrice);
+                    using (var db = new TravelContext())
+                    {
 
-                    Travel newTravel = new Travel()
-                    {
-                        Name = newTravelName,
-                        ShortDescription = newTravelShortDesctiption,
-                        Description = newTravelLongDescription,
-                        Price = newTravelPrice,
-                        Image = imageData,
-                        Start = _fromAddress,
-                        End = _toAddress,
-                        Date = travelDate
-                    };
-                    if (ChoosenAttractions.Count > 0)
-                    {
-                        newTravel.Attractions.AddRange(db.Attractions.Where(el => ChoosenAttractions.Contains(el.Name)));
-                    }
-                    if (ChoosenHotels.Count > 0)
-                    {
-                        newTravel.Hotels.AddRange(db.Hotels.Where(el => ChoosenHotels.Contains(el.Name)));
-                    }
-                    if (ChoosenRestaurants.Count > 0)
-                    {
-                        newTravel.Restaurants.AddRange(db.Restaurants.Where(el => ChoosenRestaurants.Contains(el.Name)));
-                    }
+                        Travel newTravel = new Travel()
+                        {
+                            Name = newTravelName,
+                            ShortDescription = newTravelShortDesctiption,
+                            Description = newTravelLongDescription,
+                            Price = newTravelPrice,
+                            Image = imageData,
+                            Start = _fromAddress,
+                            End = _toAddress,
+                            Date = travelDate
+                        };
+                        if (ChoosenAttractions.Count > 0)
+                        {
+                            newTravel.Attractions.AddRange(db.Attractions.Where(el => ChoosenAttractions.Contains(el.Name)));
+                        }
+                        if (ChoosenHotels.Count > 0)
+                        {
+                            newTravel.Hotels.AddRange(db.Hotels.Where(el => ChoosenHotels.Contains(el.Name)));
+                        }
+                        if (ChoosenRestaurants.Count > 0)
+                        {
+                            newTravel.Restaurants.AddRange(db.Restaurants.Where(el => ChoosenRestaurants.Contains(el.Name)));
+                        }
 
-                    try
-                    {
-                        db.Travels.Add(newTravel);
-                        db.SaveChanges();
-                        MessageBox.Show("Novo putovanje je uspešno kreirano");
+                        try
+                        {
+                            db.Travels.Add(newTravel);
+                            db.SaveChanges();
+                            MessageBox.Show("Novo putovanje je uspešno kreirano");
 
-                        TravelName.Text = string.Empty;
-                        TravelShortDescription.Text = string.Empty;
-                        TravelLongDescription.Text = string.Empty;
-                        TravelPrice.Text = string.Empty;
-                        StartLocation.Text = string.Empty;
-                        EndLocation.Text = string.Empty;
-                        TravelDate.SelectedDate = null;
-                        Photo.Source = null;
-                        ChoosenAttractions.Clear();
-                        ChoosenHotels.Clear();
-                        ChoosenRestaurants.Clear();
-                        CollectionViewSource.GetDefaultView(ChoosenAttractionsListBox.ItemsSource).Refresh();
-                        CollectionViewSource.GetDefaultView(ChoosenHotelsListBox.ItemsSource).Refresh();
-                        CollectionViewSource.GetDefaultView(ChoosenRestaurantsListBox.ItemsSource).Refresh();
-                        InitializeOptions();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Podaci putovanja nisu u ispravnom obliku. Proverite sva polja i pokušajte ponovo.", "Neuspelo kreiranje", MessageBoxButton.OK, MessageBoxImage.Error);
+                            TravelName.Text = string.Empty;
+                            TravelShortDescription.Text = string.Empty;
+                            TravelLongDescription.Text = string.Empty;
+                            TravelPrice.Text = string.Empty;
+                            StartLocation.Text = string.Empty;
+                            EndLocation.Text = string.Empty;
+                            TravelDate.SelectedDate = null;
+                            Photo.Source = null;
+                            ChoosenAttractions.Clear();
+                            ChoosenHotels.Clear();
+                            ChoosenRestaurants.Clear();
+                            CollectionViewSource.GetDefaultView(ChoosenAttractionsListBox.ItemsSource).Refresh();
+                            CollectionViewSource.GetDefaultView(ChoosenHotelsListBox.ItemsSource).Refresh();
+                            CollectionViewSource.GetDefaultView(ChoosenRestaurantsListBox.ItemsSource).Refresh();
+                            InitializeOptions();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Podaci putovanja nisu u ispravnom obliku. Proverite sva polja i pokušajte ponovo.", "Neuspelo kreiranje", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                 }
             }

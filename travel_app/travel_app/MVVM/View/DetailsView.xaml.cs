@@ -43,6 +43,7 @@ namespace travel_app.MVVM.View
 
             Travel currentTravel;
 
+            if (TravelName.Text == "") return;
             using (var db = new TravelContext())
             {
                 currentTravel = db.Travels.Include("Attractions").Single(item => item.Name == TravelName.Text);
