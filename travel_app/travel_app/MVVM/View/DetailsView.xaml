@@ -26,10 +26,10 @@
                     <TextBlock Name="TravelName" Text="{Binding Name}" Foreground="#333" FontSize="24" Margin="20,20,10,0"/>
                     <TextBlock Name="StartLocation" Text="{Binding Start}" Foreground="#333" FontSize="16" Margin="20,20,10,0"/>
                     <TextBlock Name="EndLocation" Text="{Binding End}" Foreground="#333" FontSize="16" Margin="20,20,10,0"/>
-                    <TextBlock Text="{Binding Description}" Foreground="#333" FontSize="16" Margin="20,20,10,0"/>
+                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Foreground="#333" FontSize="12" Margin="20,20,10,0"/>
                     <TextBlock Text="{Binding Price}" Foreground="#333" FontSize="16" Margin="20,20,10,0"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 40 0 0">
-                        <Button Content="Otkaži"  Style="{StaticResource GradientButton}" Margin="0,20,5,20" Command="{Binding DeleteCommand}"/>
+                        <Button Content="Nazad"  Style="{StaticResource GradientButton}" Margin="0,20,5,20" Command="{Binding DeleteCommand}"/>
                         <Button Content="Izmeni"  Style="{StaticResource GradientButton}" Margin="5,20,0,20" Command="{Binding EditCommand}"/>
                     </StackPanel>
                 </StackPanel>

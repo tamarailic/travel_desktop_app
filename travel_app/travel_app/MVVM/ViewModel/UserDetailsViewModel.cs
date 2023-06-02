@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace travel_app.MVVM.ViewModel
             Name = travel.Name == null ? "Nedostaju podaci" : travel.Name;
             ShortDescription = travel.ShortDescription == null ? "Nedostaju podaci" : travel.ShortDescription;
             Description = travel.Description == null ? "Nedostaju podaci" : travel.Description;
-            Image = travel.Image;
+            Image = travel.Image == null ? File.ReadAllBytes("D:/Fakultet/Treca_godina/HCI/Projekat/travel_desktop_app/travel_app/travel_app/images/putokazi_logo.png") : travel.Image;
             Price = travel.Price;
             Date = travel.Date.Split("T")[0];
             Start = travel.Start == null ? "Nedostaju podaci" : travel.Start;

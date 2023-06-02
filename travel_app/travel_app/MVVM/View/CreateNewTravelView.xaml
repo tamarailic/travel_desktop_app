@@ -7,180 +7,184 @@
              xmlns:v="clr-namespace:travel_app.Validators"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1400"
+             d:DesignHeight="800" d:DesignWidth="1500"
              Background="White">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-        <WrapPanel>
-         
-        <StackPanel Width="500" Margin="20,20,80,0">
-            <TextBlock Text="Novo putovanje:" Margin="0,0,0,20" FontSize="24" FontWeight="Bold"/>
-            <Label Content="Poster (slika) putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="4" Grid.Column="0"/>
-            <Image Grid.Row="5" Grid.Column="0" x:Name="Photo" Height="200" />
-            <Button Grid.Row="5" Grid.Column="1" Content="Izaberi sliku" Click="BrowseButton_Click" Margin="0,20,0,20" />
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+        <StackPanel>
+            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                <Label Content="Naziv putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="0" Grid.Column="0" Margin="0,5,0,5"/>
-                <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelName" Margin="0,5,0,5">
-                    <TextBox.Text>
-                        <Binding Path="check" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <v:NotEmptyValidationRule Message="Niste uneli naziv putovanja." />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-                <Label Content="Adresa okupljanja:" FontWeight="Bold" FontSize="14" Grid.Row="1" Grid.Column="0" Margin="0,5,0,5"/>
-                <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="StartLocation" Margin="0,5,0,5" LostFocus="UpdateMap">
-                <TextBox.Text>
-                        <Binding Path="check" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <v:NotEmptyValidationRule Message="Niste uneli polazište putovanja." />
-                    </Binding.ValidationRules>
-                </Binding>
-                </TextBox.Text>
-                </TextBox>
-                <Label Content="Adresa destinacije:" FontWeight="Bold" FontSize="14" Grid.Row="2" Grid.Column="0" Margin="0,5,0,5"/>
-                <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="EndLocation" Margin="0,5,0,5" LostFocus="UpdateMap">
-                <TextBox.Text>
-                        <Binding Path="check" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <v:NotEmptyValidationRule Message="Niste uneli destinaciju putovanja." />
-                    </Binding.ValidationRules>
-                </Binding>
-                </TextBox.Text>
-                </TextBox>
-                <Label Content="Kratak opis:" FontWeight="Bold" FontSize="14" Grid.Row="3" Grid.Column="0" Margin="0,5,0,5"/>
-                <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelShortDescription" Margin="0,5,0,5">
-                <TextBox.Text>
-                        <Binding Path="check" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <v:NotEmptyValidationRule Message="Niste uneli kraći opis putovanja." />
-                    </Binding.ValidationRules>
-                </Binding>
-                </TextBox.Text>
-                </TextBox>
-                <Label Content="Detaljan opis:" FontWeight="Bold" FontSize="14" Grid.Row="4" Grid.Column="0" Margin="0,5,0,5"/>
-                <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelLongDescription" Margin="0,5,0,5">
-                <TextBox.Text>
-                        <Binding Path="check" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <v:NotEmptyValidationRule Message="Niste uneli duži opis putovanja." />
-                    </Binding.ValidationRules>
-                </Binding>
-                </TextBox.Text>
-                </TextBox>
-                <Label Content="Cena putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="5" Grid.Column="0" Margin="0,5,0,5"/>
-                <TextBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelPrice" Margin="0,5,0,5">
-                <TextBox.Text>
-                        <Binding Path="check" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <v:NotEmptyValidationRule Message="Niste uneli cenu putovanja." />
-                        <v:PositiveIntegerValidationRule Message="Cena putovanja mora biti pozitivan ceo broj." />
-                    </Binding.ValidationRules>
-                </Binding>
-                </TextBox.Text>
-                </TextBox>
-                <Label Content="Datum putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="6" Grid.Column="0" Margin="0,5,0,5"/>
-                <DatePicker Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelDate" Margin="0,5,0,5">
-                    <DatePicker.SelectedDate>
-                        <Binding Path="check">
-                            <Binding.ValidationRules>
-                                <v:NotEmptyDateValidationRule Message="Niste uneli datum putovanja." />
-                                <v:NoPastDateValidationRule Message="Ne možete da odaberete datum iz prošlosti." />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </DatePicker.SelectedDate>
-                </DatePicker>
-            </Grid>
-        </StackPanel>
-
-                <Grid >
+            <StackPanel Width="500" Margin="20,20,80,0">
+                <TextBlock Text="Novo putovanje:" Margin="0,0,0,20" FontSize="24" FontWeight="Bold"/>
+                <Label Content="Poster (slika) putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="4" Grid.Column="0"/>
+                <Image Grid.Row="5" Grid.Column="0" x:Name="Photo" Height="200" />
+                <Button Grid.Row="5" Grid.Column="1" Content="Izaberi sliku" Click="BrowseButton_Click" Margin="0,20,0,20" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <m:Map MouseLeftButtonDown="Map_MouseLeftButtonDown" AnimationLevel="Full" UseInertia="True" Center="45.255,19.833"  ZoomLevel="7" Mode="Road" Grid.Row="0" Margin="20" CredentialsProvider="AoDHQrsDjWxAd2BBTIt1TbvTMLqIHZ_Gki6iY1HMq-dcSVwoyF2K4QWog7Fi5QK8" Name="mainMap"/>
+                    <Label Content="Naziv putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="0" Grid.Column="0" Margin="0,5,0,5"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" MaxLength="30" Name="TravelName" Margin="0,5,0,5">
+                        <TextBox.Text>
+                            <Binding Path="TravelsName" UpdateSourceTrigger="Explicit">
+                                <Binding.ValidationRules>
+                                    <v:NotEmptyValidationRule Message="Niste uneli naziv putovanja." />
+                                    <v:NotToLongValidationRule Message="Dozvoljen broj karaktera za naziv putovanja je 30." Length="30"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Label Content="Adresa okupljanja:" FontWeight="Bold" FontSize="14" Grid.Row="1" Grid.Column="0" Margin="0,5,0,5"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" MaxLength="30" FontSize="14" Name="StartLocation" Margin="0,5,0,5" LostFocus="UpdateMap">
+                        <TextBox.Text>
+                            <Binding Path="From" UpdateSourceTrigger="Explicit">
+                                <Binding.ValidationRules>
+                                    <v:NotEmptyValidationRule Message="Niste uneli polazište putovanja." />
+                                    <v:NotToLongValidationRule Message="Dozvoljen broj karaktera za polazište putovanja je 30." Length="30"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Label Content="Adresa destinacije:" FontWeight="Bold" FontSize="14" Grid.Row="2" Grid.Column="0" Margin="0,5,0,5"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" MaxLength="30" FontSize="14" Name="EndLocation" Margin="0,5,0,5" LostFocus="UpdateMap">
+                        <TextBox.Text>
+                            <Binding Path="To" UpdateSourceTrigger="Explicit">
+                                <Binding.ValidationRules>
+                                    <v:NotEmptyValidationRule Message="Niste uneli destinaciju putovanja." />
+                                    <v:NotToLongValidationRule Message="Dozvoljen broj karaktera za destinaciju putovanja je 30." Length="30"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Label Content="Kratak opis:" FontWeight="Bold" FontSize="14" Grid.Row="3" Grid.Column="0" Margin="0,5,0,5"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" MaxLength="100" FontSize="14" Name="TravelShortDescription" Margin="0,5,0,5">
+                        <TextBox.Text>
+                            <Binding Path="DescShort" UpdateSourceTrigger="Explicit">
+                                <Binding.ValidationRules>
+                                    <v:NotEmptyValidationRule Message="Niste uneli kraći opis putovanja." />
+                                    <v:NotToLongValidationRule Message="Dozvoljen broj karaktera za kraći opis putovanja je 100." Length="100"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Label Content="Detaljan opis:" FontWeight="Bold" FontSize="14" Grid.Row="4" Grid.Column="0" Margin="0,5,0,5"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" MaxLength="300" Name="TravelLongDescription" Margin="0,5,0,5">
+                        <TextBox.Text>
+                            <Binding Path="DescLong" UpdateSourceTrigger="Explicit">
+                                <Binding.ValidationRules>
+                                    <v:NotEmptyValidationRule Message="Niste uneli duži opis putovanja." />
+                                    <v:NotToLongValidationRule Message="Dozvoljen broj karaktera za duži opis putovanja je 300." Length="300"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Label Content="Cena putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="5" Grid.Column="0" Margin="0,5,0,5"/>
+                    <TextBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" MaxLength="100" Name="TravelPrice" Margin="0,5,0,5">
+                        <TextBox.Text>
+                            <Binding Path="Price" UpdateSourceTrigger="Explicit">
+                                <Binding.ValidationRules>
+                                    <v:NotEmptyValidationRule Message="Niste uneli cenu putovanja." />
+                                    <v:PositiveIntegerValidationRule Message="Cena putovanja mora biti pozitivan ceo broj." />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Label Content="Datum putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="6" Grid.Column="0" Margin="0,5,0,5"/>
+                    <DatePicker Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelDate" Margin="0,5,0,5">
 
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <StackPanel Grid.Column="0" Margin="20,5,20,5" >
-                            <TextBlock Text="Atrakcije:" FontSize="20" FontWeight="Bold"/>
-
-                            <ListBox AllowDrop="True" ItemsSource="{Binding ChoosenAttractions, Mode=TwoWay}" Margin="0,20,0,0" MinHeight="100" Name="ChoosenAttractionsListBox">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}" />
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-
-                            <ComboBox x:Name="attractionComboBox" Foreground="#333" Margin="0,20,0,0" Height="28" VerticalAlignment="Center" />
-                            <Button Click="AddAttraction" Content="Dodaj izabranu atrakciju" Style="{StaticResource SecondButton}" Margin="0,20,0,0"/>
-                        </StackPanel>
-
-                        <StackPanel Grid.Column="1" Margin="20,5,20,5" >
-                            <TextBlock Text="Restorani:" FontSize="20" FontWeight="Bold"/>
-
-                            <ListBox AllowDrop="True" ItemsSource="{Binding ChoosenRestaurants, Mode=TwoWay}" Margin="0,20,0,0" MinHeight="100" Name="ChoosenRestaurantsListBox">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}" />
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-
-                            <ComboBox x:Name="restaurantsComboBox" Foreground="#333" Margin="0,20,0,0" Height="28" VerticalAlignment="Center" />
-                            <Button Click="AddRestaurant" Content="Dodaj izabrani restoran" Style="{StaticResource SecondButton}" Margin="0,20,0,0"/>
-                        </StackPanel>
-
-                        <StackPanel Grid.Column="2" Margin="20,5,20,5" >
-                            <TextBlock Text="Smeštaj:" FontSize="20" FontWeight="Bold"/>
-
-                            <ListBox AllowDrop="True" ItemsSource="{Binding ChoosenHotels, Mode=TwoWay}" Margin="0,20,0,0" MinHeight="100" Name="ChoosenHotelsListBox">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}" />
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-
-                            <ComboBox x:Name="hotelsComboBox" Foreground="#333" Margin="0,20,0,0" Height="28" VerticalAlignment="Center" />
-                            <Button Click="AddHotel" Content="Dodaj izabrani smeštaj" Style="{StaticResource SecondButton}" Margin="0,20,0,0"/>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
-                            <Button Content="Kreiraj novo putovanje" Click="Create_Click" Style="{StaticResource GradientButton}" Margin="0,5,0,20" HorizontalAlignment="Right" />
-                        </StackPanel>
-
-                    </Grid>
-
+                        <DatePicker.SelectedDate>
+                            <Binding Path="Date" UpdateSourceTrigger="Explicit">
+                                <Binding.ValidationRules>
+                                    <v:NotEmptyDateValidationRule Message="Niste uneli datum putovanja." />
+                                    <v:NoPastDateValidationRule Message="Ne možete da odaberete datum iz prošlosti." />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </DatePicker.SelectedDate>
+                    </DatePicker>
                 </Grid>
-            
+            </StackPanel>
+
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <m:Map MouseLeftButtonDown="Map_MouseLeftButtonDown" AnimationLevel="Full" UseInertia="True" Center="45.255,19.833"  ZoomLevel="7" Mode="Road" Grid.Row="0" Margin="20" CredentialsProvider="AoDHQrsDjWxAd2BBTIt1TbvTMLqIHZ_Gki6iY1HMq-dcSVwoyF2K4QWog7Fi5QK8" Name="mainMap"/>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="20,5,20,5" >
+                        <TextBlock Text="Atrakcije:" FontSize="20" FontWeight="Bold"/>
+
+                        <ListBox AllowDrop="True" ItemsSource="{Binding ChoosenAttractions, Mode=TwoWay}" Margin="0,20,0,0" MinHeight="100" Name="ChoosenAttractionsListBox">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <ComboBox x:Name="attractionComboBox" Foreground="#333" Margin="0,20,0,0" Height="28" VerticalAlignment="Center" />
+                        <Button Click="AddAttraction" Content="Dodaj izabranu atrakciju" Style="{StaticResource SecondButton}" Margin="0,20,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Margin="20,5,20,5" >
+                        <TextBlock Text="Restorani:" FontSize="20" FontWeight="Bold"/>
+
+                        <ListBox AllowDrop="True" ItemsSource="{Binding ChoosenRestaurants, Mode=TwoWay}" Margin="0,20,0,0" MinHeight="100" Name="ChoosenRestaurantsListBox">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <ComboBox x:Name="restaurantsComboBox" Foreground="#333" Margin="0,20,0,0" Height="28" VerticalAlignment="Center" />
+                        <Button Click="AddRestaurant" Content="Dodaj izabrani restoran" Style="{StaticResource SecondButton}" Margin="0,20,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Margin="20,5,20,5" >
+                        <TextBlock Text="Smeštaj:" FontSize="20" FontWeight="Bold"/>
+
+                        <ListBox AllowDrop="True" ItemsSource="{Binding ChoosenHotels, Mode=TwoWay}" Margin="0,20,0,0" MinHeight="100" Name="ChoosenHotelsListBox">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <ComboBox x:Name="hotelsComboBox" Foreground="#333" Margin="0,20,0,0" Height="28" VerticalAlignment="Center" />
+                        <Button Click="AddHotel" Content="Dodaj izabrani smeštaj" Style="{StaticResource SecondButton}" Margin="0,20,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
         </WrapPanel>
+            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Kreiraj novo putovanje" Click="Create_Click" Style="{StaticResource GradientButton}" Margin="0,5,0,20" HorizontalAlignment="Right" />
+        </StackPanel>
+        </StackPanel>
     </ScrollViewer>
 </UserControl>

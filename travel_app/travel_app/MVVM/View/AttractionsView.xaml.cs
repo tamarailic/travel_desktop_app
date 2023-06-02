@@ -23,7 +23,16 @@ namespace travel_app.MVVM.View
 {
     public partial class AttractionsView : UserControl
     {
-        public string check { get; set; }
+        public string AttractionName { get; set; }
+        public string AttractionAddress { get; set; }
+        public string AttractionType { get; set; }
+        public string RestaurantName { get; set; }
+        public string RestaurantAddress { get; set; }
+        public string RestaurantType { get; set; }
+        public string HotelName { get; set; }
+        public string HotelAddress { get; set; }
+        public string HotelStars { get; set; }
+ 
         public AttractionsView()
         {
             InitializeComponent();
@@ -41,7 +50,7 @@ namespace travel_app.MVVM.View
                 var restaurantTypes = context.RestaurantTypes.Select(el => el.Name).ToList();
                 restaurantTypesComboBox.ItemsSource = restaurantTypes;
 
-                hotelStarsComboBox.ItemsSource = new ArrayList() { 1, 2, 3, 4, 5 };
+                hotelStarsComboBox.ItemsSource = new List<string>() { "1","2", "3", "4", "5"};
             }
         }
 
@@ -61,11 +70,14 @@ namespace travel_app.MVVM.View
                         {
                             var name = hotelName.Text.Trim();
                             var address = hotelLocation.Text.Trim();
-                            var stars = int.Parse(hotelStarsComboBox.SelectedItem.ToString());
+                            var stars = int.Parse(hotelStarsComboBox.SelectedValue.ToString());
 
                             db.Hotels.Add(new Hotels(name, address, stars));
                             db.SaveChanges();
-                            hotelName.Text = string.Empty;
+                            
+
+                            hotelName.Clear();
+                            
                             hotelLocation.Text = string.Empty;
                             hotelStarsComboBox.SelectedIndex = -1;
 
@@ -256,24 +268,14 @@ namespace travel_app.MVVM.View
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "CSV files (*.csv)|*.csv";
-            if (openFileDialog.ShowDialog() == true && ValidCSV())
+            if (openFileDialog.ShowDialog() == true)
             {
                 txtFilePath.Text = openFileDialog.FileName;
                 ReadCsvFile();
             }
         }
 
-        private bool ValidCSV() {
-            var bindingExpressiontxtFilePath = txtFilePath.GetBindingExpression(TextBox.TextProperty);
-            bindingExpressiontxtFilePath.UpdateSource();
-            if (Validation.GetHasError(txtFilePath))
-            {
-                var errors = Validation.GetErrors(txtFilePath);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            return true;
-        }
+       
         private void ReadCsvFile()
         {
             List<Attractions> attractions = new List<Attractions>();

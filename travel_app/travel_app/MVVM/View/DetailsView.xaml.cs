@@ -119,5 +119,6 @@ namespace travel_app.MVVM.View
             attractionPin.Location = new Location(lat, lng);
             mainMap.Children.Add(attractionPin);
         }
+
     }
 }

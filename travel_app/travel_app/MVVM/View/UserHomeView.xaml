@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:travel_app.MVVM.View"
              mc:Ignorable="d" 
               Background="White"
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="600" d:DesignWidth="1400"
              Padding="50">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
     <StackPanel>
@@ -25,7 +25,7 @@
         <ItemsControl ItemsSource="{Binding Travels}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel />
+                    <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
@@ -37,14 +37,14 @@
                     CornerRadius="10"
                     Margin="0,20,20,0">
                         <StackPanel >
-                            <Image Width="300"
+                            <Image Margin="5" Width="300"
                            Height="200"
                            Source="{Binding Image, Converter={StaticResource BytesToImageConverter}}"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Top"/>
                             <!-- Bind the TextBlocks to the properties of the Travel object -->
-                            <TextBlock Text="{Binding Name}" Foreground="#22202f" FontSize="24" Margin="20,10,10,0"/>
-                            <TextBlock Text="{Binding ShortDescription}" Foreground="#22202f"  FontSize="16" Margin="20,10,10,0"/>
+                                <TextBlock Text="{Binding Name}" Foreground="#22202f" FontSize="24" TextWrapping="Wrap" Margin="20,10,10,0"/>
+                                <TextBlock Text="{Binding ShortDescription}" Foreground="#22202f" TextWrapping="Wrap" FontSize="11" Margin="20,10,10,0"/>
                             <TextBlock Text="{Binding Price}"  FontSize="16" Foreground="#22202f" Margin="20,10,10,0"/>
                             <Button Command="{Binding Command}" Content="Detaljnije" Width="100" Style="{StaticResource GradientButton}" />
                         </StackPanel>

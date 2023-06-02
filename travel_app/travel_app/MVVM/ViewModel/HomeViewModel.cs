@@ -14,6 +14,7 @@ using travel_app.Services;
 using travel_app.Store;
 using System.Diagnostics;
 using static travel_app.MVVM.ViewModel.UserHomeViewModel;
+using System.IO;
 
 namespace travel_app.MVVM.ViewModel
 {
@@ -58,7 +59,7 @@ namespace travel_app.MVVM.ViewModel
                 Name = travel.Name == null ? "Nedostaju podaci" : travel.Name;
                 ShortDescription = travel.ShortDescription == null ? "Nedostaju podaci" : travel.ShortDescription;
                 Description = travel.Description == null ? "Nedostaju podaci" : travel.Description;
-                Image = travel.Image;
+                Image = travel.Image == null ? File.ReadAllBytes("D:/Fakultet/Treca_godina/HCI/Projekat/travel_desktop_app/travel_app/travel_app/images/putokazi_logo.png") : travel.Image;
                 Price = travel.Price;
                 Start = travel.Start == null ? "Nedostaju podaci" : travel.Start;
                 End = travel.End == null ? "Nedostaju podaci" : travel.End;

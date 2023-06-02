@@ -31,26 +31,26 @@
             <ItemsControl ItemsSource="{Binding Travels}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel />
+                        <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border Width="300"
-                    Height="350"
+                    Height="380"
                     BorderThickness="2"
                     BorderBrush="#22202f"
                     CornerRadius="10"
                     Margin="0,20,20,0">
                             <StackPanel>
-                                <Image Width="300"
+                                <Image Margin="5" Width="300"
                            Height="200"
                            Source="{Binding Image, Converter={StaticResource BytesToImageConverter}}"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Top"/>
                                 <!-- Bind the TextBlocks to the properties of the Travel object -->
-                                <TextBlock Text="{Binding Name}"  FontSize="24" Margin="20,10,10,0"/>
-                                <TextBlock Text="{Binding ShortDescription}"  FontSize="16" Margin="20,10,10,0"/>
+                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap"  FontSize="24" Margin="20,10,10,0"/>
+                                <TextBlock Text="{Binding ShortDescription}" TextWrapping="Wrap" FontSize="16" Margin="20,10,10,0"/>
                                 <TextBlock Text="{Binding Price}"  FontSize="16" Margin="20,10,10,0"/>
                                 <Button Command="{Binding Command}" Content="Detaljnije" Width="100" Style="{StaticResource GradientButton}" />
                             </StackPanel>

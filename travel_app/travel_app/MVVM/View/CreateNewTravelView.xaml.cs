@@ -32,7 +32,13 @@ namespace travel_app.MVVM.View
 {
     public partial class CreateNewTravelView : UserControl
     {
-        public string check { get; set; }
+        public string TravelsName { get; set; }
+        public string From { get; set; }
+        public string To { get; set; }
+        public string DescLong { get; set; }
+        public string DescShort { get; set; }
+        public string Price { get; set; }
+        public string Date { get; set; }
         private string _fromAddress = string.Empty;
         private List<double> _fromLocation = new List<double>();
         private string _toAddress = string.Empty;

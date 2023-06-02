@@ -26,6 +26,21 @@ namespace travel_app.Validators
         }
     }
 
+    public class NotToLongValidationRule : ValidationRule
+    {
+        public string Message { get; set; }
+        public int Length { get; set; }
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            string input = value as string;
+            if (input.Length > Length)
+            {
+                return new ValidationResult(false, Message);
+            }
+            return ValidationResult.ValidResult;
+        }
+    }
+
     public class NotEmptyDateValidationRule : ValidationRule
     {
         public string Message { get; set; }
