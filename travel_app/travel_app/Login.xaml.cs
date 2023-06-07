@@ -118,7 +118,7 @@ namespace travel_app
                 }
                 else
                 {
-                    CustomMessageBox.ShowOK("Korisničko ime ili lozinka nisu ispravni. Pokušajte ponovo.", "Greška", "U red");
+                    CustomMessageBox.ShowOK("Korisničko ime ili lozinka nisu ispravni. Pokušajte ponovo.", "Greška", "U redu");
                 }
             }
         }

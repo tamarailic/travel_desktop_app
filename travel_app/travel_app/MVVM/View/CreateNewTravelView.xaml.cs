@@ -172,11 +172,11 @@ namespace travel_app.MVVM.View
             
         }
 
-        private byte[] imageData; // A variable to store the image data
+        private byte[] imageData;
         private void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog op = new OpenFileDialog();
-            op.Title = "Select a picture";
+            op.Title = "Izaberite";
             op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
                 "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
                 "Portable Network Graphic (*.png)|*.png";
@@ -259,7 +259,7 @@ namespace travel_app.MVVM.View
                         }
                         catch (Exception ex)
                         {
-                            CustomMessageBox.ShowOK("Podaci putovanja nisu u ispravnom obliku. Proverite sva polja i pokušajte ponovo.", "Neuspelo kreiranje", "U redu");
+                            CustomMessageBox.ShowOK("Putovanje sa tim imenom već postoji. Izmenite unos i pokušajte ponovo.", "Neuspelo kreiranje", "U redu");
                         }
                     }
                 }
@@ -272,7 +272,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelName))
             {
                 var errors = Validation.GetErrors(TravelName);
-                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -281,7 +281,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(StartLocation))
             {
                 var errors = Validation.GetErrors(StartLocation);
-                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -290,7 +290,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(EndLocation))
             {
                 var errors = Validation.GetErrors(EndLocation);
-                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -299,7 +299,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelShortDescription))
             {
                 var errors = Validation.GetErrors(TravelShortDescription);
-                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -308,7 +308,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelLongDescription))
             {
                 var errors = Validation.GetErrors(TravelLongDescription);
-                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -317,7 +317,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelPrice))
             {
                 var errors = Validation.GetErrors(TravelPrice);
-                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -326,7 +326,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelDate))
             {
                 var errors = Validation.GetErrors(TravelDate);
-                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 

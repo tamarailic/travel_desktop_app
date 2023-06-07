@@ -101,7 +101,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(hotelName))
             {
                 var errors = Validation.GetErrors(hotelName);
-                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -168,7 +168,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(restaurantName))
             {
                 var errors = Validation.GetErrors(restaurantName);
-                CustomMessageBox.ShowYesNo(errors[0].ErrorContent.ToString(), "Greška", "Da", "Ne");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -177,7 +177,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(restaurantLocation))
             {
                 var errors = Validation.GetErrors(restaurantLocation);
-                CustomMessageBox.ShowYesNo(errors[0].ErrorContent.ToString(), "Greška", "Da", "Ne");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -186,7 +186,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(restaurantTypesComboBox))
             {
                 var errors = Validation.GetErrors(restaurantTypesComboBox);
-                CustomMessageBox.ShowYesNo(errors[0].ErrorContent.ToString(), "Greška", "Da", "Ne");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
             return true;
@@ -199,7 +199,7 @@ namespace travel_app.MVVM.View
                 var result = MessageBoxResult.Yes;
                 if (!MainWindow.LogedInUser.Pro)
                 {
-                    result = CustomMessageBox.ShowYesNo($"Da li ste sigurni da želite da kreirate atrakciju {attractionName.Text.Trim()}?", "Potvrdite kreiranje atrakcije", "Yes", "No");
+                    result = CustomMessageBox.ShowYesNo($"Da li ste sigurni da želite da kreirate atrakciju {attractionName.Text.Trim()}?", "Potvrdite kreiranje atrakcije", "Da", "Ne");
                 }
                 if (result == MessageBoxResult.Yes)
                 {
@@ -235,7 +235,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(attractionName))
             {
                 var errors = Validation.GetErrors(attractionName);
-                CustomMessageBox.ShowYesNo(errors[0].ErrorContent.ToString(), "Greška", "Da", "Ne");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -244,7 +244,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(attractionAddress))
             {
                 var errors = Validation.GetErrors(attractionAddress);
-                CustomMessageBox.ShowYesNo(errors[0].ErrorContent.ToString(), "Greška", "Da", "Ne");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -253,7 +253,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(attractionTypesComboBox))
             {
                 var errors = Validation.GetErrors(attractionTypesComboBox);
-                CustomMessageBox.ShowYesNo(errors[0].ErrorContent.ToString(), "Greška", "Da", "Ne");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
             return true;
@@ -298,7 +298,7 @@ namespace travel_app.MVVM.View
         {
             if (MainWindow.LogedInUser.Pro == true)
             {
-                var result = CustomMessageBox.ShowYesNo("Potvrdite unos preko CSV-a. Kliknite 'Da' ukoliko želite da učitate hotele iz izabranog fajla.", "Potvrda unosa", "Da", "Ne");
+                var result = CustomMessageBox.ShowYesNo("Potvrdite unos preko CSV-a. Kliknite 'Da' ukoliko želite da učitate smeštaje iz izabranog fajla.", "Potvrda unosa", "Da", "Ne");
                 if (result == MessageBoxResult.No) return;
             }
 
@@ -310,8 +310,6 @@ namespace travel_app.MVVM.View
                 ReadCsvFileHotel();
             }
         }
-
-
 
         private void ReadCsvFileAttraction()
         {
@@ -332,21 +330,30 @@ namespace travel_app.MVVM.View
                         attractions.Add(attraction);
                     }
                 }
-            }catch(Exception ex)
+                saveToDBAttraction(attractions);
+            }
+            catch(Exception ex)
             {
                 CustomMessageBox.ShowOK("Greška prilikom učitavanja podataka iz fajla. Fajl nije u odgovarajućem obliku.", "Greška prilikom unosa", "U redu");
             }
-            saveToDBAttraction(attractions);    
+            txtFilePath.Text = String.Empty;
         }
 
         private void saveToDBAttraction(List<Attractions> attractions)
         {
             using (var db = new TravelContext())
             {
-                db.Attractions.AddRange(attractions);
-                db.SaveChanges();
+                try
+                {
+                    db.Attractions.AddRange(attractions);
+                    db.SaveChanges();
 
-                CustomMessageBox.ShowOK($"Uspešno je dodat novih {attractions.Count} atrakcija", "Uspešno", "U redu");
+                    CustomMessageBox.ShowOK($"Uspešno je dodat novih {attractions.Count} atrakcija", "Uspešno", "U redu");
+                }
+                catch (Exception ex)
+                {
+                    CustomMessageBox.ShowOK("Greška prilikom učitavanja podataka iz fajla. Podaci fajla nisu u odgovarajućem obliku.", "Greška prilikom unosa", "U redu");
+                }
             }
         }
 
@@ -369,22 +376,30 @@ namespace travel_app.MVVM.View
                         restaurants.Add(restaurant);
                     }
                 }
+                saveToDBRestaurant(restaurants);
             }
             catch (Exception ex)
             {
                 CustomMessageBox.ShowOK("Greška prilikom učitavanja podataka iz fajla. Fajl nije u odgovarajućem obliku.", "Greška prilikom unosa", "U redu");
             }
-            saveToDBRestaurant(restaurants);
+            txtFilePathRestaurant.Text = String.Empty;
         }
 
         private void saveToDBRestaurant(List<Restaurants> restaurants)
         {
             using (var db = new TravelContext())
             {
-                db.Restaurants.AddRange(restaurants);
-                db.SaveChanges();
+                try
+                {
+                    db.Restaurants.AddRange(restaurants);
+                    db.SaveChanges();
 
-                CustomMessageBox.ShowOK($"Uspešno je dodat novih {restaurants.Count} restorana", "Uspešno", "U redu");
+                    CustomMessageBox.ShowOK($"Uspešno je dodat novih {restaurants.Count} restorana", "Uspešno", "U redu");
+                }
+                catch (Exception ex)
+                {
+                    CustomMessageBox.ShowOK("Greška prilikom učitavanja podataka iz fajla. Podaci fajla nisu u odgovarajućem obliku.", "Greška prilikom unosa", "U redu");
+                }
             }
         }
 
@@ -407,24 +422,31 @@ namespace travel_app.MVVM.View
                         hotels.Add(hotel);
                     }
                 }
+                saveToDBHotels(hotels);
             }
             catch (Exception ex)
             {
                 CustomMessageBox.ShowOK("Greška prilikom učitavanja podataka iz fajla. Fajl nije u odgovarajućem obliku.", "Greška prilikom unosa", "U redu");
             }
-            saveToDBHotels(hotels);
+            txtFilePathHotel.Text = String.Empty;
         }
 
         private void saveToDBHotels(List<Hotels> hotels)
         {
             using (var db = new TravelContext())
             {
-                db.Hotels.AddRange(hotels);
-                db.SaveChanges();
+                try
+                {
+                    db.Hotels.AddRange(hotels);
+                    db.SaveChanges();
 
-                CustomMessageBox.ShowOK($"Uspešno je dodat novih {hotels.Count} hotela", "Uspešno", "U redu");
+                    CustomMessageBox.ShowOK($"Uspešno je dodat novih {hotels.Count} smeštaja", "Uspešno", "U redu");
+                }
+                catch (Exception ex)
+                {
+                    CustomMessageBox.ShowOK("Greška prilikom učitavanja podataka iz fajla. Podaci fajla nisu u odgovarajućem obliku.", "Greška prilikom unosa", "U redu");
+                }
             }
         }
-
     }
 }

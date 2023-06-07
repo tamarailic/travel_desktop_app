@@ -6,7 +6,7 @@
              xmlns:converters="clr-namespace:travel_app.MVVM.Converters"
              xmlns:local="clr-namespace:travel_app.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1500"
+             
              Background="White"
              Padding="50">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
@@ -22,7 +22,7 @@
                    HorizontalAlignment="Left"
                    Margin="0,0,0,20"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button VerticalContentAlignment="Center" Style="{StaticResource GradientButton}" Command="{Binding CreateNewCommand}">
+                <Button VerticalContentAlignment="Center" Style="{StaticResource GradientButton}" Command="{Binding CreateNewCommand}" ToolTip="Prelaz na stranicu za kreiranje putovanja.&#10;Alt + D">
                 <AccessText Foreground="White">_Dodaj novo putovanje:</AccessText>  
             </Button>
             

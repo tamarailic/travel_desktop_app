@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:travel_app.MVVM.View"
              mc:Ignorable="d" 
               Background="White"
-             d:DesignHeight="600" d:DesignWidth="1500"
+            d:DesignHeight="800" d:DesignWidth="1500"
              Padding="50">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
     <StackPanel>
