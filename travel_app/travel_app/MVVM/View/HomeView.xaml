@@ -6,7 +6,7 @@
              xmlns:converters="clr-namespace:travel_app.MVVM.Converters"
              xmlns:local="clr-namespace:travel_app.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1500"
+             
              Background="White"
              Padding="50">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
