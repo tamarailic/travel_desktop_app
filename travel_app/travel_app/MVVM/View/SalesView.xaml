@@ -28,25 +28,24 @@
           BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="1" AlternationCount="2" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Datum transakcije" Binding="{Binding DateTime}"/>
-                    <DataGridTextColumn Header="Tip transakcije" Binding="{Binding Type}"/>
                     <DataGridTextColumn Header="Putovanje" Binding="{Binding Travel.Name}"/>
                     <DataGridTextColumn Header="Kupac" Binding="{Binding User.Email}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Margin="0,40,0,0">
                 <TextBlock x:Name="ByTravelTitle" FontSize="24" FontWeight="Bold"/>
             </StackPanel>
             <DataGrid x:Name="salesByTravel" Margin="20" VerticalAlignment="Top" AutoGenerateColumns="False" HorizontalAlignment="Center" CellStyle="{StaticResource DataGridCellStyle}" RowStyle="{StaticResource DataGridRowStyle}" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
           BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="1" AlternationCount="2" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Ime putovanja" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Cena" Binding="{Binding Price}"/>
+                    <DataGridTextColumn Header="Cena (rsd)" Binding="{Binding Price}"/>
                     <DataGridTextColumn Header="Polazište" Binding="{Binding Start}"/>
                     <DataGridTextColumn Header="Odredište" Binding="{Binding End}"/>
-                    <DataGridTextColumn Header="Otkazano" Binding="{Binding Canceled}"/>
-                    <DataGridTextColumn Header="Prodaja" Binding="{Binding Sales.Count}"/>
+                    <DataGridCheckBoxColumn Header="Otkazano" Binding="{Binding Canceled}"/>
+                    <DataGridTextColumn Header="Broj prodaja" Binding="{Binding Sales.Count}"/>
                 </DataGrid.Columns>
             </DataGrid>
 

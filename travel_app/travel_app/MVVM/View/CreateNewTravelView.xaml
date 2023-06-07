@@ -101,8 +101,13 @@
                     </TextBox>
                     <Label Content="Datum putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="6" Grid.Column="0" Margin="0,5,0,5"/>
                     <DatePicker Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelDate" Margin="0,5,0,5">
-
-                        <DatePicker.SelectedDate>
+                            <DatePicker.Resources>
+                                <Style TargetType="DatePickerTextBox">
+                                    <Setter Property="Text" Value="Odaberite datum"/>
+                                    <Setter Property="IsReadOnly" Value="True"/>
+                                </Style>
+                            </DatePicker.Resources>
+                            <DatePicker.SelectedDate>
                             <Binding Path="Date" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
                                     <v:NotEmptyDateValidationRule Message="Niste uneli datum putovanja." />
@@ -120,7 +125,8 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <m:Map MouseLeftButtonDown="Map_MouseLeftButtonDown" AnimationLevel="Full" UseInertia="True" MinHeight="200" Center="45.255,19.833"  ZoomLevel="7" Mode="Road" Grid.Row="0" Margin="20" CredentialsProvider="AoDHQrsDjWxAd2BBTIt1TbvTMLqIHZ_Gki6iY1HMq-dcSVwoyF2K4QWog7Fi5QK8" Name="mainMap"/>
+                <m:Map MouseLeftButtonDown="Map_MouseLeftButtonDown" AnimationLevel="Full" UseInertia="True" Center="45.255,19.833"  ZoomLevel="7" Mode="Road" Grid.Row="0" Margin="20" CredentialsProvider="AoDHQrsDjWxAd2BBTIt1TbvTMLqIHZ_Gki6iY1HMq-dcSVwoyF2K4QWog7Fi5QK8" Name="mainMap" MinHeight="300"/>
+
 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -181,8 +187,10 @@
                 </Grid>
             </Grid>
         </WrapPanel>
-            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Kreiraj novo putovanje" Click="Create_Click" Style="{StaticResource GradientButton}" Margin="0,20,0,20" HorizontalAlignment="Right" />
+
+            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0">
+                <Button Content="Kreiraj novo putovanje" Click="Create_Click" Style="{StaticResource GradientButton}" Margin="0,5,0,20" HorizontalAlignment="Right" ToolTip="Pritiskom ovog dugmeta potvrđujete unesene informacije." />
+
         </StackPanel>
         </StackPanel>
     </ScrollViewer>

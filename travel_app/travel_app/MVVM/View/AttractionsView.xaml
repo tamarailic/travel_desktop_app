@@ -56,7 +56,7 @@
                         </Binding>
                     </ComboBox.SelectedValue>
                     </ComboBox>
-                        <Button  Click="CreateNewAttraction" Grid.Row="3" Grid.Column="1" Content="Kreiraj novu atrakciju" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/>
+                        <Button  Click="CreateNewAttraction" Grid.Row="3" Grid.Column="1" Content="Kreiraj novu atrakciju" Style="{StaticResource GradientButton}" Margin="0,20,0,0" ToolTip="Dodavanje nove atrakcije u listu svih atrakcija."/>
 
                 </Grid>
 
@@ -66,7 +66,7 @@
                 
                 <StackPanel Orientation="Vertical" Margin="0,20,0,0" >
                         <TextBox x:Name="txtFilePath"  Height="40" IsEnabled="false" Margin="0,0,0,10"/>
-                        <Button x:Name="btnBrowse" Content="Izaberi csv" Width="200" Height="40" Click="BtnBrowse_ClickAttraction" Background="#007aff" Foreground="White" FontSize="14" FontWeight="Medium"/>
+                        <Button x:Name="btnBrowse" Content="Izaberi csv" Width="200" Height="40" Click="BtnBrowse_ClickAttraction" Background="#007aff" Foreground="White" FontSize="14" FontWeight="Medium" ToolTip="Napredna opcija za unos velike količine podataka iz fajla. Pripremite odgovarajući fajl pre unosa, pogledajte pomoć za više informacija." Cursor="Hand"/>
                     <CheckBox x:Name="chkHasHeader" Content="Prvi red su labele kolona" IsChecked="True" Margin="0,10,0,0" HorizontalAlignment="Center"/>
                 </StackPanel>
                 
@@ -118,7 +118,7 @@
                         </Binding>
                     </ComboBox.SelectedValue>
                     </ComboBox>
-                    <Button Click="CreateNewRestaurant" Grid.Row="3" Grid.Column="1" Content="Kreiraj novi restoran" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/>
+                        <Button Click="CreateNewRestaurant" Grid.Row="3" Grid.Column="1" Content="Kreiraj novi restoran" Style="{StaticResource GradientButton}" Margin="0,20,0,0" ToolTip="Dodavanje novog restorana u listu svih restorana."/>
 
                 </Grid>
                     <Rectangle Margin="50" HorizontalAlignment="Stretch" Fill="#333" Height="3"/>
@@ -127,7 +127,7 @@
 
                     <StackPanel Orientation="Vertical" Margin="20,20,0,0" >
                         <TextBox x:Name="txtFilePathRestaurant"  Height="40" IsEnabled="false" Margin="0,0,0,10"/>
-                        <Button x:Name="btnBrowseRestaurant" Content="Izaberi csv" Width="200" Height="40" Click="BtnBrowse_ClickRestaurant" Background="#007aff" Foreground="White" FontSize="14" FontWeight="Medium"/>
+                        <Button x:Name="btnBrowseRestaurant" Content="Izaberi csv" Width="200" Height="40" Click="BtnBrowse_ClickRestaurant" Background="#007aff" Foreground="White" FontSize="14" FontWeight="Medium" ToolTip="Napredna opcija za unos velike količine podataka iz fajla. Pripremite odgovarajući fajl pre unosa, pogledajte pomoć za više informacija." Cursor="Hand"/>
                         <CheckBox x:Name="chkHasHeaderRestaurant" Content="Prvi red su labele kolona" IsChecked="True" Margin="0,10,0,0" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>
@@ -153,7 +153,7 @@
                             <TextBox.Text>
                                 <Binding Path="HotelName" UpdateSourceTrigger="Explicit">
                                     <Binding.ValidationRules>
-                                        <v:NotEmptyValidationRule Message="Niste uneli adresu hotela." />
+                                        <v:NotEmptyValidationRule Message="Niste uneli adresu smeštaja." />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -163,7 +163,7 @@
                             <TextBox.Text>
                                 <Binding Path="HotelAddress" UpdateSourceTrigger="Explicit">
                                     <Binding.ValidationRules>
-                                        <v:NotEmptyValidationRule Message="Niste uneli adresu hotela." />
+                                        <v:NotEmptyValidationRule Message="Niste uneli adresu smeštaja." />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -173,12 +173,12 @@
                             <ComboBox.SelectedValue>
                                 <Binding Path="HotelStars" UpdateSourceTrigger="Explicit">
                                     <Binding.ValidationRules>
-                                        <v:NotEmptyComboBoxValidationRule Message="Niste izabrali broj zvezdica hotela." />
+                                        <v:NotEmptyComboBoxValidationRule Message="Niste izabrali kvalitet smeštaja." />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </ComboBox.SelectedValue>
                         </ComboBox>
-                        <Button Click="CreateNewHotel" Grid.Row="3" Grid.Column="1" Content="Kreiraj novi smeštaj" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/> 
+                        <Button Click="CreateNewHotel" Grid.Row="3" Grid.Column="1" Content="Kreiraj novi smeštaj" Style="{StaticResource GradientButton}" Margin="0,20,0,0" ToolTip="Dodavanje novog smeštaja u listu svih smeštaja."/> 
                     </Grid>
                     <Rectangle Margin="50" HorizontalAlignment="Stretch" Fill="#333" Height="3"/>
 
@@ -186,7 +186,7 @@
 
                     <StackPanel Orientation="Vertical" Margin="20,20,0,0" >
                         <TextBox x:Name="txtFilePathHotel" Height="40" IsEnabled="false" Margin="0,0,0,10"/>
-                        <Button x:Name="btnBrowseHotel" Content="Izaberi csv" Width="200" Height="40" Click="BtnBrowse_ClickHotel" Background="#007aff" Foreground="White" FontSize="14" FontWeight="Medium"/>
+                        <Button x:Name="btnBrowseHotel" Content="Izaberi csv" Width="200" Height="40" Click="BtnBrowse_ClickHotel" Background="#007aff" Foreground="White" FontSize="14" FontWeight="Medium" ToolTip="Napredna opcija za unos velike količine podataka iz fajla. Pripremite odgovarajući fajl pre unosa, pogledajte pomoć za više informacija." Cursor="Hand"/>
                         <CheckBox x:Name="chkHasHeaderHotel" Content="Prvi red su labele kolona" IsChecked="True" Margin="0,10,0,0" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>

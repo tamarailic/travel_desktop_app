@@ -25,11 +25,11 @@ namespace travel_app
         public HelpViewer(string key, MainWindow originator)
         {
             InitializeComponent();
-            string curDir = "D:\\Fakultet\\Treca_godina\\HCI\\Projekat\\travel_desktop_app\\travel_app\\travel_app";
+            string curDir = System.IO.Path.GetFullPath(".") + "/../../.." ;
             string path = String.Format("{0}/Help/{1}.htm", curDir, key);
-            Trace.WriteLine(path);
             if (!File.Exists(path))
             {
+                Trace.WriteLine("Greška prilikom učitavanja pomoći. Podesite putanju trenutno je nameštena na :", path);
                 key = "error";
             }
             Uri u = new Uri(String.Format("file:///{0}/Help/{1}.htm", curDir, key));
