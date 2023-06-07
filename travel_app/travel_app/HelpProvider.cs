@@ -25,7 +25,7 @@ namespace travel_app
             //NOOP
         }
 
-        public static void ShowHelp(string key, Login originator)
+        public static void ShowHelp(string key, MainWindow originator)
         {
             HelpViewer hh = new HelpViewer(key, originator);
             hh.Show();

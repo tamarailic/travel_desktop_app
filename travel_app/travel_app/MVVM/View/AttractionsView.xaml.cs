@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using travel_app.MVVM.Model;
+using WPFCustomMessageBox;
 
 namespace travel_app.MVVM.View
 {
@@ -60,7 +61,7 @@ namespace travel_app.MVVM.View
                 var result = MessageBoxResult.Yes;
                 if (!MainWindow.LogedInUser.Pro)
                 {
-                    result = MessageBox.Show($"Da li ste sigurni da želite da dodate smeštaj {hotelName.Text.Trim()}?", "Potvrdite dodavanje smeštaja", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    result = CustomMessageBox.ShowYesNo($"Da li ste sigurni da želite da dodate smeštaj {hotelName.Text.Trim()}?", "Potvrdite dodavanje smeštaja", "Da", "Ne");
                 }
                 if (result == MessageBoxResult.Yes)
                 {
@@ -81,11 +82,11 @@ namespace travel_app.MVVM.View
                             hotelLocation.Text = string.Empty;
                             hotelStarsComboBox.SelectedIndex = -1;
 
-                            MessageBox.Show($"Novi smeštaj pod nazivom {name} je uspešno dodat");
+                            CustomMessageBox.ShowOK($"Novi smeštaj pod nazivom {name} je uspešno dodat", "Novi smeštaj", "U redu");
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Greška prilikom unosa. Smeštaj pod tim imenom već postoji ili podaci forme nisu u odgovarajućem obliku. Ispravite unos i pokušajte ponovo.", "Neuspeo unos", MessageBoxButton.OK, MessageBoxImage.Error);
+                            CustomMessageBox.ShowOK("Greška prilikom unosa. Smeštaj pod tim imenom već postoji ili podaci forme nisu u odgovarajućem obliku. Ispravite unos i pokušajte ponovo.", "Neuspeo unos", "U redu");
                         }
                     }
                 }
@@ -100,7 +101,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(hotelName))
             {
                 var errors = Validation.GetErrors(hotelName);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
                 return false;
             }
 
@@ -109,7 +110,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(hotelLocation))
             {
                 var errors = Validation.GetErrors(hotelLocation);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -118,7 +119,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(hotelStarsComboBox))
             {
                 var errors = Validation.GetErrors(hotelStarsComboBox);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
             return true;
@@ -131,7 +132,7 @@ namespace travel_app.MVVM.View
                 var result = MessageBoxResult.Yes;
                 if (!MainWindow.LogedInUser.Pro)
                 {
-                    result = MessageBox.Show($"Da li ste sigurni da želite da dodate restoran {restaurantName.Text.Trim()}?", "Potvrdite dodavanje restorana", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    result = CustomMessageBox.ShowYesNo($"Da li ste sigurni da želite da dodate restoran {restaurantName.Text.Trim()}?", "Potvrdite dodavanje restorana", "Da", "Ne");
                 }
                 if (result == MessageBoxResult.Yes)
                 {
@@ -149,11 +150,11 @@ namespace travel_app.MVVM.View
                             restaurantName.Text = string.Empty;
                             restaurantLocation.Text = string.Empty;
                             restaurantTypesComboBox.SelectedIndex = -1;
-                            MessageBox.Show($"Novi restoran pod nazivom {name} je uspešno dodat");
+                            CustomMessageBox.ShowOK($"Novi restoran pod nazivom {name} je uspešno dodat", "Novi restoran", "U redu");
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Greška prilikom unosa. Restoran pod tim imenom već postoji ili podaci forme nisu u odgovarajućem obliku. Ispravite unos i pokušajte ponovo.", "Unos neuspesan", MessageBoxButton.OK, MessageBoxImage.Error);
+                            CustomMessageBox.ShowYesNo("Greška prilikom unosa. Restoran pod tim imenom već postoji ili podaci forme nisu u odgovarajućem obliku. Ispravite unos i pokušajte ponovo.", "Unos neuspesan", "Da", "Ne");
                         }
                     }
                 }
@@ -167,7 +168,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(restaurantName))
             {
                 var errors = Validation.GetErrors(restaurantName);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowYesNo(errors[0].ErrorContent.ToString(), "Greška", "Da", "Ne");
                 return false;
             }
 
@@ -176,7 +177,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(restaurantLocation))
             {
                 var errors = Validation.GetErrors(restaurantLocation);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowYesNo(errors[0].ErrorContent.ToString(), "Greška", "Da", "Ne");
                 return false;
             }
 
@@ -185,7 +186,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(restaurantTypesComboBox))
             {
                 var errors = Validation.GetErrors(restaurantTypesComboBox);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowYesNo(errors[0].ErrorContent.ToString(), "Greška", "Da", "Ne");
                 return false;
             }
             return true;
@@ -198,7 +199,7 @@ namespace travel_app.MVVM.View
                 var result = MessageBoxResult.Yes;
                 if (!MainWindow.LogedInUser.Pro)
                 {
-                    result = MessageBox.Show($"Da li ste sigurni da želite da kreirate atrakciju {attractionName.Text.Trim()}?", "Potvrdite kreiranje atrakcije", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    result = CustomMessageBox.ShowYesNo($"Da li ste sigurni da želite da kreirate atrakciju {attractionName.Text.Trim()}?", "Potvrdite kreiranje atrakcije", "Yes", "No");
                 }
                 if (result == MessageBoxResult.Yes)
                 {
@@ -216,11 +217,11 @@ namespace travel_app.MVVM.View
                             attractionName.Text = string.Empty;
                             attractionAddress.Text = string.Empty;
                             attractionTypesComboBox.SelectedIndex = -1;
-                            MessageBox.Show("Nova atrakcija je uspešno kreirana");
+                            CustomMessageBox.ShowOK("Nova atrakcija je uspešno kreirana", "Nova atrakcija", "U redu");
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Greška prilikom unosa. Atrakcija pod tim imenom već postoji.", "Neuspeo unos", MessageBoxButton.OK, MessageBoxImage.Error);
+                            CustomMessageBox.ShowOK("Greška prilikom unosa. Atrakcija pod tim imenom već postoji.", "Neuspeo unos", "U redu");
                         }
                     }
                 }
@@ -234,7 +235,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(attractionName))
             {
                 var errors = Validation.GetErrors(attractionName);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowYesNo(errors[0].ErrorContent.ToString(), "Greška", "Da", "Ne");
                 return false;
             }
 
@@ -243,7 +244,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(attractionAddress))
             {
                 var errors = Validation.GetErrors(attractionAddress);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowYesNo(errors[0].ErrorContent.ToString(), "Greška", "Da", "Ne");
                 return false;
             }
 
@@ -252,17 +253,17 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(attractionTypesComboBox))
             {
                 var errors = Validation.GetErrors(attractionTypesComboBox);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowYesNo(errors[0].ErrorContent.ToString(), "Greška", "Da", "Ne");
                 return false;
             }
             return true;
         }
 
-        private void BtnBrowse_Click(object sender, RoutedEventArgs e)
+        private void BtnBrowse_ClickAttraction(object sender, RoutedEventArgs e)
         {
             if(MainWindow.LogedInUser.Pro == true)
             {
-                var result = MessageBox.Show("Potvrdite unos preko CSV-a. Kliknite Yes ukoliko želite da učitate atrakcije iz izabranog fajla.", "Potvrda unosa", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var result = CustomMessageBox.ShowYesNo("Potvrdite unos preko CSV-a. Kliknite 'Da' ukoliko želite da učitate atrakcije iz izabranog fajla.", "Potvrda unosa", "Da", "Ne");
                 if (result == MessageBoxResult.No) return;
             }
 
@@ -271,12 +272,48 @@ namespace travel_app.MVVM.View
             if (openFileDialog.ShowDialog() == true)
             {
                 txtFilePath.Text = openFileDialog.FileName;
-                ReadCsvFile();
+                ReadCsvFileAttraction();
             }
         }
 
-       
-        private void ReadCsvFile()
+        private void BtnBrowse_ClickRestaurant(object sender, RoutedEventArgs e)
+        {
+            if (MainWindow.LogedInUser.Pro == true)
+            {
+                var result = CustomMessageBox.ShowYesNo("Potvrdite unos preko CSV-a. Kliknite 'Da' ukoliko želite da učitate restorane iz izabranog fajla.", "Potvrda unosa", "Da", "Ne");
+                if (result == MessageBoxResult.No) return;
+            }
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "CSV files (*.csv)|*.csv";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                txtFilePathRestaurant.Text = openFileDialog.FileName;
+                ReadCsvFileRestaurant();
+            }
+        }
+
+
+        private void BtnBrowse_ClickHotel(object sender, RoutedEventArgs e)
+        {
+            if (MainWindow.LogedInUser.Pro == true)
+            {
+                var result = CustomMessageBox.ShowYesNo("Potvrdite unos preko CSV-a. Kliknite 'Da' ukoliko želite da učitate hotele iz izabranog fajla.", "Potvrda unosa", "Da", "Ne");
+                if (result == MessageBoxResult.No) return;
+            }
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "CSV files (*.csv)|*.csv";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                txtFilePathHotel.Text = openFileDialog.FileName;
+                ReadCsvFileHotel();
+            }
+        }
+
+
+
+        private void ReadCsvFileAttraction()
         {
             List<Attractions> attractions = new List<Attractions>();
             try
@@ -297,19 +334,95 @@ namespace travel_app.MVVM.View
                 }
             }catch(Exception ex)
             {
-                MessageBox.Show("Greška prilikom učitavanja podataka iz fajla. Fajl nije u odgovarajućem obliku.", "Greška prilikom unosa", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK("Greška prilikom učitavanja podataka iz fajla. Fajl nije u odgovarajućem obliku.", "Greška prilikom unosa", "U redu");
             }
-            saveToDB(attractions);    
+            saveToDBAttraction(attractions);    
         }
 
-        private void saveToDB(List<Attractions> attractions)
+        private void saveToDBAttraction(List<Attractions> attractions)
         {
             using (var db = new TravelContext())
             {
                 db.Attractions.AddRange(attractions);
                 db.SaveChanges();
 
-                MessageBox.Show($"Uspešno je dodat novih {attractions.Count} atrakcija");
+                CustomMessageBox.ShowOK($"Uspešno je dodat novih {attractions.Count} atrakcija", "Uspešno", "U redu");
+            }
+        }
+
+        private void ReadCsvFileRestaurant()
+        {
+            List<Restaurants> restaurants = new List<Restaurants>();
+            try
+            {
+                using (StreamReader sr = new StreamReader(txtFilePathRestaurant.Text))
+                {
+                    if (chkHasHeaderRestaurant.IsChecked == true)
+                    {
+                        sr.ReadLine();
+                    }
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        string[] tokens = line.Split(',');
+                        Restaurants restaurant = new Restaurants(tokens[0], tokens[1], int.Parse(tokens[2]));
+                        restaurants.Add(restaurant);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.ShowOK("Greška prilikom učitavanja podataka iz fajla. Fajl nije u odgovarajućem obliku.", "Greška prilikom unosa", "U redu");
+            }
+            saveToDBRestaurant(restaurants);
+        }
+
+        private void saveToDBRestaurant(List<Restaurants> restaurants)
+        {
+            using (var db = new TravelContext())
+            {
+                db.Restaurants.AddRange(restaurants);
+                db.SaveChanges();
+
+                CustomMessageBox.ShowOK($"Uspešno je dodat novih {restaurants.Count} restorana", "Uspešno", "U redu");
+            }
+        }
+
+        private void ReadCsvFileHotel()
+        {
+            List<Hotels> hotels = new List<Hotels>();
+            try
+            {
+                using (StreamReader sr = new StreamReader(txtFilePathHotel.Text))
+                {
+                    if (chkHasHeaderHotel.IsChecked == true)
+                    {
+                        sr.ReadLine();
+                    }
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        string[] tokens = line.Split(',');
+                        Hotels hotel = new Hotels(tokens[0], tokens[1], int.Parse(tokens[2]));
+                        hotels.Add(hotel);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.ShowOK("Greška prilikom učitavanja podataka iz fajla. Fajl nije u odgovarajućem obliku.", "Greška prilikom unosa", "U redu");
+            }
+            saveToDBHotels(hotels);
+        }
+
+        private void saveToDBHotels(List<Hotels> hotels)
+        {
+            using (var db = new TravelContext())
+            {
+                db.Hotels.AddRange(hotels);
+                db.SaveChanges();
+
+                CustomMessageBox.ShowOK($"Uspešno je dodat novih {hotels.Count} hotela", "Uspešno", "U redu");
             }
         }
 

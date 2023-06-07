@@ -8,11 +8,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1000" Background="White">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-        <WrapPanel Margin="40,10,40,10">
+        <WrapPanel Margin="40,10,40,10" HorizontalAlignment="Center" >
 
         <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="#333333" Padding="0,0,20,0" >
                 <StackPanel Width="300">
-                <TextBlock Text="Dodajte novu atrakciju:" FontWeight="Bold" FontSize="20" Margin="00,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="Dodajte novu atrakciju:" FontWeight="Bold" FontSize="20" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                 <Grid Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
@@ -65,9 +65,9 @@
                 <TextBlock Text="Dodajte atrakcije &#x0a; sve preko CSV-a:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 
                 <StackPanel Orientation="Vertical" Margin="0,20,0,0" >
-                        <TextBox x:Name="txtFilePath" Width="300" Height="40" IsEnabled="false" Margin="0,0,0,10"/>
-                        <Button x:Name="btnBrowse" Content="Izaberi csv" Width="200" Height="40" Click="BtnBrowse_Click" Background="#007aff" Foreground="White" FontSize="14" FontWeight="Medium"/>
-                    <CheckBox x:Name="chkHasHeader" Content="First row is Column name" IsChecked="True" Margin="0,10,0,0" HorizontalAlignment="Center"/>
+                        <TextBox x:Name="txtFilePath"  Height="40" IsEnabled="false" Margin="0,0,0,10"/>
+                        <Button x:Name="btnBrowse" Content="Izaberi csv" Width="200" Height="40" Click="BtnBrowse_ClickAttraction" Background="#007aff" Foreground="White" FontSize="14" FontWeight="Medium"/>
+                    <CheckBox x:Name="chkHasHeader" Content="Prvi red su labele kolona" IsChecked="True" Margin="0,10,0,0" HorizontalAlignment="Center"/>
                 </StackPanel>
                 
             </StackPanel>
@@ -75,7 +75,7 @@
 
         <Border Grid.Column="1" BorderThickness="0,0,1,0" BorderBrush="#333333"  Padding="0,0,20,0">
                 <StackPanel  Width="300">
-                <TextBlock Text="Dodajte novi restoran:" FontWeight="Bold" FontSize="20" Margin="00,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="Dodajte novi restoran:" FontWeight="Bold" FontSize="20" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Grid Margin="20,20,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -121,13 +121,21 @@
                     <Button Click="CreateNewRestaurant" Grid.Row="3" Grid.Column="1" Content="Kreiraj novi restoran" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/>
 
                 </Grid>
+                    <Rectangle Margin="50" HorizontalAlignment="Stretch" Fill="#333" Height="3"/>
 
-            </StackPanel>
+                    <TextBlock Text="Dodajte restorane &#x0a; sve preko CSV-a:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    <StackPanel Orientation="Vertical" Margin="20,20,0,0" >
+                        <TextBox x:Name="txtFilePathRestaurant"  Height="40" IsEnabled="false" Margin="0,0,0,10"/>
+                        <Button x:Name="btnBrowseRestaurant" Content="Izaberi csv" Width="200" Height="40" Click="BtnBrowse_ClickRestaurant" Background="#007aff" Foreground="White" FontSize="14" FontWeight="Medium"/>
+                        <CheckBox x:Name="chkHasHeaderRestaurant" Content="Prvi red su labele kolona" IsChecked="True" Margin="0,10,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
         </Border>
 
             <Border Grid.Column="2">
                 <StackPanel  Width="300">
-                    <TextBlock Text="Dodajte novi smeštaj:" FontWeight="Bold" FontSize="20" Margin="00,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="Dodajte novi smeštaj:" FontWeight="Bold" FontSize="20" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Grid Margin="20,20,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -172,6 +180,15 @@
                         </ComboBox>
                         <Button Click="CreateNewHotel" Grid.Row="3" Grid.Column="1" Content="Kreiraj novi smeštaj" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/> 
                     </Grid>
+                    <Rectangle Margin="50" HorizontalAlignment="Stretch" Fill="#333" Height="3"/>
+
+                    <TextBlock Text="Dodajte smeštaj &#x0a; sve preko CSV-a:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    <StackPanel Orientation="Vertical" Margin="20,20,0,0" >
+                        <TextBox x:Name="txtFilePathHotel" Height="40" IsEnabled="false" Margin="0,0,0,10"/>
+                        <Button x:Name="btnBrowseHotel" Content="Izaberi csv" Width="200" Height="40" Click="BtnBrowse_ClickHotel" Background="#007aff" Foreground="White" FontSize="14" FontWeight="Medium"/>
+                        <CheckBox x:Name="chkHasHeaderHotel" Content="Prvi red su labele kolona" IsChecked="True" Margin="0,10,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
                 </StackPanel>
             </Border>
         </WrapPanel>

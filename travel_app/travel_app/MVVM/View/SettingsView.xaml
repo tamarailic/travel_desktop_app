@@ -22,7 +22,7 @@
             <Border BorderThickness="0,0,0,2">
                 <StackPanel Margin="0,0,0,4" Orientation="Horizontal">
                     <Label VerticalAlignment="Center" HorizontalAlignment="Right" Content="Profesionalni režim" Grid.Column="0" Grid.Row="0" FontSize="18"/>
-                    <CheckBox VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" Margin="10,0,0,0" IsChecked="{Binding Pro}" Checked="Pro_Checked"/>
+                    <CheckBox VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" Margin="10,0,0,0" IsChecked="{Binding Pro}" Click="Pro_Checked"/>
                 </StackPanel>
                 </Border>
             </Grid>

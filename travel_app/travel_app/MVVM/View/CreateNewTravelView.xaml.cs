@@ -27,6 +27,7 @@ using System.Collections;
 using System.Globalization;
 using System.Collections.ObjectModel;
 using travel_app.MVVM.ViewModel;
+using WPFCustomMessageBox;
 
 namespace travel_app.MVVM.View
 {
@@ -193,7 +194,7 @@ namespace travel_app.MVVM.View
             var result = MessageBoxResult.Yes;
             if (!MainWindow.LogedInUser.Pro)
             {
-                result = MessageBox.Show("Da li ste sigurni da želite da kreirate ovo putovanje?", "Kreiranje putovanja", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da kreirate ovo putovanje?", "Kreiranje putovanja", "Da", "Ne");
             }
 
             if (result == MessageBoxResult.Yes)
@@ -238,7 +239,7 @@ namespace travel_app.MVVM.View
                         {
                             db.Travels.Add(newTravel);
                             db.SaveChanges();
-                            MessageBox.Show("Novo putovanje je uspešno kreirano");
+                            CustomMessageBox.ShowOK("Novo putovanje je uspešno kreirano","Novo putovanje", "U redu");
 
                             TravelName.Text = string.Empty;
                             TravelShortDescription.Text = string.Empty;
@@ -258,7 +259,7 @@ namespace travel_app.MVVM.View
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Podaci putovanja nisu u ispravnom obliku. Proverite sva polja i pokušajte ponovo.", "Neuspelo kreiranje", MessageBoxButton.OK, MessageBoxImage.Error);
+                            CustomMessageBox.ShowOK("Podaci putovanja nisu u ispravnom obliku. Proverite sva polja i pokušajte ponovo.", "Neuspelo kreiranje", "U redu");
                         }
                     }
                 }
@@ -271,7 +272,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelName))
             {
                 var errors = Validation.GetErrors(TravelName);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
                 return false;
             }
 
@@ -280,7 +281,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(StartLocation))
             {
                 var errors = Validation.GetErrors(StartLocation);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
                 return false;
             }
 
@@ -289,7 +290,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(EndLocation))
             {
                 var errors = Validation.GetErrors(EndLocation);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
                 return false;
             }
 
@@ -298,7 +299,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelShortDescription))
             {
                 var errors = Validation.GetErrors(TravelShortDescription);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
                 return false;
             }
 
@@ -307,7 +308,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelLongDescription))
             {
                 var errors = Validation.GetErrors(TravelLongDescription);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
                 return false;
             }
 
@@ -316,7 +317,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelPrice))
             {
                 var errors = Validation.GetErrors(TravelPrice);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
                 return false;
             }
 
@@ -325,7 +326,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelDate))
             {
                 var errors = Validation.GetErrors(TravelDate);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
                 return false;
             }
 
@@ -424,12 +425,13 @@ namespace travel_app.MVVM.View
             var result = MessageBoxResult.Yes;
             if (!MainWindow.LogedInUser.Pro)
             {
-                result = MessageBox.Show($"Da li ste sigurni da želite da uključite atrakciju {attractionComboBox.SelectedItem}?", "Potvrdite dodavanje atrakcije", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                result = CustomMessageBox.ShowYesNo($"Da li ste sigurni da želite da uključite atrakciju {attractionComboBox.SelectedItem}?", "Potvrdite dodavanje atrakcije", "Da", "Ne");
             }
             if (result == MessageBoxResult.Yes)
             {
                 using (var db = new TravelContext())
                 {
+                    if (attractionComboBox.SelectedIndex < 0) return;
                     string attractionName = attractionComboBox.SelectedItem.ToString();
                     ChoosenAttractions.Add(attractionName);
                     CollectionViewSource.GetDefaultView(ChoosenAttractionsListBox.ItemsSource).Refresh();
@@ -451,12 +453,13 @@ namespace travel_app.MVVM.View
             var result = MessageBoxResult.Yes;
             if (!MainWindow.LogedInUser.Pro)
             {
-                result = MessageBox.Show($"Da li ste sigurni da želite da uključite restoran {attractionComboBox.SelectedItem}?", "Potvrdite dodavanje restorana", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                result = CustomMessageBox.ShowYesNo($"Da li ste sigurni da želite da uključite restoran {attractionComboBox.SelectedItem}?", "Potvrdite dodavanje restorana", "Da", "Ne");
             }
             if (result == MessageBoxResult.Yes)
             {
                 using (var db = new TravelContext())
                 {
+                    if (restaurantsComboBox.SelectedIndex < 0) return;
                     string restaurantName = restaurantsComboBox.SelectedItem.ToString();
                     ChoosenRestaurants.Add(restaurantName);
                     CollectionViewSource.GetDefaultView(ChoosenRestaurantsListBox.ItemsSource).Refresh();
@@ -476,12 +479,13 @@ namespace travel_app.MVVM.View
             var result = MessageBoxResult.Yes;
             if (!MainWindow.LogedInUser.Pro)
             {
-                result = MessageBox.Show($"Da li ste sigurni da želite da uključite smeštaj {attractionComboBox.SelectedItem}?", "Potvrdite dodavanje smeštaja", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                result = CustomMessageBox.ShowYesNo($"Da li ste sigurni da želite da uključite smeštaj {attractionComboBox.SelectedItem}?", "Potvrdite dodavanje smeštaja", "Da", "Ne");
             }
             if (result == MessageBoxResult.Yes)
             {
                 using (var db = new TravelContext())
                 {
+                    if (hotelsComboBox.SelectedIndex < 0) return;
                     string hotelName = hotelsComboBox.SelectedItem.ToString();
                     ChoosenHotels.Add(hotelName);
                     CollectionViewSource.GetDefaultView(ChoosenHotelsListBox.ItemsSource).Refresh();

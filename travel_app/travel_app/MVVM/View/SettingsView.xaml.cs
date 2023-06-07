@@ -13,16 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using travel_app.MVVM.Model;
+using WPFCustomMessageBox;
 
 namespace travel_app.MVVM.View
 {
     public partial class SettingsView : UserControl
     {
+        public bool Pro { get; set; }
 
         public SettingsView()
         {
             InitializeComponent();
             this.DataContext = MainWindow.LogedInUser;
+            Pro = MainWindow.LogedInUser.Pro;
         }
 
         private void Pro_Checked(object sender, RoutedEventArgs e)
@@ -30,7 +33,7 @@ namespace travel_app.MVVM.View
             var checkBox = sender as CheckBox;
 
             if ((bool)checkBox.IsChecked) {
-                var result = MessageBox.Show("Da li ste sigurni da želite da pređete u profesionalan režim?", "Potvrda profesionalnog režima", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da pređete u profesionalan režim?", "Potvrda profesionalnog režima","Da", "Ne");
                 // Check the result value
                 if (result == MessageBoxResult.Yes)
                 {

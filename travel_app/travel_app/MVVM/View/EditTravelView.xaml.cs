@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFCustomMessageBox;
 
 namespace travel_app.MVVM.View
 {
@@ -20,6 +21,12 @@ namespace travel_app.MVVM.View
     /// </summary>
     public partial class EditTravelView : UserControl
     {
+        public string TravelsName { get; set; }
+        public string From { get; set; }
+        public string To { get; set; }
+        public string DescLong { get; set; }
+        public string DescShort { get; set; }
+        public string Price { get; set; }
         public EditTravelView()
         {
             InitializeComponent();
@@ -32,7 +39,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelName))
             {
                 var errors = Validation.GetErrors(TravelName);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška","U red");
                 return false;
             }
 
@@ -41,7 +48,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(StartLocation))
             {
                 var errors = Validation.GetErrors(StartLocation);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -50,7 +57,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(EndLocation))
             {
                 var errors = Validation.GetErrors(EndLocation);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -59,7 +66,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelShortDescription))
             {
                 var errors = Validation.GetErrors(TravelShortDescription);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
                 return false;
             }
 
@@ -68,7 +75,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelDescription))
             {
                 var errors = Validation.GetErrors(TravelDescription);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
                 return false;
             }
 
@@ -77,7 +84,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelPrice))
             {
                 var errors = Validation.GetErrors(TravelPrice);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
                 return false;
             }
 
@@ -86,7 +93,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelDate))
             {
                 var errors = Validation.GetErrors(TravelDate);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
                 return false;
             }
 

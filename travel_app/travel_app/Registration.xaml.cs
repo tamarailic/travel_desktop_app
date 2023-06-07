@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using travel_app.MVVM.Model;
 using travel_app.MVVM.ViewModel;
 using travel_app.Store;
+using WPFCustomMessageBox;
 
 namespace travel_app
 {
@@ -46,24 +47,24 @@ namespace travel_app
             if (Validation.GetHasError(UsernameTextBox))
             {
                 var errors = Validation.GetErrors(UsernameTextBox);
-                MessageBox.Show(errors[0].ErrorContent.ToString(), "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
             }
             else if (((password ?? "").ToString()).Length < 5)
             {
-                MessageBox.Show("Lozinka mora da ima bar 5 karaktera.", "Greška", MessageBoxButton.OK, MessageBoxImage.Information);
+                CustomMessageBox.ShowOK("Lozinka mora da ima bar 5 karaktera.", "Greška", "U redu");
             } else if ((password ?? "").ToString().Count(c => !char.IsLetter(c)) == 0) {
-                MessageBox.Show("Lozinka mora da ima bar 1 specijalni karaktera ili broj.", "Greška", MessageBoxButton.OK, MessageBoxImage.Information);
+                CustomMessageBox.ShowOK("Lozinka mora da ima bar 1 specijalni karaktera ili broj.", "Greška", "U redu");
             }
             else if (!password.Equals(repassword))
             {
-                MessageBox.Show("Lozinke se ne poklapaju.", "Greška", MessageBoxButton.OK, MessageBoxImage.Information);
+                CustomMessageBox.ShowOK("Lozinke se ne poklapaju.", "Greška", "U redu");
             }
             else {
                 using (var db = new TravelContext())
                 {
                     if (db.Users.Where(user => user.Email == username).Any())
                     {
-                        MessageBox.Show("Podaci nisu uneti u ispravnom obliku", "Neuspela registracija", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        CustomMessageBox.ShowOK("Podaci nisu uneti u ispravnom obliku", "Neuspela registracija", "U redu");
                         return;
                     }
                     User newUser = new User
@@ -75,7 +76,7 @@ namespace travel_app
                     };
                     db.Users.Add(newUser);
                     db.SaveChanges();
-                    MessageBox.Show("Uspešna registracija", "Uspešno", MessageBoxButton.OK, MessageBoxImage.Information);
+                    CustomMessageBox.ShowOK("Uspešna registracija", "Uspešno", "U redu");
                     NavigationStore navigationStore = new NavigationStore();
                     if (newUser.Role.Equals("user"))
                     {

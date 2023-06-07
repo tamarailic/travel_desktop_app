@@ -13,7 +13,7 @@
         Background="Transparent"
         MouseDown="Window_MouseDown"
         WindowStartupLocation="CenterScreen"
-        MinWidth="660"
+        MinWidth="900"
         MinHeight="500"
         >
 

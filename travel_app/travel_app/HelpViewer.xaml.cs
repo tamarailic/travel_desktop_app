@@ -22,7 +22,7 @@ namespace travel_app
     public partial class HelpViewer : Window
     {
         private JavaScriptControlHelper ch;
-        public HelpViewer(string key, Login originator)
+        public HelpViewer(string key, MainWindow originator)
         {
             InitializeComponent();
             string curDir = "D:\\Fakultet\\Treca_godina\\HCI\\Projekat\\travel_desktop_app\\travel_app\\travel_app";

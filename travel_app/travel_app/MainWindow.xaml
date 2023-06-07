@@ -7,14 +7,15 @@
         xmlns:view="clr-namespace:travel_app.MVVM.View"
         xmlns:converters="clr-namespace:travel_app.MVVM.Converters"
         mc:Ignorable="d"
-        xmlns:l="clr-namespace:travel_app"
         Height="800" Width="1400"
         WindowStyle="None"
         Background="Transparent"
         MouseDown="Window_MouseDown"
         WindowStartupLocation="CenterScreen"
         MinWidth="660"
-        MinHeight="500">
+        MinHeight="500"
+        xmlns:l="clr-namespace:travel_app"
+        l:HelpProvider.HelpKey="index">
 
     <Window.InputBindings>
         <KeyBinding Gesture="Control+N"
@@ -28,7 +29,9 @@
         <KeyBinding Gesture="Control+H"
                 Command="{Binding HomeViewCommand}"/>
     </Window.InputBindings>
-
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </Window.CommandBindings>
     <Window.Resources>
         <converters:EmailToNameConverter x:Key="EmailToNameConverter" />
     </Window.Resources>

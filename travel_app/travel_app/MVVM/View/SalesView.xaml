@@ -25,7 +25,7 @@
             </StackPanel>
             <DataGrid x:Name="salesByMonth" Margin="20" VerticalAlignment="Top" AutoGenerateColumns="False" HorizontalAlignment="Center"
           CellStyle="{StaticResource DataGridCellStyle}" RowStyle="{StaticResource DataGridRowStyle}" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-          BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="1" AlternationCount="2">
+          BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="1" AlternationCount="2" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Datum transakcije" Binding="{Binding DateTime}"/>
                     <DataGridTextColumn Header="Tip transakcije" Binding="{Binding Type}"/>
@@ -39,7 +39,7 @@
                 <TextBlock x:Name="ByTravelTitle" FontSize="24" FontWeight="Bold"/>
             </StackPanel>
             <DataGrid x:Name="salesByTravel" Margin="20" VerticalAlignment="Top" AutoGenerateColumns="False" HorizontalAlignment="Center" CellStyle="{StaticResource DataGridCellStyle}" RowStyle="{StaticResource DataGridRowStyle}" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-          BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="1" AlternationCount="2">
+          BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="1" AlternationCount="2" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Ime putovanja" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Cena" Binding="{Binding Price}"/>

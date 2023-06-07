@@ -20,6 +20,7 @@ using travel_app.Command;
 using travel_app.Core;
 using travel_app.MVVM.Model;
 using travel_app.Store;
+using WPFCustomMessageBox;
 
 namespace travel_app.MVVM.ViewModel
 {
@@ -72,7 +73,7 @@ namespace travel_app.MVVM.ViewModel
             var result = MessageBoxResult.Yes;
             if (!MainWindow.LogedInUser.Pro)
             {
-                result = MessageBox.Show("Da li ste sigurni da želite da otkažete ovo putovanje?", "Otkazivanje", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da otkažete ovo putovanje?", "Otkazivanje","Da", "Ne");
             }
 
             if (result == MessageBoxResult.Yes)
@@ -82,12 +83,12 @@ namespace travel_app.MVVM.ViewModel
                     var currentTravel = db.Travels.Find(Id);
                     if (currentTravel.Canceled)
                     {
-                        MessageBox.Show($"Putovanje je već otkazano", "Neuspelo brisanje", MessageBoxButton.OK, MessageBoxImage.Error);
+                        CustomMessageBox.ShowOK($"Putovanje je već otkazano", "Neuspelo brisanje", "U redu");
                         return;
                     }
                     currentTravel.Canceled = true;
                     db.SaveChanges();
-                    MessageBox.Show("Uspešno otkazivanje putovanja.", "Otkazivanje", MessageBoxButton.OK, MessageBoxImage.Information);
+                    CustomMessageBox.ShowOK("Uspešno otkazivanje putovanja.", "Otkazivanje", "U redu");
                 }
             }
         }

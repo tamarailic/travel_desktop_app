@@ -14,11 +14,11 @@ namespace travel_app.MVVM.ViewModel
     internal class SettingsViewModel : ObservableObject
     {
 
-        public ICommand NavigateDetailsCommand { get; }
+       
 
         public SettingsViewModel(NavigationStore navigationStore)
         {
-            NavigateDetailsCommand = new NavigateCommand<SalesViewModel>(navigationStore, () => new SalesViewModel(navigationStore));
+            
         }        
     }
 }

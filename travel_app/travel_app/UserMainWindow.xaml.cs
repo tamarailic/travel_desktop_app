@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using travel_app.MVVM.Model;
+using WPFCustomMessageBox;
 
 namespace travel_app
 {
@@ -33,7 +34,7 @@ namespace travel_app
             var result = MessageBoxResult.Yes;
             if (!LogedInUser.Pro)
             {
-                result = MessageBox.Show("Da li ste sigurni da želite da se odjavite sa naloga?", "Potvrdite odjavu", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da se odjavite sa naloga?", "Potvrdite odjavu", "Da", "Ne");
             }
             if (result == MessageBoxResult.Yes)
             {

@@ -13,6 +13,7 @@ using travel_app.Command;
 using travel_app.Core;
 using travel_app.MVVM.Model;
 using travel_app.Store;
+using WPFCustomMessageBox;
 
 namespace travel_app.MVVM.ViewModel
 {
@@ -66,7 +67,7 @@ namespace travel_app.MVVM.ViewModel
             var result = MessageBoxResult.Yes;
             if (!MainWindow.LogedInUser.Pro)
             {
-                result = MessageBox.Show("Da li ste sigurni da želite da izmenite ovo putovanje?", "Izmena putovanja", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da izmenite ovo putovanje?", "Izmena putovanja", "Da", "Ne");
             }
 
             if (result == MessageBoxResult.Yes)
@@ -82,7 +83,7 @@ namespace travel_app.MVVM.ViewModel
                     currentTravel.End = End;
                     db.SaveChanges();
 
-                    MessageBox.Show("Izmena uspešno odrađena :)");
+                    CustomMessageBox.ShowOK("Izmena uspešno odrađena :)","Izmena", "U redu");
 
                 }
             }

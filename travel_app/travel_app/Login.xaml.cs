@@ -11,6 +11,7 @@ using System.Windows.Input;
 using travel_app.MVVM.Model;
 using travel_app.MVVM.ViewModel;
 using travel_app.Store;
+using WPFCustomMessageBox;
 
 namespace travel_app
 {
@@ -117,7 +118,7 @@ namespace travel_app
                 }
                 else
                 {
-                    MessageBox.Show("Korisničko ime ili lozinka nisu ispravni. Pokušajte ponovo.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    CustomMessageBox.ShowOK("Korisničko ime ili lozinka nisu ispravni. Pokušajte ponovo.", "Greška", "U red");
                 }
             }
         }
@@ -130,20 +131,6 @@ namespace travel_app
             registration.Show();
             currentWindow.Close();
         }
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
-            if (focusedControl is DependencyObject)
-            {
-                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
-                HelpProvider.ShowHelp(str, this);
-            }
-        }
-
-        public void doThings(string param)
-        {
-            //btnOK.Background = new SolidColorBrush(Color.FromRgb(32, 64, 128));
-            Title = param;
-        }
+        
     }
 }

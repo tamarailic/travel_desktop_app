@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:travel_app.MVVM.View"
              mc:Ignorable="d" 
               Background="White"
-             d:DesignHeight="600" d:DesignWidth="1400"
+             d:DesignHeight="600" d:DesignWidth="1500"
              Padding="50">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
     <StackPanel>
@@ -30,8 +30,8 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border Width="300"
-                        Height="380"
+                    <Border Width="350"
+                        Height="450"
                     BorderThickness="2"
                     BorderBrush="#22202f"
                     CornerRadius="10"
@@ -43,10 +43,10 @@
                            HorizontalAlignment="Center"
                            VerticalAlignment="Top"/>
                             <!-- Bind the TextBlocks to the properties of the Travel object -->
-                                <TextBlock Text="{Binding Name}" Foreground="#22202f" FontSize="24" TextWrapping="Wrap" Margin="20,10,10,0"/>
-                                <TextBlock Text="{Binding ShortDescription}" Foreground="#22202f" TextWrapping="Wrap" FontSize="11" Margin="20,10,10,0"/>
-                            <TextBlock Text="{Binding Price}"  FontSize="16" Foreground="#22202f" Margin="20,10,10,0"/>
-                            <Button Command="{Binding Command}" Content="Detaljnije" Width="100" Style="{StaticResource GradientButton}" />
+                                <TextBlock Text="{Binding Name}" Foreground="#22202f" FontSize="26" TextWrapping="Wrap" Height="55" Margin="20,10,10,0"/>
+                                <TextBlock Text="{Binding ShortDescription}" Foreground="#22202f" TextWrapping="Wrap" Height="55" FontSize="16" Margin="20,10,10,0"/>
+                                <TextBlock Text="{Binding Price}"  FontSize="20" Foreground="#22202f" Height="30" Margin="20,10,10,0"/>
+                                <Button Command="{Binding Command}" Content="Detaljnije" Width="100" Height="30" Style="{StaticResource GradientButton}" />
                         </StackPanel>
                     </Border>
                 </DataTemplate>

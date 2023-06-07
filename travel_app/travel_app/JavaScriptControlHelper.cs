@@ -14,8 +14,8 @@ namespace travel_app
         [ComVisible(true)]
         public class JavaScriptControlHelper
         {
-            Login prozor;
-            public JavaScriptControlHelper(Login w)
+        MainWindow prozor;
+            public JavaScriptControlHelper(MainWindow w)
             {
                 prozor = w;
             }

@@ -11,7 +11,7 @@ using travel_app.Command;
 using travel_app.Core;
 using travel_app.MVVM.Model;
 using travel_app.Store;
-using static travel_app.MVVM.ViewModel.UserHomeViewModel;
+using WPFCustomMessageBox;
 
 namespace travel_app.MVVM.ViewModel
 {
@@ -60,7 +60,7 @@ namespace travel_app.MVVM.ViewModel
 
         private void Reserve(object element)
         {
-            var result = MessageBox.Show("Želite da rezervišete ovo putovanje?", "Rezervacija", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var result = CustomMessageBox.ShowYesNo("Želite da rezervišete ovo putovanje?", "Rezervacija", "Da", "Ne");
 
             if (result == MessageBoxResult.Yes)
             {
@@ -68,7 +68,7 @@ namespace travel_app.MVVM.ViewModel
                 {
                     if (TravelAlreadyBookedOrPurchased())
                     {
-                        MessageBox.Show($"Hey, već ste rezervisali ovo putavanje. Vidimo se {Date} na adresi {Start} ;)", "Neuspela rezervacija", MessageBoxButton.OK, MessageBoxImage.Error);
+                        CustomMessageBox.ShowOK($"Hey, već ste rezervisali ovo putavanje. Vidimo se {Date} na adresi {Start} ;)", "Neuspela rezervacija", "U redu");
                         return;
                     }
                     
@@ -76,14 +76,14 @@ namespace travel_app.MVVM.ViewModel
                     currentUser.Travels.Add(db.Travels.Find(Id));
                     db.Sales.Add(new Sale(DateTime.Now, "reservation", Id, UserMainWindow.LogedInUser.Id));
                     db.SaveChanges();
-                    MessageBox.Show("Uspešna rezervacija.", "Rezervacija", MessageBoxButton.OK, MessageBoxImage.Information);
+                    CustomMessageBox.ShowOK("Uspešna rezervacija.", "Rezervacija","U redu");
                 }
             }
         }
 
         private void Buy(object element)
         {
-            var result = MessageBox.Show("Želite da kupite ovo putovanje?", "Kupovina", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var result = CustomMessageBox.ShowYesNo("Želite da kupite ovo putovanje?", "Kupovina", "Da", "Ne");
 
             if (result == MessageBoxResult.Yes)
             {
@@ -91,14 +91,14 @@ namespace travel_app.MVVM.ViewModel
                 {
                     if (TravelAlreadyBookedOrPurchased())
                     {
-                        MessageBox.Show($"Hey, već ste kupili ovo putavanje. Vidimo se {Date} na adresi {Start} :)", "Neuspela rezervacija", MessageBoxButton.OK, MessageBoxImage.Error);
+                        CustomMessageBox.ShowOK($"Hey, već ste kupili ovo putavanje. Vidimo se {Date} na adresi {Start} :)", "Neuspela rezervacija", "U redu");
                         return;
                     }
                     User currentUser = db.Users.Include("Travels").Single(el => el.Id == UserMainWindow.LogedInUser.Id);
                     currentUser.Travels.Add(db.Travels.Find(Id));
                     db.Sales.Add(new Sale(DateTime.Now, "sell", Id, UserMainWindow.LogedInUser.Id));
                     db.SaveChanges();
-                    MessageBox.Show("Uspešna kupovina.", "Kupovina", MessageBoxButton.OK, MessageBoxImage.Information);
+                    CustomMessageBox.ShowOK("Uspešna kupovina.", "Kupovina", "U redu");
                 }
             }
         }
