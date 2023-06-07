@@ -6,7 +6,7 @@
               xmlns:converters="clr-namespace:travel_app.MVVM.Converters"
              xmlns:local="clr-namespace:travel_app.MVVM.View" xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1400"
+             d:DesignHeight="800" d:DesignWidth="1500"
              Background="White">
     <UserControl.Resources>
         <converters:BytesToImageConverter x:Key="BytesToImageConverter" />
