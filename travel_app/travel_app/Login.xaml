@@ -36,10 +36,10 @@
         <Border CornerRadius="8" BorderThickness="1" Background="White"  Grid.Row="3" Grid.Column="1" Margin="5">
             <PasswordBox x:Name="PasswordBox" Width="200" Margin="5" BorderThickness="0"/>
         </Border>
-        <Button Click="LoginButton_Click" x:Name="LoginButton" Content= "Prijava" HorizontalAlignment= "Right" Margin= "5" Grid.Row ="4 " Grid.ColumnSpan ="2" Style="{StaticResource GradientButton}" />
+        <Button Click="LoginButton_Click" x:Name="LoginButton" Content= "Prijava" HorizontalAlignment= "Right" Margin= "5" Grid.Row ="4 " Grid.ColumnSpan ="2" Style="{StaticResource GradientButton}"/>
         <StackPanel Grid.Row ="5 " Grid.ColumnSpan ="2" Orientation="Horizontal" HorizontalAlignment= "Right">
             <TextBlock   Text="Nemate nalog?"  VerticalAlignment="Center"/>
-            <Button Click="RegisterButton_Click" x:Name="RegisterButton" Content= "Registracija"  Margin= "5" Style="{StaticResource SecondButton}" />
+            <Button Click="RegisterButton_Click" x:Name="RegisterButton" Content= "Registracija"  Margin= "5" Style="{StaticResource SecondButton}" ToolTip="Prelaz na stranicu sa registraciju.&#10;Kreirajte nalog kako biste mogli da pristupite sistemu." />
         </StackPanel>
         
     </Grid>

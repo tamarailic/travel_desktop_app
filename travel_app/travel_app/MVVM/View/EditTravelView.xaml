@@ -29,6 +29,12 @@
                         <Image Source="{Binding Image}" Grid.Row="5" Grid.Column="0" x:Name="photo" Height="200" />
                         <TextBox Name="TravelName" Text="{Binding Name, Mode=TwoWay}" Foreground="#333" FontSize="24" Margin="10,20,10,0"/>
                         <DatePicker HorizontalAlignment="Stretch" FontSize="14" Name="TravelDate" Margin="10,20,10,0">
+                            <DatePicker.Resources>
+                                <Style TargetType="DatePickerTextBox">
+                                    <Setter Property="Text" Value="Odaberite datum"/>
+                                    <Setter Property="IsReadOnly" Value="True"/>
+                                </Style>
+                            </DatePicker.Resources>
                             <DatePicker.SelectedDate>
                                 <Binding Path="check">
                                     <Binding.ValidationRules>
@@ -48,8 +54,8 @@
 
             </WrapPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 40 0 0">
-                    <Button Content="Sučuvaj izmene"  Style="{StaticResource GradientButton}" Margin="0,20,5,20" Command="{Binding SaveCommand}"/>
-                    <Button Content="Odustani"  Style="{StaticResource GradientButton}" Margin="5,20,0,20" Command="{Binding BackCommand}"/>
+                <Button Content="Sučuvaj izmene"  Style="{StaticResource GradientButton}" Margin="0,20,5,20" Command="{Binding SaveCommand}" ToolTip="Klikom na ovo dugme unešene izmene će biti odražene na izabrano putovanje."/>
+                <Button Content="Odustani"  Style="{StaticResource GradientButton}" Margin="5,20,0,20" Command="{Binding BackCommand}" ToolTip="Unešene izmene će biti odbačene i putovanje neće biti promenjeno."/>
                 </StackPanel>
         </StackPanel>
     </ScrollViewer>

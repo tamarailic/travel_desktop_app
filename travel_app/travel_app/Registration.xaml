@@ -57,7 +57,7 @@
         <Button Click="RegistrationButton_Click" Content="Registracija" HorizontalAlignment="Right" Margin="5" Grid.Row="6" Grid.ColumnSpan="2" Style="{StaticResource GradientButton}" />
         <StackPanel Grid.Row ="7 " Grid.ColumnSpan ="2" Orientation="Horizontal" HorizontalAlignment= "Right">
             <TextBlock   Text="Imate nalog?"  VerticalAlignment="Center"/>
-            <Button Click="LoginButton_Click" x:Name="LoginButton" Content= "Prijava" HorizontalAlignment= "Right" Margin= "5"  Style="{StaticResource SecondButton}" />
+            <Button Click="LoginButton_Click" x:Name="LoginButton" Content= "Prijava" HorizontalAlignment= "Right" Margin= "5"  Style="{StaticResource SecondButton}" ToolTip="Prelaz na stranicu za prijavu" />
         </StackPanel>
         
     </Grid>

@@ -22,7 +22,7 @@
                    HorizontalAlignment="Left"
                    Margin="0,0,0,20"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button VerticalContentAlignment="Center" Style="{StaticResource GradientButton}" Command="{Binding CreateNewCommand}">
+                <Button VerticalContentAlignment="Center" Style="{StaticResource GradientButton}" Command="{Binding CreateNewCommand}" ToolTip="Prelaz na stranicu za kreiranje putovanja.&#10;Alt + D">
                 <AccessText Foreground="White">_Dodaj novo putovanje:</AccessText>  
             </Button>
             

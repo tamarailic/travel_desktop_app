@@ -102,8 +102,13 @@
                     </TextBox>
                     <Label Content="Datum putovanja:" FontWeight="Bold" FontSize="14" Grid.Row="6" Grid.Column="0" Margin="0,5,0,5"/>
                     <DatePicker Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="14" Name="TravelDate" Margin="0,5,0,5">
-
-                        <DatePicker.SelectedDate>
+                            <DatePicker.Resources>
+                                <Style TargetType="DatePickerTextBox">
+                                    <Setter Property="Text" Value="Odaberite datum"/>
+                                    <Setter Property="IsReadOnly" Value="True"/>
+                                </Style>
+                            </DatePicker.Resources>
+                            <DatePicker.SelectedDate>
                             <Binding Path="Date" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
                                     <v:NotEmptyDateValidationRule Message="Niste uneli datum putovanja." />
@@ -182,8 +187,8 @@
                 </Grid>
             </Grid>
         </WrapPanel>
-            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Kreiraj novo putovanje" Click="Create_Click" Style="{StaticResource GradientButton}" Margin="0,5,0,20" HorizontalAlignment="Right" />
+            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0">
+                <Button Content="Kreiraj novo putovanje" Click="Create_Click" Style="{StaticResource GradientButton}" Margin="0,5,0,20" HorizontalAlignment="Right" ToolTip="Pritiskom ovog dugmeta potvrđujete unesene informacije." />
         </StackPanel>
         </StackPanel>
     </ScrollViewer>

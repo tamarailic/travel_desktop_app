@@ -39,7 +39,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelName))
             {
                 var errors = Validation.GetErrors(TravelName);
-                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška","U red");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška","U redu");
                 return false;
             }
 
@@ -66,7 +66,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelShortDescription))
             {
                 var errors = Validation.GetErrors(TravelShortDescription);
-                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -75,7 +75,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelDescription))
             {
                 var errors = Validation.GetErrors(TravelDescription);
-                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -84,7 +84,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelPrice))
             {
                 var errors = Validation.GetErrors(TravelPrice);
-                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
@@ -93,7 +93,7 @@ namespace travel_app.MVVM.View
             if (Validation.GetHasError(TravelDate))
             {
                 var errors = Validation.GetErrors(TravelDate);
-                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U red");
+                CustomMessageBox.ShowOK(errors[0].ErrorContent.ToString(), "Greška", "U redu");
                 return false;
             }
 
