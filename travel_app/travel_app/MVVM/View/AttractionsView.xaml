@@ -1,0 +1,196 @@
+﻿<UserControl x:Class="travel_app.MVVM.View.AttractionsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:travel_app.MVVM.View"
+             xmlns:v="clr-namespace:travel_app.Validators"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000" Background="White">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <WrapPanel Margin="40,10,40,10" HorizontalAlignment="Center" >
+
+        <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="#333333" Padding="0,0,20,0" >
+                <StackPanel Width="300">
+                <TextBlock Text="Dodajte novu atrakciju:" FontWeight="Bold" FontSize="20" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Grid Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Naziv:" Grid.Column="0" Grid.Row="0"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="attractionName" Foreground="#333" Height="25" FontSize="14" MaxLength="40" >
+                        <TextBox.Text>
+                                <Binding Path="AttractionName" UpdateSourceTrigger="Explicit">
+                                <Binding.ValidationRules>
+                                    <v:NotEmptyValidationRule Message="Niste uneli naziv atrakcije." />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Label Content="Adresa:" Grid.Column="0" Grid.Row="1" Margin="0,10,20,10"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="attractionAddress" Foreground="#333" Height="25" FontSize="14" MaxLength="40">
+                        <TextBox.Text>
+                                <Binding Path="AttractionAddress" UpdateSourceTrigger="Explicit">
+                                <Binding.ValidationRules>
+                                    <v:NotEmptyValidationRule Message="Niste uneli adresu atrakcije putovanja." />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Label Content="Tip:" Grid.Column="0" Grid.Row="2"/>
+                    <ComboBox Grid.Column="1" Grid.Row="2" x:Name="attractionTypesComboBox" Foreground="#333" Height="25" FontSize="14">
+                    <ComboBox.SelectedValue>
+                                <Binding Path="AttractionType" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <v:NotEmptyComboBoxValidationRule Message="Niste izabrali tip atrakcije." />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedValue>
+                    </ComboBox>
+                        <Button  Click="CreateNewAttraction" Grid.Row="3" Grid.Column="1" Content="Kreiraj novu atrakciju" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/>
+
+                </Grid>
+
+                <Rectangle Margin="50" HorizontalAlignment="Stretch" Fill="#333" Height="3"/>
+
+                <TextBlock Text="Dodajte atrakcije &#x0a; sve preko CSV-a:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                
+                <StackPanel Orientation="Vertical" Margin="0,20,0,0" >
+                        <TextBox x:Name="txtFilePath"  Height="40" IsEnabled="false" Margin="0,0,0,10"/>
+                        <Button x:Name="btnBrowse" Content="Izaberi csv" Width="200" Height="40" Click="BtnBrowse_ClickAttraction" Background="#007aff" Foreground="White" FontSize="14" FontWeight="Medium"/>
+                    <CheckBox x:Name="chkHasHeader" Content="Prvi red su labele kolona" IsChecked="True" Margin="0,10,0,0" HorizontalAlignment="Center"/>
+                </StackPanel>
+                
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1" BorderThickness="0,0,1,0" BorderBrush="#333333"  Padding="0,0,20,0">
+                <StackPanel  Width="300">
+                <TextBlock Text="Dodajte novi restoran:" FontWeight="Bold" FontSize="20" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Grid Margin="20,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Naziv:" Grid.Column="0" Grid.Row="0"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="restaurantName" Foreground="#333" Height="25" FontSize="14" MaxLength="40">
+                    <TextBox.Text>
+                                <Binding Path="RestaurantName" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <v:NotEmptyValidationRule Message="Niste uneli naziv restorana." />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                    </TextBox>
+                    <Label Content="Mesto:" Grid.Column="0" Grid.Row="1" Margin="0,10,20,10"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="restaurantLocation" Foreground="#333" Height="25" FontSize="14" MaxLength="40">
+                    <TextBox.Text>
+                                <Binding Path="RestaurantAddress" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                    <v:NotEmptyValidationRule Message="Niste uneli adresu restorana." />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                    </TextBox>
+                    <Label Content="Tip:" Grid.Column="0" Grid.Row="2"/>
+                    <ComboBox Grid.Column="1" Grid.Row="2" x:Name="restaurantTypesComboBox" Foreground="#333" Height="25" FontSize="14">
+                    <ComboBox.SelectedValue>
+                         <Binding Path="RestaurantType" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <v:NotEmptyComboBoxValidationRule Message="Niste izabrali tip restorana." />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedValue>
+                    </ComboBox>
+                    <Button Click="CreateNewRestaurant" Grid.Row="3" Grid.Column="1" Content="Kreiraj novi restoran" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/>
+
+                </Grid>
+                    <Rectangle Margin="50" HorizontalAlignment="Stretch" Fill="#333" Height="3"/>
+
+                    <TextBlock Text="Dodajte restorane &#x0a; sve preko CSV-a:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    <StackPanel Orientation="Vertical" Margin="20,20,0,0" >
+                        <TextBox x:Name="txtFilePathRestaurant"  Height="40" IsEnabled="false" Margin="0,0,0,10"/>
+                        <Button x:Name="btnBrowseRestaurant" Content="Izaberi csv" Width="200" Height="40" Click="BtnBrowse_ClickRestaurant" Background="#007aff" Foreground="White" FontSize="14" FontWeight="Medium"/>
+                        <CheckBox x:Name="chkHasHeaderRestaurant" Content="Prvi red su labele kolona" IsChecked="True" Margin="0,10,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+        </Border>
+
+            <Border Grid.Column="2">
+                <StackPanel  Width="300">
+                    <TextBlock Text="Dodajte novi smeštaj:" FontWeight="Bold" FontSize="20" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Grid Margin="20,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Naziv:" Grid.Column="0" Grid.Row="0"/>
+                        <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="hotelName" Foreground="#333" Height="25" FontSize="14" MaxLength="40">
+                            <TextBox.Text>
+                                <Binding Path="HotelName" UpdateSourceTrigger="Explicit">
+                                    <Binding.ValidationRules>
+                                        <v:NotEmptyValidationRule Message="Niste uneli adresu hotela." />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <Label Content="Mesto:" Grid.Column="0" Grid.Row="1" Margin="0,10,20,10"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="hotelLocation" Foreground="#333" Height="25" FontSize="14" MaxLength="40">
+                            <TextBox.Text>
+                                <Binding Path="HotelAddress" UpdateSourceTrigger="Explicit">
+                                    <Binding.ValidationRules>
+                                        <v:NotEmptyValidationRule Message="Niste uneli adresu hotela." />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <Label Content="Broj zvezdica:" Grid.Column="0" Grid.Row="2"/>
+                        <ComboBox Grid.Column="1" Grid.Row="2" x:Name="hotelStarsComboBox" Foreground="#333" Height="25" FontSize="14">
+                            <ComboBox.SelectedValue>
+                                <Binding Path="HotelStars" UpdateSourceTrigger="Explicit">
+                                    <Binding.ValidationRules>
+                                        <v:NotEmptyComboBoxValidationRule Message="Niste izabrali broj zvezdica hotela." />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </ComboBox.SelectedValue>
+                        </ComboBox>
+                        <Button Click="CreateNewHotel" Grid.Row="3" Grid.Column="1" Content="Kreiraj novi smeštaj" Style="{StaticResource GradientButton}" Margin="0,20,0,0"/> 
+                    </Grid>
+                    <Rectangle Margin="50" HorizontalAlignment="Stretch" Fill="#333" Height="3"/>
+
+                    <TextBlock Text="Dodajte smeštaj &#x0a; sve preko CSV-a:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    <StackPanel Orientation="Vertical" Margin="20,20,0,0" >
+                        <TextBox x:Name="txtFilePathHotel" Height="40" IsEnabled="false" Margin="0,0,0,10"/>
+                        <Button x:Name="btnBrowseHotel" Content="Izaberi csv" Width="200" Height="40" Click="BtnBrowse_ClickHotel" Background="#007aff" Foreground="White" FontSize="14" FontWeight="Medium"/>
+                        <CheckBox x:Name="chkHasHeaderHotel" Content="Prvi red su labele kolona" IsChecked="True" Margin="0,10,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </WrapPanel>
+    </ScrollViewer>
+</UserControl>

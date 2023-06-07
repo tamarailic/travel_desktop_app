@@ -1,0 +1,126 @@
+﻿<Window x:Class="travel_app.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:travel_app.MVVM.ViewModel"
+        xmlns:view="clr-namespace:travel_app.MVVM.View"
+        xmlns:converters="clr-namespace:travel_app.MVVM.Converters"
+        mc:Ignorable="d"
+        Height="800" Width="1400"
+        WindowStyle="None"
+        Background="Transparent"
+        MouseDown="Window_MouseDown"
+        WindowStartupLocation="CenterScreen"
+        MinWidth="660"
+        MinHeight="500"
+        xmlns:l="clr-namespace:travel_app"
+        l:HelpProvider.HelpKey="index">
+
+    <Window.InputBindings>
+        <KeyBinding Gesture="Control+N"
+                Command="{Binding CreateNewTravelCommand}"/>
+        <KeyBinding Gesture="Control+P"
+                Command="{Binding SalesViewCommand}"/>
+        <KeyBinding Gesture="Control+A"
+                Command="{Binding AttractionsViewCommand}"/>
+        <KeyBinding Gesture="Control+S"
+                Command="{Binding SettingsViewCommand}"/>
+        <KeyBinding Gesture="Control+H"
+                Command="{Binding HomeViewCommand}"/>
+    </Window.InputBindings>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </Window.CommandBindings>
+    <Window.Resources>
+        <converters:EmailToNameConverter x:Key="EmailToNameConverter" />
+    </Window.Resources>
+    <Border Background="#272537"
+            CornerRadius="20">
+      
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Image Width="170"
+                   Height="38"
+                   Source="/Images/just-logo-white.png"/>
+
+            <TextBlock Text="{Binding LogedInUser.Email, RelativeSource={RelativeSource AncestorType=Window}, StringFormat='Dobrodošli {0}', Converter={StaticResource EmailToNameConverter}}" Grid.Column="1" Margin="40,0,0,0" Foreground="White" FontSize="24" VerticalAlignment="Center"/>
+
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Početna"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="16"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding HomeViewCommand}"/>
+                <RadioButton Content="Pregled prodaja"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="16"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding SalesViewCommand}"/>
+                <RadioButton Content="Atrakcije"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="16"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding AttractionsViewCommand}"/>
+                <RadioButton Content="Podešavanja"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="16"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding SettingsViewCommand}"/>
+                <RadioButton Content="Odjavi se"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="16"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Click="LogOut"/>
+            </StackPanel>
+
+            <ContentControl 
+                Grid.Row="1" 
+                Grid.Column="1" 
+                Margin="20,20,10,10"
+
+                Content="{Binding CurrentViewModel}">
+                <ContentControl.Resources>
+
+                    <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                        <view:HomeView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:SalesViewModel}">
+                        <view:SalesView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
+                        <view:SettingsView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:AttractionsViewModel}">
+                        <view:AttractionsView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:CreateNewTravelViewModel}">
+                        <view:CreateNewTravelView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:DetailsViewModel}">
+                        <view:DetailsView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:EditTravelViewModel}">
+                        <view:EditTravelView/>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </Grid>
+
+    </Border>
+</Window>
