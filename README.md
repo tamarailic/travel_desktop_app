@@ -4,5 +4,5 @@
  3. Build aplikacije sa prečicom Ctrl+B
  4. Pokretanje aplikacije sa prečicom Ctrl+F5
 
-##Dodatno
+## Dodatno
 - Potrebno je instalirati plagin sa sledeceg linka https://github.com/evanwon/WPFCustomMessageBox
